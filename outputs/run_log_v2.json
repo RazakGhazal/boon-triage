@@ -1,0 +1,17 @@
+{
+  "as_of_date": "2025-10-14",
+  "backend": "gemini",
+  "capacity_per_facilitator": 8,
+  "arms": {
+    "treatment_surfaced": 73,
+    "holdout_students": 24
+  },
+  "escalate_prior_intervention_failed": [
+    "S005",
+    "S012",
+    "S017",
+    "S023",
+    "S091",
+    "S190"
+  ]
+}

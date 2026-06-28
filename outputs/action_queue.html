@@ -1,0 +1,393 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Boon Academy — Intervention Queue</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--navy:#172740;--ink:#1b2a44;--mut:#697a92;--faint:#9aa7ba;--bg:#f7f8fa;--card:#fff;
+--line:#e7eaf0;--mint:#17e4a1;--mintd:#0e9b6b;--mintbg:#eafaf3}
+*{box-sizing:border-box} html{scroll-behavior:smooth}
+body{margin:0;font-family:"IBM Plex Sans Arabic",-apple-system,Segoe UI,Roboto,sans-serif;
+background:var(--bg);color:var(--ink);font-size:15px;line-height:1.55;-webkit-font-smoothing:antialiased}
+.hero{background:var(--navy);color:#fff;padding:34px 0 30px}
+.wrap{max-width:940px;margin:0 auto;padding:0 28px}
+.brand{font-size:21px;font-weight:700;letter-spacing:-.4px}
+.brand i{color:var(--mint);font-style:normal} .brand b{font-weight:500;color:rgba(255,255,255,.6)}
+.hero h1{margin:16px 0 4px;font-size:30px;font-weight:700;letter-spacing:-.6px}
+.hero .sub{margin:0;color:rgba(255,255,255,.62);font-size:14px}
+.stats{display:flex;flex-wrap:wrap;gap:38px;margin-top:24px}
+.stats .n{font-size:30px;font-weight:700;line-height:1}
+.stats .l{font-size:10.5px;letter-spacing:.09em;text-transform:uppercase;color:rgba(255,255,255,.5);margin-top:4px}
+main{padding:14px 0 64px}
+.sec{margin-top:34px}
+.sechead{display:flex;align-items:baseline;gap:12px;margin-bottom:4px}
+.sechead h2{font-size:13px;letter-spacing:.07em;text-transform:uppercase;color:var(--navy);margin:0;font-weight:700}
+.sechead .m{font-size:12.5px;color:var(--faint)}
+.card{background:var(--card);border:1px solid var(--line);border-top:3px solid #ccc;border-radius:14px;
+padding:18px 20px;margin-top:14px;box-shadow:0 1px 2px rgba(20,40,80,.04)}
+.r1{display:flex;align-items:center;gap:11px;flex-wrap:wrap}
+.sid{font-weight:700;font-size:18px;color:var(--navy);letter-spacing:-.3px}
+.pri{font-size:11px;font-weight:700;letter-spacing:.05em;text-transform:uppercase}
+.tag{font-size:12px;color:var(--mintd);border:1px solid #bdeede;border-radius:100px;padding:2px 11px;background:var(--mintbg)}
+.cta{margin-inline-start:auto;display:inline-flex;align-items:center;gap:7px;font-size:13px;font-weight:600;
+color:#06382a;background:var(--mint);border-radius:8px;padding:8px 15px;white-space:nowrap}
+.story{margin:13px 0 0;font-size:15px;color:#33415c}
+ul.why{list-style:none;padding:0;margin:10px 0 0}
+ul.why li{position:relative;padding-inline-start:16px;font-size:13px;color:var(--mut);margin-top:4px}
+ul.why li::before{content:"";position:absolute;inset-inline-start:2px;top:8px;width:5px;height:5px;border-radius:50%;background:#c3ccda}
+.note{background:var(--mintbg);border:1px solid #d6f2e6;border-radius:11px;padding:11px 14px;margin-top:13px}
+.dlbl{font-size:9.5px;letter-spacing:.09em;text-transform:uppercase;color:var(--mintd);font-weight:600;margin-bottom:4px}
+.dlbl.s{margin-top:11px}
+.ev{direction:rtl;text-align:right;color:#0c6e4d;font-size:14px}
+.draft{direction:rtl;text-align:right;font-size:15px;color:#26354f;line-height:1.75}
+.meta{font-size:11.5px;color:var(--faint);margin-top:13px;border-top:1px solid var(--line);padding-top:10px}
+.meta b{color:var(--mut);font-weight:600}
+.lift{font-size:10px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:var(--mintd);background:var(--mintbg);border-radius:100px;padding:2px 9px}
+.lanelbl{font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:#7c5ce1;font-weight:700;margin:20px 0 0}
+.review .card{border-top-color:#7c5ce1} .review .cta{background:#efeaff;color:#4b32a8}
+.over{font-size:12.5px;color:var(--mut);margin-top:12px} .over b{color:var(--navy)}
+footer{margin-top:46px;border-top:1px solid var(--line);padding-top:16px;font-size:12px;color:var(--faint)}
+@media(max-width:600px){.hero h1{font-size:24px}.stats{gap:22px}.cta{margin-inline-start:0}}
+</style></head><body>
+<header class="hero"><div class="wrap">
+<div class="brand">bo<i>o</i>n <b>academy</b></div>
+<h1>Who to help first — and why</h1>
+<p class="sub">As of 2025-10-14 · next quiz 2025-10-20 · ranked from the numbers and the notes, capped at the top 8 per facilitator</p>
+<div class="stats">
+<div><div class="n" style="color:var(--mint)">53</div><div class="l">Actionable now</div></div>
+<div><div class="n" style="color:#ff6a60">40</div><div class="l">Critical</div></div>
+<div><div class="n" style="color:#9b86f0">2</div><div class="l">Human review</div></div>
+<div><div class="n" style="color:#ff9d73">18</div><div class="l">Overflow</div></div>
+<div><div class="n" style="color:rgba(255,255,255,.85)">103</div><div class="l">Left alone</div></div>
+</div></div></header>
+<main><div class="wrap"><section class="sec"><div class="sechead"><h2>Facilitator 1</h2><span class="m">8 to action · 3 critical</span></div><article class="card" style="border-top-color:#ff5d52">
+<div class="r1"><span class="pri" style="color:#e23b30">Critical</span>
+<span class="sid">S005</span>
+<span class="tag">Standard</span><span class="tag">C01</span><span class="cta"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"/></svg>Call parent</span></div>
+<p class="story">The student&#x27;s attendance has collapsed, and despite multiple attempts to contact the mother, there has been no response, indicating a worsening situation.</p>
+<ul class="why"><li>attendance collapsed from a strong baseline (87 min) to near-zero in the last days — possible silent dropout</li><li>an attempted intervention is failing — recent contact has NOT resolved it, so this is NOT lower priority</li></ul><div class="note"><div class="dlbl">From the note</div><div class="ev">“اتصلت مرتين على الام، ما ردت. قلقانه عليه”</div><div class="dlbl s">WhatsApp draft — sent by the facilitator</div><div class="draft">السلام عليكم، أحمد غيابه الأخير مقلق جدًا. نأمل أن نتمكن من مساعدته على العودة للمسار الصحيح. هل يمكننا تحديد وقت قصير للتحدث معه ومعرفة كيف يمكننا دعمه؟</div></div>
+<div class="meta">parent <b>+9665••••••05</b> (ok) · note-state <b>failing</b> · confidence <b>high</b></div></article><article class="card" style="border-top-color:#ff5d52">
+<div class="r1"><span class="pri" style="color:#e23b30">Critical</span>
+<span class="sid">S012</span>
+<span class="tag">Remedial</span><span class="tag">C01</span><span class="cta"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"/></svg>Call parent</span></div>
+<p class="story">The student missed a quiz and the father was unaware of the program, indicating a lack of initial communication.</p>
+<ul class="why"><li>failed Quiz 1 (scored 28 &lt; 60)</li><li>chronically low attendance (recent avg 15 min/session)</li><li>little sustained practice (median 0 questions/day)</li></ul><div class="note"><div class="dlbl">From the note</div><div class="ev">“ما كان يدري عن البرنامج اصلاً!”</div><div class="dlbl s">WhatsApp draft — sent by the facilitator</div><div class="draft">السلام عليكم، يوسف لم يحضر الاختبار الأخير. والدك لم يكن على علم بالبرنامج، ونحن حريصون على دعمه. هل يمكننا تحديد وقت قصير لمناقشة كيف يمكننا مساعدته على النجاح؟</div></div>
+<div class="meta">parent <b>+9665••••••12</b> (ok) · note-state <b>failing</b> · confidence <b>high</b></div></article><article class="card" style="border-top-color:#ff5d52">
+<div class="r1"><span class="pri" style="color:#e23b30">Critical</span>
+<span class="sid">S004</span>
+<span class="tag">Remedial</span><span class="tag">C01</span><span class="lift">notes moved this</span><span class="cta"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"/></svg>Call parent</span></div>
+<p class="story">Ahmed&#x27;s attendance and practice are very low, and attempts to contact his parents have been unsuccessful.</p>
+<ul class="why"><li>failed Quiz 1 (scored 42 &lt; 60)</li><li>little sustained practice (median 2 questions/day)</li><li>an attempted intervention is failing — recent contact has NOT resolved it, so this is NOT lower priority</li></ul><div class="note"><div class="dlbl">From the note</div><div class="ev">“احمد حضور ضعيف وتمارين شبه معدومة. حالة تحتاج تدخل عاجل”</div><div class="dlbl s">WhatsApp draft — sent by the facilitator</div><div class="draft">السلام عليكم، أحمد حضوره وتمارينه ضعيفة جدًا هذا الأسبوع. لو نتفق معه على حل ٥ تمارين يوميًا، نتوقّع تحسّنًا واضحًا قبل الاختبار القادم.</div></div>
+<div class="meta">parent <b>+9665••••••04</b> (missing_plus) · note-state <b>failing</b> · confidence <b>high</b></div></article><article class="card" style="border-top-color:#fe814f">
+<div class="r1"><span class="pri" style="color:#cf5e1f">High</span>
+<span class="sid">S015</span>
+<span class="tag">Standard</span><span class="tag">C01</span><span class="cta"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>1-on-1 session</span></div>
+<p class="story">Khaled attends class but does not practice, leading to a failing quiz score, and believes understanding in class is sufficient.</p>
+<ul class="why"><li>failed Quiz 1 (scored 58 &lt; 60)</li><li>little sustained practice (median 0 questions/day)</li></ul><div class="note"><div class="dlbl">From the note</div><div class="ev">“خالد يحضر بس ما يتمرن ابداً. درجة الاختبار واضحه - ٥٨ بس”</div><div class="dlbl s">WhatsApp draft — sent by the facilitator</div><div class="draft">السلام عليكم، خالد حضوره ممتاز لكنه لا يحل التمارين، ودرجته في الاختبار كانت ٥٨. لو نوضح له كيف التمارين تساعد على تثبيت المعلومة وزيادة الدرجات، قد يتحسن مستواه كثيرًا.</div></div>
+<div class="meta">parent <b>+9665••••••15</b> (ok) · note-state <b>needs_help</b> · confidence <b>high</b></div></article><article class="card" style="border-top-color:#fe814f">
+<div class="r1"><span class="pri" style="color:#cf5e1f">High</span>
+<span class="sid">S019</span>
+<span class="tag">Remedial</span><span class="tag">C01</span><span class="cta"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"/></svg>Call parent</span></div>
+<p class="story">Fatima has poor attendance and low grades, requiring comprehensive support.</p>
+<ul class="why"><li>failed Quiz 1 (scored 38 &lt; 60)</li><li>little sustained practice (median 2 questions/day)</li></ul><div class="note"><div class="dlbl">From the note</div><div class="ev">“فاطمة حضور ضعيف ودرجات متدنية. محتاجه دعم شامل”</div><div class="dlbl s">WhatsApp draft — sent by the facilitator</div><div class="draft">السلام عليكم، فاطمة تحتاج دعمًا إضافيًا في الحضور والدرجات. هل يمكننا الاتفاق على خطة لمتابعة واجباتها اليومية؟</div></div>
+<div class="meta">parent <b>+9665••••••19</b> (ok) · note-state <b>needs_help</b> · confidence <b>high</b></div></article><article class="card" style="border-top-color:#fe814f">
+<div class="r1"><span class="pri" style="color:#cf5e1f">High</span>
+<span class="sid">S008</span>
+<span class="tag">Standard</span><span class="tag">C01</span><span class="lift">notes moved this</span><span class="cta"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"/></svg>Call parent</span></div>
+<p class="story">Sarah is attending classes but not doing exercises, and both she and her mother are resistant to the idea that exercises are necessary.</p>
+<ul class="why"><li>little sustained practice (median 0 questions/day)</li><li>an attempted intervention is failing — recent contact has NOT resolved it, so this is NOT lower priority</li></ul><div class="note"><div class="dlbl">From the note</div><div class="ev">“الام كانت دفاعية: &#x27;هي تحضر الحصص، ايش اكثر من كذا تبون؟&#x27; مو متعاونه”</div></div>
+<div class="meta">parent <b>+9665••••••08</b> (ok) · note-state <b>refused</b> · confidence <b>high</b></div></article><article class="card" style="border-top-color:#f0b541">
+<div class="r1"><span class="pri" style="color:#a37d12">Medium</span>
+<span class="sid">S009</span>
+<span class="tag">Standard</span><span class="tag">C01</span><span class="cta"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>1-on-1 session</span></div>
+<p class="story">The student is showing improvement after discussions about self-confidence, though more support is needed.</p>
+<ul class="why"><li>failed Quiz 1 (scored 58 &lt; 60)</li></ul><div class="note"><div class="dlbl">From the note</div><div class="ev">“محمد بدا يتحسن بعد ما كلمته عن الثقة بالنفس. لسا طريق طويل بس البداية ايجابية”</div><div class="dlbl s">WhatsApp draft — sent by the facilitator</div><div class="draft">محمد، لاحظت أنك بدأت تتحدى الأسئلة الصعبة أكثر، وهذا شيء رائع! الاستمرار في هذا النهج سيساعدك على بناء ثقتك بنفسك. هل ترغب في تجربة حل مسألة واحدة صعبة كل يوم؟</div></div>
+<div class="meta">parent <b>+9665••••••09</b> (ok) · note-state <b>on_track</b> · confidence <b>high</b></div></article><article class="card" style="border-top-color:#f0b541">
+<div class="r1"><span class="pri" style="color:#a37d12">Medium</span>
+<span class="sid">S016</span>
+<span class="tag">Remedial</span><span class="tag">C01</span><span class="cta"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>Message</span></div>
+<p class="story">Failed Quiz 1 (scored 55 &lt; 60)</p>
+<ul class="why"><li>failed Quiz 1 (scored 55 &lt; 60)</li></ul>
+<div class="meta">parent <b>+9665••••••16</b> (ok) · note-state <b>none</b> · confidence <b>high</b></div></article><p class="over"><b>After the top 8:</b> S006, S013, S017</p></section><section class="sec"><div class="sechead"><h2>Facilitator 2</h2><span class="m">7 to action · 4 critical</span></div><article class="card" style="border-top-color:#ff5d52">
+<div class="r1"><span class="pri" style="color:#e23b30">Critical</span>
+<span class="sid">S023</span>
+<span class="tag">Standard</span><span class="tag">C01</span><span class="cta"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"/></svg>Call parent</span></div>
+<p class="story">Layla&#x27;s attendance has suddenly dropped after a good quiz score, and parents are unresponsive.</p>
+<ul class="why"><li>attendance collapsed from a strong baseline (87 min) to near-zero in the last days — possible silent dropout</li></ul><div class="note"><div class="dlbl">From the note</div><div class="ev">“ليلى غيابها غريب. درجتها كانت ممتازه وما كان في اي مؤشرات لمشكله. لازم نتواصل مع الاهل”</div><div class="dlbl s">WhatsApp draft — sent by the facilitator</div><div class="draft">السلام عليكم، لاحظنا غياب ليلى المفاجئ اليوم رغم أدائها الممتاز في الاختبار الأخير. نود الاطمئنان عليها والتأكد من أن كل شيء على ما يرام. هل يمكننا التواصل معكم للاستفسار عن سبب غيابها؟</div></div>
+<div class="meta">parent <b>+9665••••••23</b> (ok) · note-state <b>needs_help</b> · confidence <b>high</b></div></article><article class="card" style="border-top-color:#ff5d52">
+<div class="r1"><span class="pri" style="color:#e23b30">Critical</span>
+<span class="sid">S033</span>
+<span class="tag">Remedial</span><span class="tag">C01</span><span class="cta"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"/></svg>Call parent</span></div>
+<p class="story">Sarah is a concerning case with poor attendance and almost no practice.</p>
+<ul class="why"><li>failed Quiz 1 (scored 30 &lt; 60)</li><li>chronically low attendance (recent avg 34 min/session)</li><li>little sustained practice (median 1 questions/day)</li></ul><div class="note"><div class="dlbl">From the note</div><div class="ev">“حضور سيء وتمارين معدومة تقريباً”</div><div class="dlbl s">WhatsApp draft — sent by the facilitator</div><div class="draft">السلام عليكم، لاحظنا أن سارة تواجه صعوبة في الحضور وإكمال التمارين مؤخرًا. هل هناك أي شيء يمكننا تقديمه للمساعدة؟ نود التأكد من أنها تحصل على الدعم اللازم للنجاح.</div></div>
+<div class="meta">parent <b>+9665••••••33</b> (ok) · note-state <b>needs_help</b> · confidence <b>high</b></div></article><article class="card" style="border-top-color:#ff5d52">
+<div class="r1"><span class="pri" style="color:#e23b30">Critical</span>
+<span class="sid">S038</span>
+<span class="tag">Remedial</span><span class="tag">C01</span><span class="cta"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>1-on-1 session</span></div>
+<p class="story">Mohamed is a struggling student who requires an intensive intervention plan.</p>
+<ul class="why"><li>failed Quiz 1 (scored 35 &lt; 60)</li><li>chronically low attendance (recent avg 36 min/session)</li><li>little sustained practice (median 2 questions/day)</li></ul><div class="note"><div class="dlbl">From the note</div><div class="ev">“محتاج خطة تدخل مكثفة”</div></div>
+<div class="meta">parent <b>+9665••••••38</b> (ok) · note-state <b>needs_help</b> · confidence <b>high</b></div></article><article class="card" style="border-top-color:#ff5d52">
+<div class="r1"><span class="pri" style="color:#e23b30">Critical</span>
+<span class="sid">S022</span>
+<span class="tag">Remedial</span><span class="tag">C01</span><span class="cta"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"/></svg>Call parent</span></div>
+<p class="story">Failed Quiz 1 (scored 32 &lt; 60)</p>
+<ul class="why"><li>failed Quiz 1 (scored 32 &lt; 60)</li><li>chronically low attendance (recent avg 36 min/session)</li><li>little sustained practice (median 0 questions/day)</li></ul>
+<div class="meta">parent <b>+9665••••••22</b> (ok) · note-state <b>none</b> · confidence <b>high</b></div></article><article class="card" style="border-top-color:#fe814f">
+<div class="r1"><span class="pri" style="color:#cf5e1f">High</span>
+<span class="sid">S027</span>
+<span class="tag">Remedial</span><span class="tag">C01</span><span class="cta"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"/></svg>Call parent</span></div>
+<p class="story">Omar is struggling in all areas and requires immediate intervention.</p>
+<ul class="why"><li>failed Quiz 1 (scored 40 &lt; 60)</li><li>little sustained practice (median 2 questions/day)</li></ul><div class="note"><div class="dlbl">From the note</div><div class="ev">“عمر يعاني بكل المجالات. لازم نتدخل بسرعة”</div><div class="dlbl s">WhatsApp draft — sent by the facilitator</div><div class="draft">السلام عليكم، عمر يواجه صعوبات في جميع المواد حاليًا. هل يمكننا التحدث معه لتحديد سبب هذه الصعوبات ووضع خطة لمساعدته على التحسن؟</div></div>
+<div class="meta">parent <b>+9665••••••27</b> (ok) · note-state <b>needs_help</b> · confidence <b>high</b></div></article><article class="card" style="border-top-color:#f0b541">
+<div class="r1"><span class="pri" style="color:#a37d12">Medium</span>
+<span class="sid">S035</span>
+<span class="tag">Remedial</span><span class="tag">C01</span><span class="cta"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>1-on-1 session</span></div>
+<p class="story">Fatima is practicing easy exercises and her quiz score indicates this is not enough.</p>
+<ul class="why"><li>failed Quiz 1 (scored 57 &lt; 60)</li></ul><div class="note"><div class="dlbl">From the note</div><div class="ev">“فاطمة تسوي تمارين كثير بس كلها من المستوى السهل. درجتها بالاختبار تثبت ان هذا مو كافي”</div><div class="dlbl s">WhatsApp draft — sent by the facilitator</div><div class="draft">فاطمة تبذل جهدًا في التمارين لكنها تركز على المستوى السهل، وهذا ما انعكس على درجتها الأخيرة. لو نساعدها في اختيار تمارين تناسب مستواها الحالي، سنرى تحسنًا ملحوظًا في أدائها.</div></div>
+<div class="meta">parent <b>+9665••••••35</b> (ok) · note-state <b>needs_help</b> · confidence <b>high</b></div></article><article class="card" style="border-top-color:#f0b541">
+<div class="r1"><span class="pri" style="color:#a37d12">Medium</span>
+<span class="sid">S028</span>
+<span class="tag">Standard</span><span class="tag">C01</span><span class="cta"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"/></svg>Call parent</span></div>
+<p class="story">Maryam attended only a fraction of the session due to feeling unwell, despite her usual punctuality.</p>
+<ul class="why"><li>chronically low attendance (recent avg 25 min/session)</li></ul><div class="note"><div class="dlbl">From the note</div><div class="ev">“مريم جت ٣٠ دقيقة بس اليوم. غريب عليها - عادة منتظمه مره”</div><div class="dlbl s">WhatsApp draft — sent by the facilitator</div><div class="draft">السلام عليكم، لاحظنا أن مريم حضرت جزءًا قصيرًا من الحصة اليوم بسبب شعورها بالتعب. نتمنى لها الشفاء العاجل، ونرجو إخبارنا إذا احتاجت أي دعم أكاديمي لاحقًا.</div></div>
+<div class="meta">parent <b>+9665••••••28</b> (ok) · note-state <b>needs_help</b> · confidence <b>high</b></div></article><div class="lanelbl">Needs human review</div><div class="review"><article class="card" style="border-top-color:#ff5d52">
+<div class="r1"><span class="pri" style="color:#e23b30">Critical</span>
+<span class="sid">S039</span>
+<span class="tag">Standard</span><span class="tag">C01</span><span class="cta"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"/></svg>Call parent</span></div>
+<p class="story">Abdullah suddenly stopped attending after being present all week, and attempts to contact his parents have been unsuccessful.</p>
+<ul class="why"><li>attendance collapsed from a strong baseline (87 min) to near-zero in the last days — possible silent dropout</li><li>an attempted intervention is failing — recent contact has NOT resolved it, so this is NOT lower priority</li></ul><div class="note"><div class="dlbl">WhatsApp draft — sent by the facilitator</div><div class="draft">السلام عليكم، لاحظنا غياب عبدالله المفاجئ بعد حضوره الأسبوع الماضي. نود الاطمئنان عليه وتشجيعه على العودة. هل يمكننا التواصل معكم قريبًا لمعرفة ما إذا كان هناك ما يمكننا تقديمه للمساعدة؟</div></div>
+<div class="meta">parent <b>+9665••••••39</b> (ok) · note-state <b>failing</b> · confidence <b>low</b></div></article></div></section><section class="sec"><div class="sechead"><h2>Facilitator 3</h2><span class="m">8 to action · 6 critical</span></div><article class="card" style="border-top-color:#ff5d52">
+<div class="r1"><span class="pri" style="color:#e23b30">Critical</span>
+<span class="sid">S044</span>
+<span class="tag">Remedial</span><span class="tag">C02</span><span class="cta"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"/></svg>Call parent</span></div>
+<p class="story">Laila is performing poorly across all metrics and requires immediate parental contact.</p>
+<ul class="why"><li>failed Quiz 1 (scored 39 &lt; 60)</li><li>chronically low attendance (recent avg 39 min/session)</li><li>little sustained practice (median 2 questions/day)</li></ul><div class="note"><div class="dlbl">From the note</div><div class="ev">“ليلى اداء ضعيف بكل المقاييس. لازم تواصل مع الاهل فوري”</div><div class="dlbl s">WhatsApp draft — sent by the facilitator</div><div class="draft">السلام عليكم، ليلى تواجه صعوبات في أدائها الأكاديمي مؤخرًا. هل يمكننا التحدث معًا حول كيفية دعمها بشكل أفضل في واجباتها اليومية؟</div></div>
+<div class="meta">parent <b>+9665••••••44</b> (ok) · note-state <b>needs_help</b> · confidence <b>high</b></div></article><article class="card" style="border-top-color:#ff5d52">
+<div class="r1"><span class="pri" style="color:#e23b30">Critical</span>
+<span class="sid">S054</span>
+<span class="tag">Remedial</span><span class="tag">C02</span><span class="cta"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"/></svg>Call parent</span></div>
+<p class="story">Noura needs comprehensive intervention as all indicators are negative.</p>
+<ul class="why"><li>failed Quiz 1 (scored 36 &lt; 60)</li><li>chronically low attendance (recent avg 36 min/session)</li><li>little sustained practice (median 2 questions/day)</li></ul><div class="note"><div class="dlbl">From the note</div><div class="ev">“كل المؤشرات سلبية”</div></div>
+<div class="meta">parent <b>+9665••••••54</b> (ok) · note-state <b>needs_help</b> · confidence <b>high</b></div></article><article class="card" style="border-top-color:#ff5d52">
+<div class="r1"><span class="pri" style="color:#e23b30">Critical</span>
+<span class="sid">S061</span>
+<span class="tag">Remedial</span><span class="tag">C02</span><span class="cta"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"/></svg>Call parent</span></div>
+<p class="story">Omar is one of the most struggling students and requires an urgent plan.</p>
+<ul class="why"><li>failed Quiz 1 (scored 29 &lt; 60)</li><li>chronically low attendance (recent avg 31 min/session)</li><li>little sustained practice (median 1 questions/day)</li></ul><div class="note"><div class="dlbl">From the note</div><div class="ev">“عمر من الطلاب الاكثر تعثراً. لازم خطة عاجلة”</div></div>
+<div class="meta">parent <b>+9665••••••61</b> (ok) · note-state <b>needs_help</b> · confidence <b>high</b></div></article><article class="card" style="border-top-color:#ff5d52">
+<div class="r1"><span class="pri" style="color:#e23b30">Critical</span>
+<span class="sid">S073</span>
+<span class="tag">Remedial</span><span class="tag">C02</span><span class="cta"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"/></svg>Call parent</span></div>
+<p class="story">Sarah is a major cause for concern with all indicators being red.</p>
+<ul class="why"><li>failed Quiz 1 (scored 27 &lt; 60)</li><li>chronically low attendance (recent avg 29 min/session)</li><li>little sustained practice (median 0 questions/day)</li></ul><div class="note"><div class="dlbl">From the note</div><div class="ev">“سارة حالة قلق كبير. كل المؤشرات حمراء”</div></div>
+<div class="meta">parent <b>+9665••••••73</b> (ok) · note-state <b>needs_help</b> · confidence <b>high</b></div></article><article class="card" style="border-top-color:#ff5d52">
+<div class="r1"><span class="pri" style="color:#e23b30">Critical</span>
+<span class="sid">S049</span>
+<span class="tag">Remedial</span><span class="tag">C02</span><span class="cta"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"/></svg>Call parent</span></div>
+<p class="story">Ahmed is struggling across the board with low grades, attendance, and practice.</p>
+<ul class="why"><li>failed Quiz 1 (scored 31 &lt; 60)</li><li>chronically low attendance (recent avg 34 min/session)</li><li>little sustained practice (median 0 questions/day)</li></ul><div class="note"><div class="dlbl">From the note</div><div class="ev">“احمد حالة متعثرة. الدرجات والحضور والتمارين كلها ضعيفة”</div><div class="dlbl s">WhatsApp draft — sent by the facilitator</div><div class="draft">السلام عليكم، لاحظت أن أداء أحمد في الدرجات والحضور والتمارين ضعيف هذا الأسبوع. هل يمكننا مساعدته بتحديد وقت للدراسة والمتابعة معه؟</div></div>
+<div class="meta">parent <b>+9665••••••49</b> (ok) · note-state <b>failing</b> · confidence <b>high</b></div></article><article class="card" style="border-top-color:#ff5d52">
+<div class="r1"><span class="pri" style="color:#e23b30">Critical</span>
+<span class="sid">S066</span>
+<span class="tag">Remedial</span><span class="tag">C02</span><span class="cta"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"/></svg>Call parent</span></div>
+<p class="story">Fatima is in a difficult situation and requires intensive support.</p>
+<ul class="why"><li>failed Quiz 1 (scored 34 &lt; 60)</li><li>chronically low attendance (recent avg 34 min/session)</li><li>little sustained practice (median 2 questions/day)</li></ul><div class="note"><div class="dlbl">From the note</div><div class="ev">“محتاجه دعم مكثف”</div></div>
+<div class="meta">parent <b>+9665••••••66</b> (ok) · note-state <b>needs_help</b> · confidence <b>high</b></div></article><article class="card" style="border-top-color:#fe814f">
+<div class="r1"><span class="pri" style="color:#cf5e1f">High</span>
+<span class="sid">S069</span>
+<span class="tag">Standard</span><span class="tag">C02</span><span class="cta"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>Message</span></div>
+<p class="story">Hassan attends regularly but completes no practice exercises, indicating a potential systemic issue with student understanding of the program&#x27;s requirements.</p>
+<ul class="why"><li>failed Quiz 1 (scored 58 &lt; 60)</li><li>little sustained practice (median 0 questions/day)</li></ul><div class="note"><div class="dlbl">From the note</div><div class="ev">“صفر تمارين”</div><div class="dlbl s">WhatsApp draft — sent by the facilitator</div><div class="draft">السلام عليكم، حسن يحضر بانتظام ولكن لا يكمل التمارين. من المهم جدًا أن يفهم أن التمارين جزء أساسي من التعلم. هل يمكن تشجيعه على إكمال تمرين واحد يوميًا؟</div></div>
+<div class="meta">parent <b>+9665••••••69</b> (ok) · note-state <b>needs_help</b> · confidence <b>high</b></div></article><article class="card" style="border-top-color:#fe814f">
+<div class="r1"><span class="pri" style="color:#cf5e1f">High</span>
+<span class="sid">S041</span>
+<span class="tag">Standard</span><span class="tag">C02</span><span class="cta"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>Message</span></div>
+<p class="story">Noura&#x27;s parents were unaware that practice exercises were required, thinking attendance was sufficient; the issue has been clarified.</p>
+<ul class="why"><li>failed Quiz 1 (scored 59 &lt; 60)</li><li>little sustained practice (median 0 questions/day)</li></ul><div class="note"><div class="dlbl">From the note</div><div class="ev">“التمارين مطلوبه! كانوا يفكرون الحصص كافية”</div><div class="dlbl s">WhatsApp draft — sent by the facilitator</div><div class="draft">السلام عليكم، نورة طالبة مجتهدة في الحضور. بعد توضيح أهمية التمارين اليومية، نتوقع منها تحسنًا كبيرًا في أدائها. تشجيعها على حل ٥ تمارين يوميًا سيساعدها كثيرًا قبل الاختبار.</div></div>
+<div class="meta">parent <b>+9665••••••41</b> (ok) · note-state <b>on_track</b> · confidence <b>high</b></div></article><p class="over"><b>After the top 8:</b> S051, S067, S063, S075, S050, S057</p></section><section class="sec"><div class="sechead"><h2>Facilitator 4</h2><span class="m">7 to action · 6 critical</span></div><article class="card" style="border-top-color:#ff5d52">
+<div class="r1"><span class="pri" style="color:#e23b30">Critical</span>
+<span class="sid">S078</span>
+<span class="tag">Remedial</span><span class="tag">C03</span><span class="cta"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"/></svg>Call parent</span></div>
+<p class="story">The student, Mohammed, is in a remedial learning track and failed his quiz, indicating a need for urgent intervention.</p>
+<ul class="why"><li>failed Quiz 1 (scored 30 &lt; 60)</li><li>chronically low attendance (recent avg 31 min/session)</li><li>little sustained practice (median 1 questions/day)</li></ul><div class="note"><div class="dlbl">From the note</div><div class="ev">“يحتاج تدخل عاجل قبل ما الوضع يتفاقم اكثر”</div><div class="dlbl s">WhatsApp draft — sent by the facilitator</div><div class="draft">السلام عليكم، لاحظنا أن محمد في مسار تعليمي يحتاج لدعم إضافي وأن نتيجة اختباره الأخير كانت أقل من المتوقع. هل يمكننا التحدث معه حول كيفية مساعدته على التحسن في الأيام القادمة؟</div></div>
+<div class="meta">parent <b>+9665••••••78</b> (ok) · note-state <b>needs_help</b> · confidence <b>high</b></div></article><article class="card" style="border-top-color:#ff5d52">
+<div class="r1"><span class="pri" style="color:#e23b30">Critical</span>
+<span class="sid">S089</span>
+<span class="tag">Remedial</span><span class="tag">C03</span><span class="cta"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"/></svg>Call parent</span></div>
+<p class="story">Ahmed is performing very poorly and requires immediate intervention.</p>
+<ul class="why"><li>failed Quiz 1 (scored 33 &lt; 60)</li><li>chronically low attendance (recent avg 29 min/session)</li><li>little sustained practice (median 2 questions/day)</li></ul><div class="note"><div class="dlbl">From the note</div><div class="ev">“احمد اداء ضعيف جداً. لازم نتحرك بسرعة”</div><div class="dlbl s">WhatsApp draft — sent by the facilitator</div><div class="draft">السلام عليكم، قلقون جدًا بشأن أداء أحمد الأكاديمي الحالي. حضوره منخفض ونتائجه في الاختبارات ضعيفة جدًا. نحتاج لمساعدته على استعادة تركيزه. هل يمكننا التحدث معه حول تحديد وقت للدراسة كل يوم؟</div></div>
+<div class="meta">parent <b>+9665••••••89</b> (ok) · note-state <b>needs_help</b> · confidence <b>high</b></div></article><article class="card" style="border-top-color:#ff5d52">
+<div class="r1"><span class="pri" style="color:#e23b30">Critical</span>
+<span class="sid">S091</span>
+<span class="tag">Remedial</span><span class="tag">C03</span><span class="cta"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"/></svg>Call parent</span></div>
+<p class="story">Student Maryam&#x27;s attendance has suddenly dropped to zero, and her mother is unresponsive to calls.</p>
+<ul class="why"><li>failed Quiz 1 (scored 48 &lt; 60)</li><li>chronically low attendance (recent avg 0 min/session)</li><li>little sustained practice (median 4 questions/day)</li></ul><div class="note"><div class="dlbl">From the note</div><div class="ev">“مريم ما جت ابداً. اتصلت على امها - ما في رد”</div><div class="dlbl s">WhatsApp draft — sent by the facilitator</div><div class="draft">السلام عليكم، لاحظت غياب مريم المفاجئ عن الحصص مؤخرًا. هل هناك أي شيء يمكننا تقديمه للمساعدة؟ أرجو التواصل معي في أقرب وقت ممكن.</div></div>
+<div class="meta">parent <b>+9665••••••91</b> (ok) · note-state <b>failing</b> · confidence <b>high</b></div></article><article class="card" style="border-top-color:#ff5d52">
+<div class="r1"><span class="pri" style="color:#e23b30">Critical</span>
+<span class="sid">S084</span>
+<span class="tag">Remedial</span><span class="tag">C03</span><span class="cta"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"/></svg>Call parent</span></div>
+<p class="story">Layla is one of the weakest students and needs a rescue plan.</p>
+<ul class="why"><li>failed Quiz 1 (scored 26 &lt; 60)</li><li>chronically low attendance (recent avg 26 min/session)</li><li>little sustained practice (median 0 questions/day)</li></ul><div class="note"><div class="dlbl">From the note</div><div class="ev">“ليلى من اضعف الطلاب. محتاجه خطة انقاذ”</div></div>
+<div class="meta">parent <b>+9665••••••84</b> (ok) · note-state <b>needs_help</b> · confidence <b>high</b></div></article><article class="card" style="border-top-color:#ff5d52">
+<div class="r1"><span class="pri" style="color:#e23b30">Critical</span>
+<span class="sid">S096</span>
+<span class="tag">Remedial</span><span class="tag">C03</span><span class="cta"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"/></svg>Call parent</span></div>
+<p class="story">Noura is identified as a struggling student requiring special attention.</p>
+<ul class="why"><li>failed Quiz 1 (scored 24 &lt; 60)</li><li>chronically low attendance (recent avg 24 min/session)</li><li>little sustained practice (median 0 questions/day)</li></ul><div class="note"><div class="dlbl">From the note</div><div class="ev">“نورة حالة متعثرة تحتاج اهتمام خاص”</div></div>
+<div class="meta">parent <b>+9665••••••96</b> (ok) · note-state <b>needs_help</b> · confidence <b>high</b></div></article><article class="card" style="border-top-color:#ff5d52">
+<div class="r1"><span class="pri" style="color:#e23b30">Critical</span>
+<span class="sid">S093</span>
+<span class="tag">Standard</span><span class="tag">C03</span><span class="lift">notes moved this</span><span class="cta"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"/></svg>Call parent</span></div>
+<p class="story">Ali attends all classes but refuses to do any exercises, and his parents need to intervene.</p>
+<ul class="why"><li>failed Quiz 1 (scored 57 &lt; 60)</li><li>little sustained practice (median 0 questions/day)</li><li>an attempted intervention is failing — recent contact has NOT resolved it, so this is NOT lower priority</li></ul><div class="note"><div class="dlbl">From the note</div><div class="ev">“يرفض التمارين تماماً. الاهل لازم يتدخلون”</div><div class="dlbl s">WhatsApp draft — sent by the facilitator</div><div class="draft">السلام عليكم، لاحظنا أن علي يحضر جميع الحصص لكنه لا يكمل التمارين. هل يمكنكم التحدث معه لتشجيعه على حل تمرين واحد على الأقل يوميًا؟ هذا سيساعده كثيرًا في تحسين أدائه.</div></div>
+<div class="meta">parent <b>+9665••••••93</b> (ok) · note-state <b>failing</b> · confidence <b>high</b></div></article><article class="card" style="border-top-color:#f0b541">
+<div class="r1"><span class="pri" style="color:#a37d12">Medium</span>
+<span class="sid">S086</span>
+<span class="tag">Remedial</span><span class="tag">C03</span><span class="cta"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>Message</span></div>
+<p class="story">Layla is starting to attempt harder practice questions, showing progress.</p>
+<ul class="why"><li>failed Quiz 1 (scored 53 &lt; 60)</li></ul><div class="note"><div class="dlbl">From the note</div><div class="ev">“ليلى بدت تحاول الاسئلة الصعبة. هذا تقدم”</div><div class="dlbl s">WhatsApp draft — sent by the facilitator</div><div class="draft">مرحباً، لاحظنا أن ليلى بدأت تحاول حل الأسئلة الأصعب في التمارين، وهذا تقدم رائع. تشجيعها على الاستمرار في هذا النهج سيساعدها كثيرًا في الاختبار القادم.</div></div>
+<div class="meta">parent <b>+9665••••••86</b> (ok) · note-state <b>on_track</b> · confidence <b>high</b></div></article></section><section class="sec"><div class="sechead"><h2>Facilitator 5</h2><span class="m">7 to action · 3 critical</span></div><article class="card" style="border-top-color:#ff5d52">
+<div class="r1"><span class="pri" style="color:#e23b30">Critical</span>
+<span class="sid">S101</span>
+<span class="tag">Standard</span><span class="tag">C03</span><span class="cta"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"/></svg>Call parent</span></div>
+<p class="story">The student, previously excellent, has suddenly disappeared without a clear reason, and attempts to contact his parents have been unsuccessful.</p>
+<ul class="why"><li>attendance collapsed from a strong baseline (87 min) to near-zero in the last days — possible silent dropout</li></ul><div class="note"><div class="dlbl">From the note</div><div class="ev">“عمر ما جا اليوم. كان ممتاز قبل كذا (٨٤ بالاختبار). ايش صار؟”</div><div class="dlbl s">WhatsApp draft — sent by the facilitator</div><div class="draft">السلام عليكم، عمر كان طالبًا ممتازًا وحصل على 84 في الاختبار الأخير. لاحظنا غيابه المفاجئ هذا الأسبوع، ونود الاطمئنان عليه. هل يمكننا التواصل معكم لمعرفة سبب غيابه؟</div></div>
+<div class="meta">parent <b>+9665••••••01</b> (ok) · note-state <b>needs_help</b> · confidence <b>high</b></div></article><article class="card" style="border-top-color:#ff5d52">
+<div class="r1"><span class="pri" style="color:#e23b30">Critical</span>
+<span class="sid">S108</span>
+<span class="tag">Remedial</span><span class="tag">C03</span><span class="cta"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"/></svg>Call parent</span></div>
+<p class="story">Fatima&#x27;s performance is poor, and her situation requires immediate intervention.</p>
+<ul class="why"><li>failed Quiz 1 (scored 28 &lt; 60)</li><li>chronically low attendance (recent avg 26 min/session)</li><li>little sustained practice (median 1 questions/day)</li></ul><div class="note"><div class="dlbl">From the note</div><div class="ev">“فاطمة وضعها يتطلب تدخل سريع”</div><div class="dlbl s">WhatsApp draft — sent by the facilitator</div><div class="draft">السلام عليكم، فاطمة تحتاج دعمًا إضافيًا في مادتها الدراسية. هل يمكننا تحديد وقت قصير لمناقشة كيف يمكننا مساعدتها على تحسين أدائها قبل الاختبار القادم؟</div></div>
+<div class="meta">parent <b>+9665••••••08</b> (ok) · note-state <b>needs_help</b> · confidence <b>high</b></div></article><article class="card" style="border-top-color:#ff5d52">
+<div class="r1"><span class="pri" style="color:#e23b30">Critical</span>
+<span class="sid">S113</span>
+<span class="tag">Remedial</span><span class="tag">C03</span><span class="cta"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"/></svg>Call parent</span></div>
+<p class="story">Sarah is clearly struggling and requires an action plan.</p>
+<ul class="why"><li>failed Quiz 1 (scored 31 &lt; 60)</li><li>chronically low attendance (recent avg 29 min/session)</li><li>little sustained practice (median 1 questions/day)</li></ul><div class="note"><div class="dlbl">From the note</div><div class="ev">“سارة حالة تعثر واضحة. لازم خطة عمل”</div><div class="dlbl s">WhatsApp draft — sent by the facilitator</div><div class="draft">السلام عليكم، سارة تواجه صعوبات واضحة في دراستها حاليًا. لمساعدتها على استعادة تركيزها، هل يمكننا الاتفاق على تخصيص وقت محدد لها لمراجعة دروسها يوميًا؟</div></div>
+<div class="meta">parent <b>+9665••••••13</b> (ok) · note-state <b>needs_help</b> · confidence <b>high</b></div></article><article class="card" style="border-top-color:#fe814f">
+<div class="r1"><span class="pri" style="color:#cf5e1f">High</span>
+<span class="sid">S102</span>
+<span class="tag">Remedial</span><span class="tag">C03</span><span class="cta"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>1-on-1 session</span></div>
+<p class="story">Omar is a struggling student who needs comprehensive support.</p>
+<ul class="why"><li>failed Quiz 1 (scored 41 &lt; 60)</li><li>little sustained practice (median 4 questions/day)</li></ul><div class="note"><div class="dlbl">From the note</div><div class="ev">“عمر من الطلاب المتعثرين. محتاج دعم شامل”</div></div>
+<div class="meta">parent <b>+9665••••••02</b> (ok) · note-state <b>needs_help</b> · confidence <b>high</b></div></article><article class="card" style="border-top-color:#fe814f">
+<div class="r1"><span class="pri" style="color:#cf5e1f">High</span>
+<span class="sid">S105</span>
+<span class="tag">Standard</span><span class="tag">C03</span><span class="cta"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>1-on-1 session</span></div>
+<p class="story">Fatima attends regularly but does not practice at all, leading to failing quiz scores.</p>
+<ul class="why"><li>failed Quiz 1 (scored 59 &lt; 60)</li><li>little sustained practice (median 0 questions/day)</li></ul><div class="note"><div class="dlbl">From the note</div><div class="ev">“فاطمة تحضر زين بس حرفياً ما تتمرن ابداً”</div><div class="dlbl s">WhatsApp draft — sent by the facilitator</div><div class="draft">فاطمة تحضر بانتظام لكنها لا تقوم بالتدريب، مما أثر على درجاتها. هل يمكننا تشجيعها على حل ٥ مسائل تدريبية يوميًا؟</div></div>
+<div class="meta">parent <b>+9665••••••05</b> (ok) · note-state <b>needs_help</b> · confidence <b>high</b></div></article><article class="card" style="border-top-color:#f0b541">
+<div class="r1"><span class="pri" style="color:#a37d12">Medium</span>
+<span class="sid">S110</span>
+<span class="tag">Remedial</span><span class="tag">C03</span><span class="cta"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>Message</span></div>
+<p class="story">Ahmed understands the importance of challenges and is now pushing himself with harder exercises.</p>
+<ul class="why"><li>failed Quiz 1 (scored 58 &lt; 60)</li></ul><div class="note"><div class="dlbl">From the note</div><div class="ev">“احمد فهم النقطة. بدا يتحدى نفسه اكثر بالتمارين”</div></div>
+<div class="meta">parent <b>+9665••••••10</b> (ok) · note-state <b>on_track</b> · confidence <b>high</b></div></article><article class="card" style="border-top-color:#f0b541">
+<div class="r1"><span class="pri" style="color:#a37d12">Medium</span>
+<span class="sid">S116</span>
+<span class="tag">Standard</span><span class="tag">C03</span><span class="lift">notes moved this</span><span class="cta"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>Message</span></div>
+<p class="story">Sarah has perfect attendance but is not completing any practice exercises.</p>
+<ul class="why"><li>little sustained practice (median 1 questions/day)</li><li>the metrics look fine but the note reveals a problem the numbers miss</li></ul><div class="note"><div class="dlbl">From the note</div><div class="ev">“حضور مثالي بس ٠ تمارين”</div><div class="dlbl s">WhatsApp draft — sent by the facilitator</div><div class="draft">مرحباً سارة، لاحظت أن حضورك ممتاز لكنك لم تكملي أي تمارين هذا الأسبوع. هل هناك صعوبة معينة تواجهينها؟ لو حاولتِ حل تمرين واحد يوميًا، سيساعدك ذلك كثيرًا على فهم المادة بشكل أفضل.</div></div>
+<div class="meta">parent <b>+9665••••••16</b> (ok) · note-state <b>needs_help</b> · confidence <b>high</b></div></article><div class="lanelbl">Needs human review</div><div class="review"><article class="card" style="border-top-color:#f0b541">
+<div class="r1"><span class="pri" style="color:#a37d12">Medium</span>
+<span class="sid">S117</span>
+<span class="tag">Standard</span><span class="tag">C03</span><span class="cta"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"/></svg>Call parent</span></div>
+<p class="story">Abdullah&#x27;s attendance has drastically decreased due to a persistent headache, and his father was advised to take him to the hospital.</p>
+<ul class="why"><li>chronically low attendance (recent avg 18 min/session)</li><li>the note is ambiguous — needs a human read before acting</li></ul><div class="note"><div class="dlbl">WhatsApp draft — sent by the facilitator</div><div class="draft">السلام عليكم، لاحظت أن عبدالله حضر ١٠ دقائق فقط اليوم بسبب الصداع. أتمنى أن يكون بخير. هل هناك أي مستجدات أو ما يمكننا تقديمه للمساعدة؟</div></div>
+<div class="meta">parent <b>+9665••••••17</b> (ok) · note-state <b>needs_help</b> · confidence <b>low</b></div></article></div></section><section class="sec"><div class="sechead"><h2>Facilitator 8</h2><span class="m">8 to action · 8 critical</span></div><article class="card" style="border-top-color:#ff5d52">
+<div class="r1"><span class="pri" style="color:#e23b30">Critical</span>
+<span class="sid">S190</span>
+<span class="tag">Remedial</span><span class="tag">C05</span><span class="cta"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"/></svg>Call parent</span></div>
+<p class="story">The student&#x27;s attendance has drastically decreased, and attempts to contact the parent have been unsuccessful.</p>
+<ul class="why"><li>failed Quiz 1 (scored 46 &lt; 60)</li><li>chronically low attendance (recent avg 0 min/session)</li><li>little sustained practice (median 4 questions/day)</li></ul><div class="note"><div class="dlbl">From the note</div><div class="ev">“ليلى ما جت اليوم. حاولت اتصل على الام، ما ردت”</div><div class="dlbl s">WhatsApp draft — sent by the facilitator</div><div class="draft">السلام عليكم، لاحظنا غياب ليلى المتكرر مؤخرًا، حيث انخفض حضورها بشكل كبير. نود الاطمئنان عليها ومساعدتها على العودة للمسار التعليمي. هل يمكننا تحديد وقت مناسب للتواصل معكم؟</div></div>
+<div class="meta">parent <b>+9665••••••90</b> (ok) · note-state <b>failing</b> · confidence <b>high</b></div></article><article class="card" style="border-top-color:#ff5d52">
+<div class="r1"><span class="pri" style="color:#e23b30">Critical</span>
+<span class="sid">S166</span>
+<span class="tag">Remedial</span><span class="tag">C05</span><span class="cta"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"/></svg>Call parent</span></div>
+<p class="story">Failed Quiz 1 (scored 17 &lt; 60)</p>
+<ul class="why"><li>failed Quiz 1 (scored 17 &lt; 60)</li><li>chronically low attendance (recent avg 14 min/session)</li><li>little sustained practice (median 0 questions/day)</li></ul>
+<div class="meta">parent <b>+9665••••••66</b> (ok) · note-state <b>none</b> · confidence <b>high</b></div></article><article class="card" style="border-top-color:#ff5d52">
+<div class="r1"><span class="pri" style="color:#e23b30">Critical</span>
+<span class="sid">S171</span>
+<span class="tag">Remedial</span><span class="tag">C05</span><span class="cta"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"/></svg>Call parent</span></div>
+<p class="story">Failed Quiz 1 (scored 20 &lt; 60)</p>
+<ul class="why"><li>failed Quiz 1 (scored 20 &lt; 60)</li><li>chronically low attendance (recent avg 16 min/session)</li><li>little sustained practice (median 1 questions/day)</li></ul>
+<div class="meta">parent <b>+9665••••••71</b> (ok) · note-state <b>none</b> · confidence <b>high</b></div></article><article class="card" style="border-top-color:#ff5d52">
+<div class="r1"><span class="pri" style="color:#e23b30">Critical</span>
+<span class="sid">S177</span>
+<span class="tag">Remedial</span><span class="tag">C05</span><span class="cta"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"/></svg>Call parent</span></div>
+<p class="story">Failed Quiz 1 (scored 18 &lt; 60)</p>
+<ul class="why"><li>failed Quiz 1 (scored 18 &lt; 60)</li><li>chronically low attendance (recent avg 14 min/session)</li><li>little sustained practice (median 0 questions/day)</li></ul>
+<div class="meta">parent <b>+9665••••••77</b> (ok) · note-state <b>none</b> · confidence <b>high</b></div></article><article class="card" style="border-top-color:#ff5d52">
+<div class="r1"><span class="pri" style="color:#e23b30">Critical</span>
+<span class="sid">S182</span>
+<span class="tag">Remedial</span><span class="tag">C05</span><span class="cta"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"/></svg>Call parent</span></div>
+<p class="story">Failed Quiz 1 (scored 15 &lt; 60)</p>
+<ul class="why"><li>failed Quiz 1 (scored 15 &lt; 60)</li><li>chronically low attendance (recent avg 11 min/session)</li><li>little sustained practice (median 0 questions/day)</li></ul>
+<div class="meta">parent <b>+9665••••••82</b> (ok) · note-state <b>none</b> · confidence <b>high</b></div></article><article class="card" style="border-top-color:#ff5d52">
+<div class="r1"><span class="pri" style="color:#e23b30">Critical</span>
+<span class="sid">S188</span>
+<span class="tag">Remedial</span><span class="tag">C05</span><span class="cta"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"/></svg>Call parent</span></div>
+<p class="story">Failed Quiz 1 (scored 13 &lt; 60)</p>
+<ul class="why"><li>failed Quiz 1 (scored 13 &lt; 60)</li><li>chronically low attendance (recent avg 9 min/session)</li><li>little sustained practice (median 0 questions/day)</li></ul>
+<div class="meta">parent <b>+9665••••••88</b> (ok) · note-state <b>none</b> · confidence <b>high</b></div></article><article class="card" style="border-top-color:#ff5d52">
+<div class="r1"><span class="pri" style="color:#e23b30">Critical</span>
+<span class="sid">S194</span>
+<span class="tag">Remedial</span><span class="tag">C05</span><span class="cta"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"/></svg>Call parent</span></div>
+<p class="story">Failed Quiz 1 (scored 11 &lt; 60)</p>
+<ul class="why"><li>failed Quiz 1 (scored 11 &lt; 60)</li><li>chronically low attendance (recent avg 6 min/session)</li><li>little sustained practice (median 0 questions/day)</li></ul>
+<div class="meta">parent <b>+9665••••••94</b> (ok) · note-state <b>none</b> · confidence <b>high</b></div></article><article class="card" style="border-top-color:#ff5d52">
+<div class="r1"><span class="pri" style="color:#e23b30">Critical</span>
+<span class="sid">S199</span>
+<span class="tag">Remedial</span><span class="tag">C05</span><span class="cta"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"/></svg>Call parent</span></div>
+<p class="story">Failed Quiz 1 (scored 9 &lt; 60)</p>
+<ul class="why"><li>failed Quiz 1 (scored 9 &lt; 60)</li><li>chronically low attendance (recent avg 4 min/session)</li><li>little sustained practice (median 0 questions/day)</li></ul>
+<div class="meta">parent <b>+9665••••••99</b> (ok) · note-state <b>none</b> · confidence <b>high</b></div></article><p class="over"><b>After the top 8:</b> S196, S174, S185, S179, S191, S184, S168, S173, S163</p></section><section class="sec"><div class="sechead"><h2>Facilitator 7</h2><span class="m">8 to action · 6 critical</span></div><article class="card" style="border-top-color:#ff5d52">
+<div class="r1"><span class="pri" style="color:#e23b30">Critical</span>
+<span class="sid">S144</span>
+<span class="tag">Remedial</span><span class="tag">C04</span><span class="cta"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"/></svg>Call parent</span></div>
+<p class="story">Failed Quiz 1 (scored 21 &lt; 60)</p>
+<ul class="why"><li>failed Quiz 1 (scored 21 &lt; 60)</li><li>chronically low attendance (recent avg 19 min/session)</li><li>little sustained practice (median 0 questions/day)</li></ul>
+<div class="meta">parent <b>+9665••••••44</b> (ok) · note-state <b>none</b> · confidence <b>high</b></div></article><article class="card" style="border-top-color:#ff5d52">
+<div class="r1"><span class="pri" style="color:#e23b30">Critical</span>
+<span class="sid">S149</span>
+<span class="tag">Remedial</span><span class="tag">C04</span><span class="cta"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"/></svg>Call parent</span></div>
+<p class="story">Failed Quiz 1 (scored 25 &lt; 60)</p>
+<ul class="why"><li>failed Quiz 1 (scored 25 &lt; 60)</li><li>chronically low attendance (recent avg 21 min/session)</li><li>little sustained practice (median 1 questions/day)</li></ul>
+<div class="meta">parent <b>+9665••••••49</b> (ok) · note-state <b>none</b> · confidence <b>high</b></div></article><article class="card" style="border-top-color:#ff5d52">
+<div class="r1"><span class="pri" style="color:#e23b30">Critical</span>
+<span class="sid">S155</span>
+<span class="tag">Remedial</span><span class="tag">C04</span><span class="cta"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"/></svg>Call parent</span></div>
+<p class="story">Failed Quiz 1 (scored 19 &lt; 60)</p>
+<ul class="why"><li>failed Quiz 1 (scored 19 &lt; 60)</li><li>chronically low attendance (recent avg 16 min/session)</li><li>little sustained practice (median 0 questions/day)</li></ul>
+<div class="meta">parent <b>+9665••••••55</b> (ok) · note-state <b>none</b> · confidence <b>high</b></div></article><article class="card" style="border-top-color:#ff5d52">
+<div class="r1"><span class="pri" style="color:#e23b30">Critical</span>
+<span class="sid">S159</span>
+<span class="tag">Remedial</span><span class="tag">C04</span><span class="cta"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"/></svg>Call parent</span></div>
+<p class="story">Failed Quiz 1 (scored 23 &lt; 60)</p>
+<ul class="why"><li>failed Quiz 1 (scored 23 &lt; 60)</li><li>chronically low attendance (recent avg 19 min/session)</li><li>little sustained practice (median 1 questions/day)</li></ul>
+<div class="meta">parent <b>+9665••••••59</b> (ok) · note-state <b>none</b> · confidence <b>high</b></div></article><article class="card" style="border-top-color:#ff5d52">
+<div class="r1"><span class="pri" style="color:#e23b30">Critical</span>
+<span class="sid">S152</span>
+<span class="tag">Standard</span><span class="tag">C04</span><span class="lift">notes moved this</span><span class="cta"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"/></svg>Call parent</span></div>
+<p class="story">Ali attends regularly but completes zero practice exercises, leading to a failing quiz score.</p>
+<ul class="why"><li>failed Quiz 1 (scored 56 &lt; 60)</li><li>little sustained practice (median 0 questions/day)</li><li>an attempted intervention is failing — recent contact has NOT resolved it, so this is NOT lower priority</li></ul><div class="note"><div class="dlbl">From the note</div><div class="ev">“تمارين صفر”</div><div class="dlbl s">WhatsApp draft — sent by the facilitator</div><div class="draft">السلام عليكم، لاحظت أن علي يحضر بانتظام لكنه لا يكمل التمارين. هذا يؤثر على أدائه في الاختبارات. هل يمكن تشجيعه على حل تمرين واحد يوميًا على الأقل؟</div></div>
+<div class="meta">parent <b>+9665••••••52</b> (ok) · note-state <b>failing</b> · confidence <b>high</b></div></article><article class="card" style="border-top-color:#ff5d52">
+<div class="r1"><span class="pri" style="color:#e23b30">Critical</span>
+<span class="sid">S162</span>
+<span class="tag">Standard</span><span class="tag">C04</span><span class="lift">notes moved this</span><span class="cta"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"/></svg>Call parent</span></div>
+<p class="story">Hassan attends regularly but refuses to do practice exercises.</p>
+<ul class="why"><li>failed Quiz 1 (scored 55 &lt; 60)</li><li>little sustained practice (median 0 questions/day)</li><li>an attempted intervention is failing — recent contact has NOT resolved it, so this is NOT lower priority</li></ul><div class="note"><div class="dlbl">From the note</div><div class="ev">“رافض يتمرن”</div></div>
+<div class="meta">parent <b>+9665••••••62</b> (ok) · note-state <b>refused</b> · confidence <b>high</b></div></article><article class="card" style="border-top-color:#f0b541">
+<div class="r1"><span class="pri" style="color:#a37d12">Medium</span>
+<span class="sid">S146</span>
+<span class="tag">Remedial</span><span class="tag">C04</span><span class="cta"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>1-on-1 session</span></div>
+<p class="story">Youssef is avoiding difficult questions and requires ongoing emotional support, as the issue is deeper than just exercises.</p>
+<ul class="why"><li>failed Quiz 1 (scored 54 &lt; 60)</li></ul><div class="note"><div class="dlbl">From the note</div><div class="ev">“محتاج دعم نفسي اكثر”</div></div>
+<div class="meta">parent <b>+9665••••••46</b> (ok) · note-state <b>needs_help</b> · confidence <b>high</b></div></article><article class="card" style="border-top-color:#f0b541">
+<div class="r1"><span class="pri" style="color:#a37d12">Medium</span>
+<span class="sid">S161</span>
+<span class="tag">Standard</span><span class="tag">C04</span><span class="cta"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>Message</span></div>
+<p class="story">Failed Quiz 1 (scored 59 &lt; 60)</p>
+<ul class="why"><li>failed Quiz 1 (scored 59 &lt; 60)</li></ul>
+<div class="meta">parent <b>+9665••••••61</b> (ok) · note-state <b>none</b> · confidence <b>high</b></div></article></section><footer>Boon Academy · the LLM reads the Arabic notes, deterministic rules decide, the facilitator sends · generated from committed outputs.</footer></div></main></body></html>

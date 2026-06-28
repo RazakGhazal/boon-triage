@@ -1,0 +1,439 @@
+% Compile: lualatex technical-report.tex  (run twice for the ToC)
+\documentclass[11pt,paper=a4,parskip=half,DIV=11]{scrartcl}
+
+\usepackage{fontspec}
+\usepackage[english]{babel}
+\babelprovide[import]{arabic}
+\babelfont{rm}{Latin Modern Roman}
+\babelfont[arabic]{rm}{Geeza Pro}
+\newcommand{\ar}[1]{\foreignlanguage{arabic}{#1}}
+
+\usepackage{microtype}
+\usepackage{xcolor}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{ragged2e}
+\usepackage{enumitem}
+\setlist{nosep,leftmargin=1.4em}
+\usepackage{listings}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta,positioning,fit,backgrounds}
+\usepackage[most]{tcolorbox}
+\usepackage[colorlinks=true,linkcolor=noongreen,citecolor=noongreen,urlcolor=accent]{hyperref}
+
+\definecolor{noongreen}{HTML}{14342B}
+\definecolor{accent}{HTML}{2A7D44}
+\definecolor{amber}{HTML}{B5740F}
+\definecolor{rule}{HTML}{B83227}
+
+\addtokomafont{title}{\color{noongreen}}
+\addtokomafont{section}{\color{noongreen}}
+\addtokomafont{subsection}{\color{noongreen}}
+\setkomafont{descriptionlabel}{\bfseries\color{noongreen}}
+
+\lstdefinestyle{box}{basicstyle=\ttfamily\footnotesize,breaklines=true,
+  backgroundcolor=\color{black!4},frame=leftline,framerule=2pt,rulecolor=\color{accent},
+  xleftmargin=8pt,framexleftmargin=8pt,columns=fullflexible,showstringspaces=false,
+  literate={→}{$\rightarrow$}{1} {×}{$\times$}{1}}
+\lstset{style=box}
+
+\newtcolorbox{insight}[1][]{enhanced,breakable,colback=accent!6,colframe=accent,
+  boxrule=0.4pt,left=6pt,right=6pt,top=4pt,bottom=4pt,fonttitle=\bfseries,title=#1}
+\newtcolorbox{why}[1][Design rationale]{enhanced,breakable,colback=noongreen!5,colframe=noongreen,
+  boxrule=0.4pt,left=6pt,right=6pt,top=4pt,bottom=4pt,fonttitle=\bfseries\color{white},
+  coltitle=white,colbacktitle=noongreen,title=#1}
+\newtcolorbox{caveat}[1][Honest limitation]{enhanced,breakable,colback=amber!8,colframe=amber,
+  boxrule=0.4pt,left=6pt,right=6pt,top=4pt,bottom=4pt,fonttitle=\bfseries,coltitle=amber,title=#1}
+
+\title{Boon Academy --- Intervention Triage}
+\subtitle{\normalsize\color{black}A facilitator-mediated, closed-loop system for getting help to failing students\\ before the next quiz --- technical report}
+\author{AI Systems Engineer case study}
+\date{June 2026}
+
+\begin{document}
+\maketitle
+\thispagestyle{empty}
+
+\begin{abstract}
+\noindent Boon Academy already knows \emph{who} is failing; only \textasciitilde30\% of those
+students get any intervention before the next quiz. The bottleneck is not detection --- it is
+\textbf{triage, action, and never knowing whether the help worked}. This system produces a ranked,
+capacity-bounded \emph{action queue} per facilitator by fusing a transparent rule engine (the
+numbers) with an LLM that \emph{reads} the Arabic facilitator notes (the story), and then --- the
+part that distinguishes it --- \textbf{measures whether past interventions actually re-engaged
+students}. On the provided 200-student sample, only \textbf{11\%} of logged interventions show
+re-engagement: a logged note is not an effective intervention, and that gap is the real problem
+behind the 30\%. Every design choice is grounded in the early-warning and behavioural-nudge
+evidence base and stated with its limitations.
+\end{abstract}
+
+\tableofcontents
+\bigskip\hrule
+
+\section{The problem and the diagnosis}
+The brief frames a fictional ``Boon Academy'': students attend in person, on-site
+\textbf{facilitators} run each classroom, and teachers instruct remotely. When a student falls
+behind the facilitator is supposed to intervene (call the parent, 1-on-1 tutoring, a motivational
+message), but only \textasciitilde30\% of failing students are reached before the next quiz, and
+the org is scaling 1{,}000\,\textrightarrow\,5{,}000 students.
+
+\begin{insight}[The real problem is not an AI problem]
+A facilitator running a full classroom cannot act on a wall of red flags --- it is \textbf{cognitive
+overload and decision fatigue}. If she can make three calls today, the system must tell her
+\emph{which three}, \emph{why}, and \emph{what to say}. Three deeper truths shape the design:
+(1) the signal is split between LMS \emph{numbers} and the facilitators' own free-text \emph{notes},
+and nobody synthesises them; (2) attendance is a deceptive proxy; (3) a logged note $\neq$ an
+effective intervention.
+\end{insight}
+
+\section{The data}
+Three CSVs joined on \texttt{student\_id} only (names written inside notes do not match the roster).
+200 students across 5 campuses and 8 facilitators; 10 active class-days (1--14 Oct 2025, weekends
+absent); Quiz 1 on day 10; the system's ``today'' is a parameter (\texttt{AS\_OF\_DATE}=2025-10-14),
+never \texttt{now()}, so runs are reproducible.
+
+\begin{description}
+\item[metadata] \texttt{student\_id, student\_name, campus\_id, facilitator\_email, grade, parent\_phone, target\_score, learning\_track}
+\item[daily\_metrics] \texttt{student\_id, date, session\_attended\_min, practice\_questions, last\_quiz\_score, days\_until\_next\_quiz}
+\item[notes] \texttt{note\_id, student\_id, facilitator\_email, date, note\_text} (180 notes, 100\% Arabic free text)
+\end{description}
+
+\subsection{The data traps (handled once, in ingest)}
+Real operational data is messy; each trap is neutralised in one place so the rest of the pipeline can
+trust the record.
+\begin{itemize}
+\item \textbf{Name mismatch} --- join on \texttt{student\_id} only.
+\item \textbf{Carried-forward quiz} --- \texttt{last\_quiz\_score} repeats across days; it is one event
+(taken at the quiz date), not a daily score.
+\item \textbf{Quiz 0 that is an absence} --- a \texttt{0} with a \emph{blank} session on quiz day means
+``absent during the quiz'', not a real failing score (student S145).
+\item \textbf{Corrupt \texttt{target\_score}} --- a whole Remedial cohort has targets below the pass mark
+(e.g.\ 12); never used as a signal.
+\item \textbf{Dirty phones} --- a missing \texttt{+}, an email in the phone field --- normalised and flagged,
+never echoed raw (privacy).
+\item \textbf{Blank cells} --- kept distinct from a real \texttt{0.0}.
+\end{itemize}
+
+\subsection{Data insights}
+\begin{table}[h]\centering\footnotesize
+\caption{Quiz-1 failure by learning track --- track is nearly destiny.}
+\begin{tabular}{lrr}
+\toprule
+Track & Failed / total & Fail rate \\
+\midrule
+Accelerated & 0 / 14 & \textbf{0\%} \\
+Standard & 15 / 128 & 12\% \\
+Remedial & 52 / 58 & \textbf{90\%} \\
+\midrule
+All & 67 / 200 & 34\% \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{itemize}
+\item \textbf{Coverage \& blind spots:} only \textbf{75/200 (38\%)} students have any note; \textbf{125 (62\%)
+were never contacted}, including \textbf{20 who failed the quiz and have no note at all} --- invisible to
+any notes-based view.
+\item \textbf{Attendance is deceptive:} \textasciitilde15 students attend \textasciitilde88 min every day,
+do almost no practice, and score in the 50s--low-60s. An attendance-only triage rates them flawless;
+only practice + quiz catch them. Hence practice is a \emph{separate} axis from attendance.
+\item \textbf{More practice can mean more risk:} one student did 120 practice questions in a single day
+(cramming) and still failed --- so raw volume is not rewarded; the engine uses the spike-robust
+\emph{median} and flags single-day spikes.
+\item \textbf{Notes are reactive:} 74 of 180 notes (41\%) land on the single final day, with secondary
+spikes on days 3--4 (enrollment) and day 13. Notes are written \emph{after} the fact, not as early warning.
+\end{itemize}
+
+\subsection{How facilitators differ in note-taking}
+Note-taking is far from uniform, and the differences map onto the overload story directly.
+
+\begin{table}[h]\centering\footnotesize
+\caption{Per-facilitator note-taking. Notes are short (median 12 words, range 2--23) and uniformly
+Arabic; coverage and verbosity vary widely.}
+\begin{tabular}{lrrrrr}
+\toprule
+Facilitator & Roster & Noted & Coverage & Notes & Median words \\
+\midrule
+facilitator1 & 20 & 9 & 45\% & 27 & 13 \\
+facilitator2 & 20 & 8 & 40\% & 19 & \textbf{14} \\
+facilitator3 & 35 & 12 & 34\% & 26 & 14 \\
+facilitator4 & 22 & 11 & \textbf{50\%} & 24 & 10 \\
+facilitator5 & 20 & 9 & 45\% & 23 & 12 \\
+facilitator6 & 24 & 9 & 38\% & 19 & 10 \\
+facilitator7 & 21 & 9 & 43\% & 21 & 11 \\
+facilitator8 & 38 & 8 & \textbf{21\%} & 21 & \textbf{9} \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{insight}[The overload is visible in the data]
+The two facilitators with the \emph{largest} rosters (38 and 35 students) have the two \emph{lowest}
+note-coverage rates (21\% and 34\%) and, for the 38-student case, the \emph{tersest} notes (median 9
+words). Bigger caseload \textrightarrow{} less documentation \textrightarrow{} more students falling through.
+This is precisely the capacity problem the system is built to relieve --- and a reason the action queue
+is \textbf{capacity-bounded per facilitator}, not a global dump.
+\end{insight}
+
+Practical consequences for the LLM: notes are \emph{short and dialectal} (12 words median), so the
+reader must extract a lot from little and tolerate Najdi/Hijazi spelling, code-switching, and
+abbreviations; and because \emph{count/recency} of notes varies by facilitator habit rather than by
+student need, note metadata is a poor risk signal --- another reason to read \emph{content}, not count.
+
+\subsection{The demo cast --- where numbers and notes disagree}
+The dataset is built around students whose numbers and notes point in opposite directions; these drive
+the demo and the acceptance tests.
+
+\begin{table}[h]\centering\footnotesize
+\caption{Representative students. The point of reading notes is the right-hand column.}
+\begin{tabular}{llp{4.4cm}l}
+\toprule
+ID & Numbers say & Notes say & Correct call \\
+\midrule
+S023 & passing (88) & vanished, no reply & \textbf{Critical} (silent dropout) \\
+S005 & passing (85) & ``worried, needs immediate follow-up'' & \textbf{Critical} (failing intervention) \\
+S145 & quiz \texttt{0} & ``big transformation, dad engaged'' & \textbf{Low} (the 0 is an absence) \\
+S017 & passing (83) & ``crying --- family problems'' & \textbf{Surface} (note-only crisis) \\
+S199 & quiz 9, target 12 & (no note) & \textbf{Critical} (invisible at-risk) \\
+S051 & quiz 52 & ``practising regularly'' (120-q cram) & \textbf{High} (do not demote) \\
+S076 & passing (84) & ``excellent student'' & \textbf{Leave alone} \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\section{Architecture}
+A deliberately small linear pipeline (\textasciitilde1{,}450 lines of Python; pandas + the Google
+\texttt{genai} SDK) with \textbf{one} LLM seam. Four objects flow through it:
+\[
+\texttt{StudentRecord}\;\rightarrow\;\texttt{Risk}+\texttt{NoteState}\;\rightarrow\;\texttt{ActionRow}\;\rightarrow\;\texttt{queue}.
+\]
+
+\begin{figure}[h]\centering
+\begin{tikzpicture}[>=Stealth,font=\footnotesize,
+  box/.style={draw=noongreen,rounded corners,align=center,fill=noongreen!4,inner sep=5pt,minimum width=3.4cm},
+  llm/.style={draw=accent,rounded corners,align=center,fill=accent!8,inner sep=5pt,minimum width=3.4cm},
+  arr/.style={->,thick,noongreen!75}]
+\node[box](csv){3 CSVs\\\scriptsize metadata $\cdot$ daily $\cdot$ notes};
+\node[box,below=7mm of csv](ing){\texttt{ingest.py}\\\scriptsize StudentRecord (clean + traps)};
+\node[box,below=12mm of ing,xshift=-2.3cm](risk){\texttt{risk.py}\\\scriptsize NEED tier (no AI)};
+\node[llm,below=12mm of ing,xshift=2.3cm](notes){\texttt{notes.py} --- Gemini\\\scriptsize NoteState (reads notes)};
+\node[box,below=24mm of ing](dec){\texttt{decide.py}\\\scriptsize fusion: 3 rules $\rightarrow$ ActionRow};
+\node[box,below=7mm of dec](out){\texttt{output.py}\\\scriptsize ranked, capacity-bounded queue};
+\draw[arr](csv)--(ing);
+\draw[arr](ing.south)--($(risk.north)+(0,0)$);
+\draw[arr](ing.south)--($(notes.north)+(0,0)$);
+\draw[arr](risk.south)--($(dec.north)+(-2.3cm,0)$);
+\draw[arr](notes.south)--($(dec.north)+(2.3cm,0)$);
+\draw[arr](dec)--(out);
+\node[draw=amber,dashed,rounded corners,align=left,fill=amber!5,inner sep=5pt,
+  right=8mm of dec,text width=4.2cm,font=\scriptsize]
+  (v2){\textbf{v2 layer} (\texttt{pipeline.run\_v2})\\ \texttt{effectiveness.py} --- did past notes re-engage?\\ \texttt{fairness.py} --- within-track audit\\ holdout (by facilitator)\\ $\rightarrow$ \texttt{output\_v2.py} reports};
+\draw[->,thick,amber,dashed](out.east)--(v2.west);
+\end{tikzpicture}
+\caption{Data flow. \texttt{config.py} feeds constants everywhere; \texttt{pipeline.py} wires it;
+\texttt{main.py} is the CLI. The only LLM call is the green box.}
+\end{figure}
+
+\begin{table}[h]\centering\footnotesize
+\caption{Files and responsibilities (\textasciitilde1{,}450 lines total).}
+\begin{tabular}{llr}
+\toprule
+File & Job & Lines \\
+\midrule
+\texttt{config.py} & tunables, \texttt{.env} loader, \texttt{AS\_OF\_DATE} & 66 \\
+\texttt{ingest.py} & 3 CSVs $\rightarrow$ StudentRecord; every trap, once & 212 \\
+\texttt{risk.py} & NEED: 3 signals + cliff $\rightarrow$ tier + reasons (no AI) & 79 \\
+\texttt{notes.py} & the LLM seam: Gemini reads notes $\rightarrow$ NoteState & 231 \\
+\texttt{decide.py} & fusion: NEED\,$\times$\,STATE, 3 rules $\rightarrow$ ActionRow & 148 \\
+\texttt{output.py} & rank, capacity-bound, write CSV/JSON/HTML & 173 \\
+\texttt{pipeline.py} & orchestrator: run / run\_v2 / compute\_lift & 119 \\
+\texttt{effectiveness.py} & v2: retrospective ``did it work?'' & 124 \\
+\texttt{fairness.py} & v2: within-track flag audit & 48 \\
+\texttt{output\_v2.py} & v2: write the reports & 66 \\
+\texttt{tests/test\_cast.py} & 13 acceptance tests (the demo cast) & 109 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\section{The risk engine (NEED) --- where a simple rule does the job}
+Deterministic and explainable on purpose: 14 days of data, no labelled outcomes, and a decision about
+children all argue for transparent rules over a black box. Four contributors, severity-ordered, each
+attaching a human-readable reason:
+\begin{description}
+\item[Coursework] failed Quiz 1 (absence-flagged scores excluded).
+\item[Attendance] chronically low recent attendance (only when it is \emph{not} a cliff, to avoid double-counting).
+\item[Behaviour] little \emph{sustained} practice (median, so a cram spike is not credited).
+\item[Trajectory] a strong attendant who \emph{collapses} to near-zero in the last days --- a silent
+dropout the quiz can never catch (S023).
+\end{description}
+Points map to a tier (Critical/High/Medium/Low). Notably, \texttt{target\_score} is \emph{excluded}
+(corrupt for a whole cohort) and \texttt{learning\_track} is \emph{not} an input (fairness, \S\,\ref{sec:fair}).
+
+\section{The note-reader --- the only place AI is used, and why}
+\label{sec:llm}
+The one job a rule cannot do is read short, informal, dialectal Arabic prose. So the LLM is pointed at
+exactly one thing --- the notes --- for two tasks a rule can't: \textbf{reading} them into a structured
+state that changes the priority, and \textbf{drafting} the parent message. It never scores risk.
+
+\begin{why}[Extractor, not oracle]
+The LLM emits a small structured \emph{state}; deterministic rules decide. This bounds the blast radius
+of any wrong read: it can escalate, demote, or flag-for-review, but it can never silently drop a
+failing student (the numbers floor always surfaces them), and a working-note can never demote a
+quiz-failing student (a guarded rule). The model proposes; the rules dispose.
+\end{why}
+
+\subsection{Model choice}
+\textbf{Gemini 2.5 Flash Lite}, temperature 0, via the API behind a swappable \texttt{LLMBackend}
+interface (a \texttt{NoLLM} backend gives the rules-only baseline).
+\begin{why}[Why this model, and the PDPL path]
+Native structured output (\texttt{responseSchema}) guarantees schema-valid JSON --- which kills the
+single biggest execution risk (a model emitting broken JSON from dialectal Arabic). It is cheap
+(\textasciitilde\$0.0003/student) and fast. Because it is one isolated module, production with real
+minors' PII under PDPL swaps it for a KSA-region or on-prem Arabic model \emph{without touching the
+pipeline}. A second finding shaped the message design: current models \emph{read} Gulf dialect well but
+\emph{generate} it poorly --- so messages are drafted in warm, simple Modern Standard Arabic (the natural
+polite register for a Saudi family message anyway), not synthetic colloquial.
+\end{why}
+
+\subsection{The prompt}
+The system prompt (lightly abridged) --- the schema \emph{is} the architecture:
+\begin{lstlisting}
+You read a single facilitator's notes about ONE student (short, informal Saudi-dialect Arabic).
+Your ONLY job is to report the STATE of any intervention -- you do not score risk. Return JSON:
+- state: on_track | needs_help | failing | refused | none
+    on_track   was struggling, now improving / intervention clearly working
+    failing    intervention tried but NOT working -- parent/student unresponsive, worsening
+    refused    parent or student declined help
+    needs_help a real problem/crisis, attention needed, no working intervention yet
+    none       descriptive only / no clear signal
+- summary       one plain sentence: what is going on
+- root_cause    e.g. gaming, family issue, unaware of program  (or "")
+- suggested_action  call_parent | one_on_one | message | none
+- draft_message a short, warm WhatsApp message in SIMPLE Modern Standard Arabic, to the PARENT,
+    sent BY the named facilitator: cite ONE specific fact; be improvement-focused (not praise/blame);
+    propose exactly ONE doable step (NEVER a meeting); 2-3 sentences.
+- evidence      an EXACT short Arabic span copied from the notes
+- concern       low | neutral | worried | urgent
+- confidence    low | medium | high   (use low when vague -- do not guess)
+Be faithful. Do not invent facts.
+\end{lstlisting}
+
+\begin{why}[Why every field earns its place]
+\begin{itemize}
+\item \textbf{state} drives the fusion override --- it is the thing a rule cannot derive.
+\item \textbf{evidence} (a verbatim Arabic span) enables a \emph{faithfulness check}: the quote must be a
+substring of a real note, or it is dropped and confidence lowered --- the anti-hallucination floor.
+\item \textbf{confidence} powers \emph{abstention}: low-confidence reads go to a human-review lane, never
+auto-acted.
+\item \textbf{draft\_message} encodes the behavioural-nudge evidence (\S\,\ref{sec:evidence}):
+\emph{parent-directed}, \emph{improvement-focused}, \emph{one doable step}, \emph{no meeting} (the Saudi
+working-parent barrier), sent by the named facilitator (the ``trusted local sender'').
+\end{itemize}
+\end{why}
+
+Two few-shot examples teach the dialect mapping. A failing case
+(\ar{اتصلت مرتين على الام، ما ردت. قلقانه عليه}) maps to \texttt{state=failing, concern=urgent}; a
+turnaround (\ar{تحول كبير}) maps to \texttt{state=on\_track}. The drafted message stays warm MSA, e.g.\
+\ar{السلام عليكم، أحمد طالب قادر لكن حضوره تراجع هذا الأسبوع؛ لو نتفق معه على وقت ثابت للنوم نتوقّع
+تحسّنًا قبل الاختبار.}
+
+\section{The decision levels (fusion)}
+Three gating rules combine NEED (numbers) and STATE (notes); deliberately three, not a matrix --- the
+whole point of reading notes is to correct the two cases where the numbers lie.
+\begin{enumerate}
+\item \textbf{Escalate} --- \texttt{state} is \emph{failing/refused}: push up; a recent contact must NOT
+lower risk if the intervention is failing (S005).
+\item \textbf{Demote} --- \texttt{state} is \emph{on\_track} \textbf{and} the numbers agree (not failing,
+not a cliff): lower it to free capacity (S145, S070). The ``numbers agree'' guard is what stops a soft
+note from rescuing a quiz-failing crammer (S051).
+\item \textbf{Human review} --- a low-confidence/vague note: surface for a human, never auto-act (S013).
+\end{enumerate}
+\textbf{Surfacing rule:} a student is queued if the numbers flag them \emph{or} the note is non-positive
+--- the single \texttt{OR} that catches S017 (clean numbers, a hidden family crisis). The queue is then
+ranked and \textbf{capacity-bounded} to the top-$N$ per facilitator.
+
+\section{v2: closing the loop --- measuring whether help worked}
+A ranked queue is necessary but, on its own, insufficient: the early-warning literature shows that
+identifying at-risk students reliably fails to improve outcomes unless the data drives a real,
+completed intervention (\S\,\ref{sec:evidence}). v2 adds the measurement layer.
+
+\begin{insight}[The headline: attempted $\neq$ effective]
+Every facilitator note is a dated intervention; the metrics are daily. So we measure what each student's
+engagement did \emph{after} contact. Of \textbf{75 logged interventions: only 11\% re-engaged the
+student, 11\% kept declining despite contact, and 13\% were logged too late to act} (final-day notes).
+A logged note is not help. This measured gap is the real story behind the 30\%.
+\end{insight}
+
+\begin{itemize}
+\item \textbf{Note-reader, checked against reality:} on the students whose engagement decisively moved,
+the LLM's read agreed with the actual outcome \textbf{100\%} of the time (\(n=14\)) --- a data-grounded
+accuracy check (\texttt{working}\,\textrightarrow\,re-engaged; \texttt{failing}\,\textrightarrow\,declined).
+\item \textbf{Closing the loop:} 6 surfaced students were \emph{already contacted and still declined} ---
+they do not need another drafted message; they are flagged for \textbf{escalation beyond messaging}
+(S005, S023, \dots).
+\item \textbf{Measurement arms:} an always-on holdout, randomised \emph{by facilitator} (cluster, so
+parents/facilitators talking cannot leak treatment), reserves a control group so program lift can be
+measured rather than assumed.
+\end{itemize}
+
+\subsection{Fairness}\label{sec:fair}
+\begin{why}[Guarding against the documented early-warning harms]
+The risk score uses \emph{behaviour only} (attendance, practice, quiz, trajectory) --- never
+\texttt{learning\_track}, \texttt{campus}, name, phone, or grade. The audit reports surface-rate by track
+(Remedial is surfaced more because it is genuinely failing more, by behaviour, not by membership), and a
+\emph{within-track} view guarantees the most-at-risk Standard/Accelerated students are still seen ---
+and that Remedial membership never becomes a self-entrenching re-flag. This directly answers the
+real-world failures where recall-maxed dropout models concentrated false alarms on the most
+disadvantaged with no benefit.
+\end{why}
+
+\section{The evidence base}\label{sec:evidence}
+The design is not invented; each choice traces to the early-warning and behavioural-nudge literature.
+\begin{itemize}
+\item \textbf{Prediction without action fails.} A 73-school RCT of an early-warning system improved
+intermediate proxies but \emph{not} the ultimate outcome; a 38-study review found dashboards do not
+improve achievement. \emph{So we built an action layer, and measure effectiveness.}
+\item \textbf{Personalised, parent-directed nudges causally work}, concentrated on the dropout /
+re-engagement margin and among the highest-risk students; improvement-focused content beats praise.
+\emph{So the message is parent-directed, improvement-focused, one step.}
+\item \textbf{The trusted local sender is load-bearing} --- nudges that worked locally collapsed to a
+precise null at national scale when the sender became impersonal. \emph{So the facilitator sends from
+their own name; we never centralise to ``Boon''.}
+\item \textbf{Arabic LLMs read dialect well but generate it poorly.} \emph{So we extract with the model
+and draft in warm MSA.}
+\end{itemize}
+
+\begin{caveat}[What the evidence does \emph{not} establish]
+Confirmed effect sizes are modest (single-digit percentage points). \textbf{None} of the causal
+evidence is Saudi or Arabic --- external validity for Boon's context is a hypothesis to pilot, which is
+exactly why the holdout is built in. ``Two-way beats one-way'' and ``nudges survive at scale'' did not
+survive verification and are treated as open.
+\end{caveat}
+
+\section{Results and how quality is measured}
+\begin{itemize}
+\item \textbf{Runs end-to-end}, one command, LLM on; committed \texttt{outputs/} (queue + Arabic drafts).
+\item \textbf{13/13 acceptance tests} pass --- the demo cast, including the two bug-fix guarantees (S051
+cannot be demoted; S145 never reads as a real failure).
+\item \textbf{LLM lift:} the notes re-prioritised \textbf{13 of 75} noted students vs.\ rules-only (5
+hidden crises surfaced, 8 failing/refused interventions escalated).
+\item \textbf{Note-reader accuracy vs.\ outcomes:} 100\% directional agreement (\(n=14\)).
+\item \textbf{Effectiveness:} 11\% re-engaged / 11\% declined / 13\% logged too late, of 75.
+\item \textbf{Faithfulness} (evidence must be a real substring) and \textbf{abstention} (low confidence
+$\rightarrow$ human) guard the AI; quality is reproducible (temp 0 + content-hash cache).
+\end{itemize}
+
+\section{Limitations and what I would build next}
+\begin{caveat}
+The decision logic is tuned against a 200-student sample (it is both the design target and the test
+set); the \(n=14\) accuracy check is small; the effectiveness ``no-change'' bucket includes stable
+passing students, so the headline percentages are directional, not a clean trial; and the holdout is a
+\emph{mechanism} on a static snapshot, not yet a measured lift.
+\end{caveat}
+\textbf{Next}, gated on richer data and scale: a per-student \emph{temporal narrative} (the shape of the
+decline, not a tier); \emph{knowledge tracing} to diagnose the specific concept a student fails (needs
+per-question data); a \emph{student-voice} two-way check-in; and a causal \emph{what-works-for-whom}
+loop (uplift / bandits) once volume justifies it. The single most important addition is turning the
+holdout into a live measurement of realised intervention lift --- moving the metric from
+\emph{attempted} to \emph{effective}.
+
+\end{document}

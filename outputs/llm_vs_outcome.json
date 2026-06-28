@@ -1,0 +1,90 @@
+{
+  "n": 14,
+  "agreement_pct": 100,
+  "rows": [
+    {
+      "student_id": "S005",
+      "llm_state": "failing",
+      "outcome": "declined",
+      "match": true
+    },
+    {
+      "student_id": "S007",
+      "llm_state": "on_track",
+      "outcome": "re_engaged",
+      "match": true
+    },
+    {
+      "student_id": "S012",
+      "llm_state": "failing",
+      "outcome": "declined",
+      "match": true
+    },
+    {
+      "student_id": "S017",
+      "llm_state": "needs_help",
+      "outcome": "declined",
+      "match": true
+    },
+    {
+      "student_id": "S023",
+      "llm_state": "needs_help",
+      "outcome": "declined",
+      "match": true
+    },
+    {
+      "student_id": "S058",
+      "llm_state": "on_track",
+      "outcome": "re_engaged",
+      "match": true
+    },
+    {
+      "student_id": "S070",
+      "llm_state": "on_track",
+      "outcome": "re_engaged",
+      "match": true
+    },
+    {
+      "student_id": "S081",
+      "llm_state": "on_track",
+      "outcome": "re_engaged",
+      "match": true
+    },
+    {
+      "student_id": "S091",
+      "llm_state": "failing",
+      "outcome": "declined",
+      "match": true
+    },
+    {
+      "student_id": "S098",
+      "llm_state": "on_track",
+      "outcome": "re_engaged",
+      "match": true
+    },
+    {
+      "student_id": "S123",
+      "llm_state": "refused",
+      "outcome": "declined",
+      "match": true
+    },
+    {
+      "student_id": "S145",
+      "llm_state": "on_track",
+      "outcome": "re_engaged",
+      "match": true
+    },
+    {
+      "student_id": "S156",
+      "llm_state": "on_track",
+      "outcome": "re_engaged",
+      "match": true
+    },
+    {
+      "student_id": "S190",
+      "llm_state": "failing",
+      "outcome": "declined",
+      "match": true
+    }
+  ]
+}

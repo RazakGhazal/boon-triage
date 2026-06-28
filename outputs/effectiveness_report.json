@@ -1,0 +1,766 @@
+{
+  "summary": {
+    "students_with_logged_intervention": 75,
+    "by_outcome": {
+      "no_change": 51,
+      "declined": 7,
+      "logged_too_late": 10,
+      "re_engaged": 7
+    },
+    "logged_too_late_pct": 13,
+    "re_engaged_pct_of_measurable": 11,
+    "still_declining_pct_of_measurable": 11
+  },
+  "students": {
+    "S004": {
+      "student_id": "S004",
+      "first_note_date": "2025-10-03",
+      "n_notes": 2,
+      "att_baseline": 47.5,
+      "att_recent": 42.5,
+      "prac_baseline": 1.5,
+      "prac_recent": 0.5,
+      "label": "no_change"
+    },
+    "S005": {
+      "student_id": "S005",
+      "first_note_date": "2025-10-06",
+      "n_notes": 4,
+      "att_baseline": 87.5,
+      "att_recent": 0.0,
+      "prac_baseline": 22.5,
+      "prac_recent": 0.0,
+      "label": "declined"
+    },
+    "S006": {
+      "student_id": "S006",
+      "first_note_date": "2025-10-13",
+      "n_notes": 2,
+      "att_baseline": null,
+      "att_recent": null,
+      "prac_baseline": 0,
+      "prac_recent": 0,
+      "label": "logged_too_late"
+    },
+    "S007": {
+      "student_id": "S007",
+      "first_note_date": "2025-10-05",
+      "n_notes": 2,
+      "att_baseline": 51.25,
+      "att_recent": 71.0,
+      "prac_baseline": 9.0,
+      "prac_recent": 21.0,
+      "label": "re_engaged"
+    },
+    "S008": {
+      "student_id": "S008",
+      "first_note_date": "2025-10-04",
+      "n_notes": 3,
+      "att_baseline": 87.66666666666667,
+      "att_recent": 87.5,
+      "prac_baseline": 0.3333333333333333,
+      "prac_recent": 0.5,
+      "label": "no_change"
+    },
+    "S009": {
+      "student_id": "S009",
+      "first_note_date": "2025-10-02",
+      "n_notes": 4,
+      "att_baseline": 40.0,
+      "att_recent": 40.0,
+      "prac_baseline": 35.0,
+      "prac_recent": 36.5,
+      "label": "no_change"
+    },
+    "S012": {
+      "student_id": "S012",
+      "first_note_date": "2025-10-08",
+      "n_notes": 3,
+      "att_baseline": 35.0,
+      "att_recent": 15.0,
+      "prac_baseline": 1.2,
+      "prac_recent": 0.0,
+      "label": "declined"
+    },
+    "S013": {
+      "student_id": "S013",
+      "first_note_date": "2025-10-13",
+      "n_notes": 3,
+      "att_baseline": null,
+      "att_recent": null,
+      "prac_baseline": 0,
+      "prac_recent": 0,
+      "label": "logged_too_late"
+    },
+    "S015": {
+      "student_id": "S015",
+      "first_note_date": "2025-10-04",
+      "n_notes": 3,
+      "att_baseline": 87.66666666666667,
+      "att_recent": 89.0,
+      "prac_baseline": 0.3333333333333333,
+      "prac_recent": 0.0,
+      "label": "no_change"
+    },
+    "S017": {
+      "student_id": "S017",
+      "first_note_date": "2025-10-11",
+      "n_notes": 3,
+      "att_baseline": 87.25,
+      "att_recent": 57.5,
+      "prac_baseline": 18.875,
+      "prac_recent": 7.0,
+      "label": "declined"
+    },
+    "S019": {
+      "student_id": "S019",
+      "first_note_date": "2025-10-04",
+      "n_notes": 1,
+      "att_baseline": 42.333333333333336,
+      "att_recent": 42.5,
+      "prac_baseline": 3.6666666666666665,
+      "prac_recent": 1.5,
+      "label": "no_change"
+    },
+    "S023": {
+      "student_id": "S023",
+      "first_note_date": "2025-10-11",
+      "n_notes": 3,
+      "att_baseline": 87.25,
+      "att_recent": 0.0,
+      "prac_baseline": 20.875,
+      "prac_recent": 0.5,
+      "label": "declined"
+    },
+    "S024": {
+      "student_id": "S024",
+      "first_note_date": "2025-10-03",
+      "n_notes": 3,
+      "att_baseline": 49.0,
+      "att_recent": 51.0,
+      "prac_baseline": 27.5,
+      "prac_recent": 25.0,
+      "label": "no_change"
+    },
+    "S027": {
+      "student_id": "S027",
+      "first_note_date": "2025-10-03",
+      "n_notes": 1,
+      "att_baseline": 42.5,
+      "att_recent": 41.0,
+      "prac_baseline": 4.0,
+      "prac_recent": 2.5,
+      "label": "no_change"
+    },
+    "S028": {
+      "student_id": "S028",
+      "first_note_date": "2025-10-13",
+      "n_notes": 3,
+      "att_baseline": null,
+      "att_recent": null,
+      "prac_baseline": 0,
+      "prac_recent": 0,
+      "label": "logged_too_late"
+    },
+    "S030": {
+      "student_id": "S030",
+      "first_note_date": "2025-10-02",
+      "n_notes": 2,
+      "att_baseline": 88.0,
+      "att_recent": 88.5,
+      "prac_baseline": 1.0,
+      "prac_recent": 1.0,
+      "label": "no_change"
+    },
+    "S033": {
+      "student_id": "S033",
+      "first_note_date": "2025-10-04",
+      "n_notes": 1,
+      "att_baseline": 35.666666666666664,
+      "att_recent": 33.5,
+      "prac_baseline": 1.0,
+      "prac_recent": 0.0,
+      "label": "no_change"
+    },
+    "S035": {
+      "student_id": "S035",
+      "first_note_date": "2025-10-04",
+      "n_notes": 2,
+      "att_baseline": 45.0,
+      "att_recent": 47.5,
+      "prac_baseline": 21.0,
+      "prac_recent": 20.0,
+      "label": "no_change"
+    },
+    "S038": {
+      "student_id": "S038",
+      "first_note_date": "2025-10-03",
+      "n_notes": 1,
+      "att_baseline": 40.0,
+      "att_recent": 36.5,
+      "prac_baseline": 2.0,
+      "prac_recent": 0.5,
+      "label": "no_change"
+    },
+    "S039": {
+      "student_id": "S039",
+      "first_note_date": "2025-10-13",
+      "n_notes": 3,
+      "att_baseline": null,
+      "att_recent": null,
+      "prac_baseline": 0,
+      "prac_recent": 0,
+      "label": "logged_too_late"
+    },
+    "S041": {
+      "student_id": "S041",
+      "first_note_date": "2025-10-03",
+      "n_notes": 2,
+      "att_baseline": 88.5,
+      "att_recent": 88.5,
+      "prac_baseline": 0.5,
+      "prac_recent": 0.0,
+      "label": "no_change"
+    },
+    "S042": {
+      "student_id": "S042",
+      "first_note_date": "2025-10-03",
+      "n_notes": 3,
+      "att_baseline": 86.5,
+      "att_recent": 89.0,
+      "prac_baseline": 19.0,
+      "prac_recent": 17.0,
+      "label": "no_change"
+    },
+    "S044": {
+      "student_id": "S044",
+      "first_note_date": "2025-10-04",
+      "n_notes": 1,
+      "att_baseline": 41.0,
+      "att_recent": 39.0,
+      "prac_baseline": 3.6666666666666665,
+      "prac_recent": 1.5,
+      "label": "no_change"
+    },
+    "S046": {
+      "student_id": "S046",
+      "first_note_date": "2025-10-03",
+      "n_notes": 2,
+      "att_baseline": 49.0,
+      "att_recent": 51.0,
+      "prac_baseline": 25.0,
+      "prac_recent": 23.0,
+      "label": "no_change"
+    },
+    "S049": {
+      "student_id": "S049",
+      "first_note_date": "2025-10-03",
+      "n_notes": 1,
+      "att_baseline": 37.5,
+      "att_recent": 33.5,
+      "prac_baseline": 0.5,
+      "prac_recent": 0.0,
+      "label": "no_change"
+    },
+    "S050": {
+      "student_id": "S050",
+      "first_note_date": "2025-10-13",
+      "n_notes": 3,
+      "att_baseline": null,
+      "att_recent": null,
+      "prac_baseline": 0,
+      "prac_recent": 0,
+      "label": "logged_too_late"
+    },
+    "S051": {
+      "student_id": "S051",
+      "first_note_date": "2025-10-08",
+      "n_notes": 3,
+      "att_baseline": 88.0,
+      "att_recent": 86.0,
+      "prac_baseline": 4.2,
+      "prac_recent": 0.5,
+      "label": "no_change"
+    },
+    "S054": {
+      "student_id": "S054",
+      "first_note_date": "2025-10-04",
+      "n_notes": 1,
+      "att_baseline": 38.333333333333336,
+      "att_recent": 36.5,
+      "prac_baseline": 2.0,
+      "prac_recent": 0.5,
+      "label": "no_change"
+    },
+    "S057": {
+      "student_id": "S057",
+      "first_note_date": "2025-10-02",
+      "n_notes": 2,
+      "att_baseline": 88.0,
+      "att_recent": 88.5,
+      "prac_baseline": 1.0,
+      "prac_recent": 1.0,
+      "label": "no_change"
+    },
+    "S058": {
+      "student_id": "S058",
+      "first_note_date": "2025-10-05",
+      "n_notes": 3,
+      "att_baseline": 54.5,
+      "att_recent": 69.0,
+      "prac_baseline": 7.75,
+      "prac_recent": 19.0,
+      "label": "re_engaged"
+    },
+    "S061": {
+      "student_id": "S061",
+      "first_note_date": "2025-10-03",
+      "n_notes": 1,
+      "att_baseline": 35.0,
+      "att_recent": 31.0,
+      "prac_baseline": 1.5,
+      "prac_recent": 0.0,
+      "label": "no_change"
+    },
+    "S063": {
+      "student_id": "S063",
+      "first_note_date": "2025-10-04",
+      "n_notes": 2,
+      "att_baseline": 45.0,
+      "att_recent": 47.5,
+      "prac_baseline": 19.0,
+      "prac_recent": 18.0,
+      "label": "no_change"
+    },
+    "S066": {
+      "student_id": "S066",
+      "first_note_date": "2025-10-04",
+      "n_notes": 1,
+      "att_baseline": 35.666666666666664,
+      "att_recent": 33.5,
+      "prac_baseline": 2.3333333333333335,
+      "prac_recent": 0.5,
+      "label": "no_change"
+    },
+    "S067": {
+      "student_id": "S067",
+      "first_note_date": "2025-10-13",
+      "n_notes": 3,
+      "att_baseline": null,
+      "att_recent": null,
+      "prac_baseline": 0,
+      "prac_recent": 0,
+      "label": "logged_too_late"
+    },
+    "S069": {
+      "student_id": "S069",
+      "first_note_date": "2025-10-04",
+      "n_notes": 2,
+      "att_baseline": 88.33333333333333,
+      "att_recent": 88.5,
+      "prac_baseline": 0.3333333333333333,
+      "prac_recent": 0.0,
+      "label": "no_change"
+    },
+    "S070": {
+      "student_id": "S070",
+      "first_note_date": "2025-10-05",
+      "n_notes": 4,
+      "att_baseline": 51.25,
+      "att_recent": 66.5,
+      "prac_baseline": 14.75,
+      "prac_recent": 25.0,
+      "label": "re_engaged"
+    },
+    "S073": {
+      "student_id": "S073",
+      "first_note_date": "2025-10-03",
+      "n_notes": 1,
+      "att_baseline": 32.5,
+      "att_recent": 29.0,
+      "prac_baseline": 0.5,
+      "prac_recent": 0.0,
+      "label": "no_change"
+    },
+    "S075": {
+      "student_id": "S075",
+      "first_note_date": "2025-10-03",
+      "n_notes": 2,
+      "att_baseline": 43.5,
+      "att_recent": 45.0,
+      "prac_baseline": 18.0,
+      "prac_recent": 16.0,
+      "label": "no_change"
+    },
+    "S076": {
+      "student_id": "S076",
+      "first_note_date": "2025-10-03",
+      "n_notes": 3,
+      "att_baseline": 86.5,
+      "att_recent": 89.0,
+      "prac_baseline": 19.5,
+      "prac_recent": 19.0,
+      "label": "no_change"
+    },
+    "S078": {
+      "student_id": "S078",
+      "first_note_date": "2025-10-04",
+      "n_notes": 1,
+      "att_baseline": 33.333333333333336,
+      "att_recent": 31.0,
+      "prac_baseline": 1.0,
+      "prac_recent": 0.0,
+      "label": "no_change"
+    },
+    "S081": {
+      "student_id": "S081",
+      "first_note_date": "2025-10-04",
+      "n_notes": 4,
+      "att_baseline": 87.66666666666667,
+      "att_recent": 88.5,
+      "prac_baseline": 1.0,
+      "prac_recent": 20.0,
+      "label": "re_engaged"
+    },
+    "S084": {
+      "student_id": "S084",
+      "first_note_date": "2025-10-03",
+      "n_notes": 1,
+      "att_baseline": 30.0,
+      "att_recent": 26.5,
+      "prac_baseline": 0.5,
+      "prac_recent": 0.0,
+      "label": "no_change"
+    },
+    "S086": {
+      "student_id": "S086",
+      "first_note_date": "2025-10-04",
+      "n_notes": 2,
+      "att_baseline": 41.0,
+      "att_recent": 42.5,
+      "prac_baseline": 14.666666666666666,
+      "prac_recent": 14.0,
+      "label": "no_change"
+    },
+    "S089": {
+      "student_id": "S089",
+      "first_note_date": "2025-10-04",
+      "n_notes": 1,
+      "att_baseline": 31.0,
+      "att_recent": 29.0,
+      "prac_baseline": 2.0,
+      "prac_recent": 0.5,
+      "label": "no_change"
+    },
+    "S091": {
+      "student_id": "S091",
+      "first_note_date": "2025-10-07",
+      "n_notes": 5,
+      "att_baseline": 84.5,
+      "att_recent": 0.0,
+      "prac_baseline": 18.75,
+      "prac_recent": 0.0,
+      "label": "declined"
+    },
+    "S093": {
+      "student_id": "S093",
+      "first_note_date": "2025-10-02",
+      "n_notes": 2,
+      "att_baseline": 87.0,
+      "att_recent": 88.5,
+      "prac_baseline": 0.0,
+      "prac_recent": 0.0,
+      "label": "no_change"
+    },
+    "S096": {
+      "student_id": "S096",
+      "first_note_date": "2025-10-03",
+      "n_notes": 1,
+      "att_baseline": 27.5,
+      "att_recent": 23.5,
+      "prac_baseline": 0.5,
+      "prac_recent": 0.0,
+      "label": "no_change"
+    },
+    "S098": {
+      "student_id": "S098",
+      "first_note_date": "2025-10-05",
+      "n_notes": 4,
+      "att_baseline": 51.25,
+      "att_recent": 66.5,
+      "prac_baseline": 12.75,
+      "prac_recent": 31.0,
+      "label": "re_engaged"
+    },
+    "S101": {
+      "student_id": "S101",
+      "first_note_date": "2025-10-13",
+      "n_notes": 3,
+      "att_baseline": null,
+      "att_recent": null,
+      "prac_baseline": 0,
+      "prac_recent": 0,
+      "label": "logged_too_late"
+    },
+    "S102": {
+      "student_id": "S102",
+      "first_note_date": "2025-10-04",
+      "n_notes": 1,
+      "att_baseline": 42.333333333333336,
+      "att_recent": 41.0,
+      "prac_baseline": 4.666666666666667,
+      "prac_recent": 1.5,
+      "label": "no_change"
+    },
+    "S105": {
+      "student_id": "S105",
+      "first_note_date": "2025-10-03",
+      "n_notes": 2,
+      "att_baseline": 88.5,
+      "att_recent": 88.5,
+      "prac_baseline": 0.5,
+      "prac_recent": 0.0,
+      "label": "no_change"
+    },
+    "S108": {
+      "student_id": "S108",
+      "first_note_date": "2025-10-03",
+      "n_notes": 1,
+      "att_baseline": 30.0,
+      "att_recent": 26.5,
+      "prac_baseline": 1.5,
+      "prac_recent": 0.0,
+      "label": "no_change"
+    },
+    "S110": {
+      "student_id": "S110",
+      "first_note_date": "2025-10-03",
+      "n_notes": 2,
+      "att_baseline": 50.0,
+      "att_recent": 51.5,
+      "prac_baseline": 14.5,
+      "prac_recent": 13.0,
+      "label": "no_change"
+    },
+    "S113": {
+      "student_id": "S113",
+      "first_note_date": "2025-10-04",
+      "n_notes": 1,
+      "att_baseline": 31.0,
+      "att_recent": 29.0,
+      "prac_baseline": 1.0,
+      "prac_recent": 0.0,
+      "label": "no_change"
+    },
+    "S116": {
+      "student_id": "S116",
+      "first_note_date": "2025-10-04",
+      "n_notes": 2,
+      "att_baseline": 87.66666666666667,
+      "att_recent": 88.5,
+      "prac_baseline": 1.0,
+      "prac_recent": 1.0,
+      "label": "no_change"
+    },
+    "S117": {
+      "student_id": "S117",
+      "first_note_date": "2025-10-13",
+      "n_notes": 3,
+      "att_baseline": null,
+      "att_recent": null,
+      "prac_baseline": 0,
+      "prac_recent": 0,
+      "label": "logged_too_late"
+    },
+    "S122": {
+      "student_id": "S122",
+      "first_note_date": "2025-10-04",
+      "n_notes": 2,
+      "att_baseline": 45.0,
+      "att_recent": 47.5,
+      "prac_baseline": 14.333333333333334,
+      "prac_recent": 14.0,
+      "label": "no_change"
+    },
+    "S123": {
+      "student_id": "S123",
+      "first_note_date": "2025-10-04",
+      "n_notes": 5,
+      "att_baseline": 87.66666666666667,
+      "att_recent": 0.0,
+      "prac_baseline": 0.3333333333333333,
+      "prac_recent": 0.0,
+      "label": "declined"
+    },
+    "S129": {
+      "student_id": "S129",
+      "first_note_date": "2025-10-03",
+      "n_notes": 2,
+      "att_baseline": 88.5,
+      "att_recent": 88.5,
+      "prac_baseline": 0.5,
+      "prac_recent": 0.0,
+      "label": "no_change"
+    },
+    "S134": {
+      "student_id": "S134",
+      "first_note_date": "2025-10-02",
+      "n_notes": 5,
+      "att_baseline": 55.0,
+      "att_recent": 50.0,
+      "prac_baseline": 10.0,
+      "prac_recent": 8.5,
+      "label": "no_change"
+    },
+    "S140": {
+      "student_id": "S140",
+      "first_note_date": "2025-10-04",
+      "n_notes": 2,
+      "att_baseline": 88.33333333333333,
+      "att_recent": 88.5,
+      "prac_baseline": 0.3333333333333333,
+      "prac_recent": 0.0,
+      "label": "no_change"
+    },
+    "S141": {
+      "student_id": "S141",
+      "first_note_date": "2025-10-13",
+      "n_notes": 3,
+      "att_baseline": null,
+      "att_recent": null,
+      "prac_baseline": 0,
+      "prac_recent": 0,
+      "label": "logged_too_late"
+    },
+    "S145": {
+      "student_id": "S145",
+      "first_note_date": "2025-10-07",
+      "n_notes": 4,
+      "att_baseline": 0.0,
+      "att_recent": 72.5,
+      "prac_baseline": 0.0,
+      "prac_recent": 16.5,
+      "label": "re_engaged"
+    },
+    "S146": {
+      "student_id": "S146",
+      "first_note_date": "2025-10-03",
+      "n_notes": 2,
+      "att_baseline": 43.5,
+      "att_recent": 45.0,
+      "prac_baseline": 13.5,
+      "prac_recent": 12.0,
+      "label": "no_change"
+    },
+    "S152": {
+      "student_id": "S152",
+      "first_note_date": "2025-10-03",
+      "n_notes": 2,
+      "att_baseline": 88.5,
+      "att_recent": 88.5,
+      "prac_baseline": 0.5,
+      "prac_recent": 0.0,
+      "label": "no_change"
+    },
+    "S156": {
+      "student_id": "S156",
+      "first_note_date": "2025-10-04",
+      "n_notes": 6,
+      "att_baseline": 41.0,
+      "att_recent": 76.5,
+      "prac_baseline": 5.666666666666667,
+      "prac_recent": 31.0,
+      "label": "re_engaged"
+    },
+    "S162": {
+      "student_id": "S162",
+      "first_note_date": "2025-10-04",
+      "n_notes": 2,
+      "att_baseline": 88.33333333333333,
+      "att_recent": 88.5,
+      "prac_baseline": 0.3333333333333333,
+      "prac_recent": 0.0,
+      "label": "no_change"
+    },
+    "S163": {
+      "student_id": "S163",
+      "first_note_date": "2025-10-13",
+      "n_notes": 3,
+      "att_baseline": null,
+      "att_recent": null,
+      "prac_baseline": 0,
+      "prac_recent": 0,
+      "label": "logged_too_late"
+    },
+    "S168": {
+      "student_id": "S168",
+      "first_note_date": "2025-10-04",
+      "n_notes": 2,
+      "att_baseline": 38.333333333333336,
+      "att_recent": 40.0,
+      "prac_baseline": 10.333333333333334,
+      "prac_recent": 10.0,
+      "label": "no_change"
+    },
+    "S174": {
+      "student_id": "S174",
+      "first_note_date": "2025-10-03",
+      "n_notes": 2,
+      "att_baseline": 88.5,
+      "att_recent": 88.5,
+      "prac_baseline": 0.5,
+      "prac_recent": 0.0,
+      "label": "no_change"
+    },
+    "S179": {
+      "student_id": "S179",
+      "first_note_date": "2025-10-03",
+      "n_notes": 2,
+      "att_baseline": 37.5,
+      "att_recent": 37.5,
+      "prac_baseline": 9.5,
+      "prac_recent": 8.0,
+      "label": "no_change"
+    },
+    "S185": {
+      "student_id": "S185",
+      "first_note_date": "2025-10-04",
+      "n_notes": 2,
+      "att_baseline": 88.33333333333333,
+      "att_recent": 88.5,
+      "prac_baseline": 0.3333333333333333,
+      "prac_recent": 0.0,
+      "label": "no_change"
+    },
+    "S190": {
+      "student_id": "S190",
+      "first_note_date": "2025-10-07",
+      "n_notes": 5,
+      "att_baseline": 86.25,
+      "att_recent": 0.0,
+      "prac_baseline": 18.75,
+      "prac_recent": 0.0,
+      "label": "declined"
+    },
+    "S191": {
+      "student_id": "S191",
+      "first_note_date": "2025-10-04",
+      "n_notes": 2,
+      "att_baseline": 33.333333333333336,
+      "att_recent": 35.0,
+      "prac_baseline": 7.0,
+      "prac_recent": 7.0,
+      "label": "no_change"
+    },
+    "S196": {
+      "student_id": "S196",
+      "first_note_date": "2025-10-03",
+      "n_notes": 2,
+      "att_baseline": 30.0,
+      "att_recent": 30.0,
+      "prac_baseline": 6.0,
+      "prac_recent": 5.0,
+      "label": "no_change"
+    }
+  }
+}

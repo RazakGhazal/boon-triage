@@ -1,0 +1,1694 @@
+{
+  "summary": {
+    "as_of_date": "2025-10-14",
+    "capacity_per_facilitator": 8,
+    "students_total": 176,
+    "students_surfaced": 73,
+    "students_left_alone": 103,
+    "actionable": 53,
+    "human_review": 2,
+    "overflow_not_now": 18,
+    "by_priority": {
+      "Critical": 40,
+      "Medium": 20,
+      "High": 13
+    },
+    "backend": "gemini"
+  },
+  "facilitators": {
+    "facilitator1@noon.com": {
+      "actionable": [
+        {
+          "priority": "Critical",
+          "base_tier_numbers_only": "Critical",
+          "risk_score": 6,
+          "student_id": "S005",
+          "campus": "C01",
+          "track": "Standard",
+          "lane": "queue",
+          "action": "call_parent",
+          "note_state": "failing",
+          "confidence": "high",
+          "note_changed_priority": false,
+          "story": "The student's attendance has collapsed, and despite multiple attempts to contact the mother, there has been no response, indicating a worsening situation.",
+          "why": [
+            "attendance collapsed from a strong baseline (87 min) to near-zero in the last days — possible silent dropout",
+            "an attempted intervention is failing — recent contact has NOT resolved it, so this is NOT lower priority"
+          ],
+          "evidence_ar": "اتصلت مرتين على الام، ما ردت. قلقانه عليه",
+          "draft_message_ar": "السلام عليكم، أحمد غيابه الأخير مقلق جدًا. نأمل أن نتمكن من مساعدته على العودة للمسار الصحيح. هل يمكننا تحديد وقت قصير للتحدث معه ومعرفة كيف يمكننا دعمه؟",
+          "parent_phone": "+9665••••••05",
+          "phone_flag": "ok"
+        },
+        {
+          "priority": "Critical",
+          "base_tier_numbers_only": "Critical",
+          "risk_score": 6,
+          "student_id": "S012",
+          "campus": "C01",
+          "track": "Remedial",
+          "lane": "queue",
+          "action": "call_parent",
+          "note_state": "failing",
+          "confidence": "high",
+          "note_changed_priority": false,
+          "story": "The student missed a quiz and the father was unaware of the program, indicating a lack of initial communication.",
+          "why": [
+            "failed Quiz 1 (scored 28 < 60)",
+            "chronically low attendance (recent avg 15 min/session)",
+            "little sustained practice (median 0 questions/day)",
+            "an attempted intervention is failing — recent contact has NOT resolved it, so this is NOT lower priority"
+          ],
+          "evidence_ar": "ما كان يدري عن البرنامج اصلاً!",
+          "draft_message_ar": "السلام عليكم، يوسف لم يحضر الاختبار الأخير. والدك لم يكن على علم بالبرنامج، ونحن حريصون على دعمه. هل يمكننا تحديد وقت قصير لمناقشة كيف يمكننا مساعدته على النجاح؟",
+          "parent_phone": "+9665••••••12",
+          "phone_flag": "ok"
+        },
+        {
+          "priority": "Critical",
+          "base_tier_numbers_only": "High",
+          "risk_score": 4,
+          "student_id": "S004",
+          "campus": "C01",
+          "track": "Remedial",
+          "lane": "queue",
+          "action": "call_parent",
+          "note_state": "failing",
+          "confidence": "high",
+          "note_changed_priority": true,
+          "story": "Ahmed's attendance and practice are very low, and attempts to contact his parents have been unsuccessful.",
+          "why": [
+            "failed Quiz 1 (scored 42 < 60)",
+            "little sustained practice (median 2 questions/day)",
+            "an attempted intervention is failing — recent contact has NOT resolved it, so this is NOT lower priority"
+          ],
+          "evidence_ar": "احمد حضور ضعيف وتمارين شبه معدومة. حالة تحتاج تدخل عاجل",
+          "draft_message_ar": "السلام عليكم، أحمد حضوره وتمارينه ضعيفة جدًا هذا الأسبوع. لو نتفق معه على حل ٥ تمارين يوميًا، نتوقّع تحسّنًا واضحًا قبل الاختبار القادم.",
+          "parent_phone": "+9665••••••04",
+          "phone_flag": "missing_plus"
+        },
+        {
+          "priority": "High",
+          "base_tier_numbers_only": "High",
+          "risk_score": 4,
+          "student_id": "S015",
+          "campus": "C01",
+          "track": "Standard",
+          "lane": "queue",
+          "action": "one_on_one",
+          "note_state": "needs_help",
+          "confidence": "high",
+          "note_changed_priority": false,
+          "story": "Khaled attends class but does not practice, leading to a failing quiz score, and believes understanding in class is sufficient.",
+          "why": [
+            "failed Quiz 1 (scored 58 < 60)",
+            "little sustained practice (median 0 questions/day)"
+          ],
+          "evidence_ar": "خالد يحضر بس ما يتمرن ابداً. درجة الاختبار واضحه - ٥٨ بس",
+          "draft_message_ar": "السلام عليكم، خالد حضوره ممتاز لكنه لا يحل التمارين، ودرجته في الاختبار كانت ٥٨. لو نوضح له كيف التمارين تساعد على تثبيت المعلومة وزيادة الدرجات، قد يتحسن مستواه كثيرًا.",
+          "parent_phone": "+9665••••••15",
+          "phone_flag": "ok"
+        },
+        {
+          "priority": "High",
+          "base_tier_numbers_only": "High",
+          "risk_score": 4,
+          "student_id": "S019",
+          "campus": "C01",
+          "track": "Remedial",
+          "lane": "queue",
+          "action": "call_parent",
+          "note_state": "needs_help",
+          "confidence": "high",
+          "note_changed_priority": false,
+          "story": "Fatima has poor attendance and low grades, requiring comprehensive support.",
+          "why": [
+            "failed Quiz 1 (scored 38 < 60)",
+            "little sustained practice (median 2 questions/day)"
+          ],
+          "evidence_ar": "فاطمة حضور ضعيف ودرجات متدنية. محتاجه دعم شامل",
+          "draft_message_ar": "السلام عليكم، فاطمة تحتاج دعمًا إضافيًا في الحضور والدرجات. هل يمكننا الاتفاق على خطة لمتابعة واجباتها اليومية؟",
+          "parent_phone": "+9665••••••19",
+          "phone_flag": "ok"
+        },
+        {
+          "priority": "High",
+          "base_tier_numbers_only": "Low",
+          "risk_score": 1,
+          "student_id": "S008",
+          "campus": "C01",
+          "track": "Standard",
+          "lane": "queue",
+          "action": "call_parent",
+          "note_state": "refused",
+          "confidence": "high",
+          "note_changed_priority": true,
+          "story": "Sarah is attending classes but not doing exercises, and both she and her mother are resistant to the idea that exercises are necessary.",
+          "why": [
+            "little sustained practice (median 0 questions/day)",
+            "an attempted intervention is failing — recent contact has NOT resolved it, so this is NOT lower priority"
+          ],
+          "evidence_ar": "الام كانت دفاعية: 'هي تحضر الحصص، ايش اكثر من كذا تبون؟' مو متعاونه",
+          "draft_message_ar": "",
+          "parent_phone": "+9665••••••08",
+          "phone_flag": "ok"
+        },
+        {
+          "priority": "Medium",
+          "base_tier_numbers_only": "Medium",
+          "risk_score": 3,
+          "student_id": "S009",
+          "campus": "C01",
+          "track": "Standard",
+          "lane": "queue",
+          "action": "one_on_one",
+          "note_state": "on_track",
+          "confidence": "high",
+          "note_changed_priority": false,
+          "story": "The student is showing improvement after discussions about self-confidence, though more support is needed.",
+          "why": [
+            "failed Quiz 1 (scored 58 < 60)"
+          ],
+          "evidence_ar": "محمد بدا يتحسن بعد ما كلمته عن الثقة بالنفس. لسا طريق طويل بس البداية ايجابية",
+          "draft_message_ar": "محمد، لاحظت أنك بدأت تتحدى الأسئلة الصعبة أكثر، وهذا شيء رائع! الاستمرار في هذا النهج سيساعدك على بناء ثقتك بنفسك. هل ترغب في تجربة حل مسألة واحدة صعبة كل يوم؟",
+          "parent_phone": "+9665••••••09",
+          "phone_flag": "ok"
+        },
+        {
+          "priority": "Medium",
+          "base_tier_numbers_only": "Medium",
+          "risk_score": 3,
+          "student_id": "S016",
+          "campus": "C01",
+          "track": "Remedial",
+          "lane": "queue",
+          "action": "message",
+          "note_state": "none",
+          "confidence": "high",
+          "note_changed_priority": false,
+          "story": "Failed Quiz 1 (scored 55 < 60)",
+          "why": [
+            "failed Quiz 1 (scored 55 < 60)"
+          ],
+          "evidence_ar": "",
+          "draft_message_ar": "",
+          "parent_phone": "+9665••••••16",
+          "phone_flag": "ok"
+        }
+      ],
+      "overflow": [
+        {
+          "priority": "Medium",
+          "base_tier_numbers_only": "Medium",
+          "risk_score": 2,
+          "student_id": "S006",
+          "campus": "C01",
+          "track": "Standard",
+          "lane": "queue",
+          "action": "call_parent",
+          "note_state": "needs_help",
+          "confidence": "high",
+          "note_changed_priority": false,
+          "story": "Fatima left the session early due to distress and is now absent due to a family issue.",
+          "why": [
+            "chronically low attendance (recent avg 12 min/session)"
+          ],
+          "evidence_ar": "غايبه اليوم. اتصلت على ابوها، قال في مشكله عائليه",
+          "draft_message_ar": "السلام عليكم، لاحظنا أن فاطمة غائبة اليوم. هل كل شيء على ما يرام؟ نأمل أن تعود الأسبوع القادم ونحن هنا لدعمها في دراستها.",
+          "parent_phone": "+9665••••••06",
+          "phone_flag": "ok"
+        },
+        {
+          "priority": "Medium",
+          "base_tier_numbers_only": "Low",
+          "risk_score": 0,
+          "student_id": "S013",
+          "campus": "C01",
+          "track": "Standard",
+          "lane": "queue",
+          "action": "one_on_one",
+          "note_state": "needs_help",
+          "confidence": "high",
+          "note_changed_priority": true,
+          "story": "Nour is consistently leaving class early and appears distressed, despite denying any issues.",
+          "why": [
+            "the metrics look fine but the note reveals a problem the numbers miss"
+          ],
+          "evidence_ar": "نور شكلها مشغولة البال. جت ٥٠ دقيقة بس اليوم، عادة تجي كامل الحصة",
+          "draft_message_ar": "مرحباً، لاحظنا أن نور تغادر الصف مبكرًا وتبدو قلقة. هل هناك أي شيء يمكننا فعله لدعمها في المنزل؟\n\nنود أن نقترح عليها تخصيص وقت محدد لمراجعة الدروس يوميًا لتعزيز ثقتها بنفسها.",
+          "parent_phone": "+9665••••••13",
+          "phone_flag": "ok"
+        },
+        {
+          "priority": "Medium",
+          "base_tier_numbers_only": "Low",
+          "risk_score": 0,
+          "student_id": "S017",
+          "campus": "C01",
+          "track": "Standard",
+          "lane": "queue",
+          "action": "message",
+          "note_state": "needs_help",
+          "confidence": "high",
+          "note_changed_priority": true,
+          "story": "A student is experiencing family issues causing sadness but is still attending classes.",
+          "why": [
+            "the metrics look fine but the note reveals a problem the numbers miss"
+          ],
+          "evidence_ar": "امل كانت تبكي اليوم - سألتها، قالت مشاكل عائلية",
+          "draft_message_ar": "",
+          "parent_phone": "+9665••••••17",
+          "phone_flag": "ok"
+        }
+      ],
+      "review": []
+    },
+    "facilitator2@noon.com": {
+      "actionable": [
+        {
+          "priority": "Critical",
+          "base_tier_numbers_only": "Critical",
+          "risk_score": 6,
+          "student_id": "S023",
+          "campus": "C01",
+          "track": "Standard",
+          "lane": "queue",
+          "action": "call_parent",
+          "note_state": "needs_help",
+          "confidence": "high",
+          "note_changed_priority": false,
+          "story": "Layla's attendance has suddenly dropped after a good quiz score, and parents are unresponsive.",
+          "why": [
+            "attendance collapsed from a strong baseline (87 min) to near-zero in the last days — possible silent dropout"
+          ],
+          "evidence_ar": "ليلى غيابها غريب. درجتها كانت ممتازه وما كان في اي مؤشرات لمشكله. لازم نتواصل مع الاهل",
+          "draft_message_ar": "السلام عليكم، لاحظنا غياب ليلى المفاجئ اليوم رغم أدائها الممتاز في الاختبار الأخير. نود الاطمئنان عليها والتأكد من أن كل شيء على ما يرام. هل يمكننا التواصل معكم للاستفسار عن سبب غيابها؟",
+          "parent_phone": "+9665••••••23",
+          "phone_flag": "ok"
+        },
+        {
+          "priority": "Critical",
+          "base_tier_numbers_only": "Critical",
+          "risk_score": 6,
+          "student_id": "S033",
+          "campus": "C01",
+          "track": "Remedial",
+          "lane": "queue",
+          "action": "call_parent",
+          "note_state": "needs_help",
+          "confidence": "high",
+          "note_changed_priority": false,
+          "story": "Sarah is a concerning case with poor attendance and almost no practice.",
+          "why": [
+            "failed Quiz 1 (scored 30 < 60)",
+            "chronically low attendance (recent avg 34 min/session)",
+            "little sustained practice (median 1 questions/day)"
+          ],
+          "evidence_ar": "حضور سيء وتمارين معدومة تقريباً",
+          "draft_message_ar": "السلام عليكم، لاحظنا أن سارة تواجه صعوبة في الحضور وإكمال التمارين مؤخرًا. هل هناك أي شيء يمكننا تقديمه للمساعدة؟ نود التأكد من أنها تحصل على الدعم اللازم للنجاح.",
+          "parent_phone": "+9665••••••33",
+          "phone_flag": "ok"
+        },
+        {
+          "priority": "Critical",
+          "base_tier_numbers_only": "Critical",
+          "risk_score": 6,
+          "student_id": "S038",
+          "campus": "C01",
+          "track": "Remedial",
+          "lane": "queue",
+          "action": "one_on_one",
+          "note_state": "needs_help",
+          "confidence": "high",
+          "note_changed_priority": false,
+          "story": "Mohamed is a struggling student who requires an intensive intervention plan.",
+          "why": [
+            "failed Quiz 1 (scored 35 < 60)",
+            "chronically low attendance (recent avg 36 min/session)",
+            "little sustained practice (median 2 questions/day)"
+          ],
+          "evidence_ar": "محتاج خطة تدخل مكثفة",
+          "draft_message_ar": "",
+          "parent_phone": "+9665••••••38",
+          "phone_flag": "ok"
+        },
+        {
+          "priority": "Critical",
+          "base_tier_numbers_only": "Critical",
+          "risk_score": 6,
+          "student_id": "S022",
+          "campus": "C01",
+          "track": "Remedial",
+          "lane": "queue",
+          "action": "call_parent",
+          "note_state": "none",
+          "confidence": "high",
+          "note_changed_priority": false,
+          "story": "Failed Quiz 1 (scored 32 < 60)",
+          "why": [
+            "failed Quiz 1 (scored 32 < 60)",
+            "chronically low attendance (recent avg 36 min/session)",
+            "little sustained practice (median 0 questions/day)"
+          ],
+          "evidence_ar": "",
+          "draft_message_ar": "",
+          "parent_phone": "+9665••••••22",
+          "phone_flag": "ok"
+        },
+        {
+          "priority": "High",
+          "base_tier_numbers_only": "High",
+          "risk_score": 4,
+          "student_id": "S027",
+          "campus": "C01",
+          "track": "Remedial",
+          "lane": "queue",
+          "action": "call_parent",
+          "note_state": "needs_help",
+          "confidence": "high",
+          "note_changed_priority": false,
+          "story": "Omar is struggling in all areas and requires immediate intervention.",
+          "why": [
+            "failed Quiz 1 (scored 40 < 60)",
+            "little sustained practice (median 2 questions/day)"
+          ],
+          "evidence_ar": "عمر يعاني بكل المجالات. لازم نتدخل بسرعة",
+          "draft_message_ar": "السلام عليكم، عمر يواجه صعوبات في جميع المواد حاليًا. هل يمكننا التحدث معه لتحديد سبب هذه الصعوبات ووضع خطة لمساعدته على التحسن؟",
+          "parent_phone": "+9665••••••27",
+          "phone_flag": "ok"
+        },
+        {
+          "priority": "Medium",
+          "base_tier_numbers_only": "Medium",
+          "risk_score": 3,
+          "student_id": "S035",
+          "campus": "C01",
+          "track": "Remedial",
+          "lane": "queue",
+          "action": "one_on_one",
+          "note_state": "needs_help",
+          "confidence": "high",
+          "note_changed_priority": false,
+          "story": "Fatima is practicing easy exercises and her quiz score indicates this is not enough.",
+          "why": [
+            "failed Quiz 1 (scored 57 < 60)"
+          ],
+          "evidence_ar": "فاطمة تسوي تمارين كثير بس كلها من المستوى السهل. درجتها بالاختبار تثبت ان هذا مو كافي",
+          "draft_message_ar": "فاطمة تبذل جهدًا في التمارين لكنها تركز على المستوى السهل، وهذا ما انعكس على درجتها الأخيرة. لو نساعدها في اختيار تمارين تناسب مستواها الحالي، سنرى تحسنًا ملحوظًا في أدائها.",
+          "parent_phone": "+9665••••••35",
+          "phone_flag": "ok"
+        },
+        {
+          "priority": "Medium",
+          "base_tier_numbers_only": "Medium",
+          "risk_score": 2,
+          "student_id": "S028",
+          "campus": "C01",
+          "track": "Standard",
+          "lane": "queue",
+          "action": "call_parent",
+          "note_state": "needs_help",
+          "confidence": "high",
+          "note_changed_priority": false,
+          "story": "Maryam attended only a fraction of the session due to feeling unwell, despite her usual punctuality.",
+          "why": [
+            "chronically low attendance (recent avg 25 min/session)"
+          ],
+          "evidence_ar": "مريم جت ٣٠ دقيقة بس اليوم. غريب عليها - عادة منتظمه مره",
+          "draft_message_ar": "السلام عليكم، لاحظنا أن مريم حضرت جزءًا قصيرًا من الحصة اليوم بسبب شعورها بالتعب. نتمنى لها الشفاء العاجل، ونرجو إخبارنا إذا احتاجت أي دعم أكاديمي لاحقًا.",
+          "parent_phone": "+9665••••••28",
+          "phone_flag": "ok"
+        }
+      ],
+      "overflow": [],
+      "review": [
+        {
+          "priority": "Critical",
+          "base_tier_numbers_only": "Critical",
+          "risk_score": 6,
+          "student_id": "S039",
+          "campus": "C01",
+          "track": "Standard",
+          "lane": "human_review",
+          "action": "call_parent",
+          "note_state": "failing",
+          "confidence": "low",
+          "note_changed_priority": false,
+          "story": "Abdullah suddenly stopped attending after being present all week, and attempts to contact his parents have been unsuccessful.",
+          "why": [
+            "attendance collapsed from a strong baseline (87 min) to near-zero in the last days — possible silent dropout",
+            "an attempted intervention is failing — recent contact has NOT resolved it, so this is NOT lower priority"
+          ],
+          "evidence_ar": "",
+          "draft_message_ar": "السلام عليكم، لاحظنا غياب عبدالله المفاجئ بعد حضوره الأسبوع الماضي. نود الاطمئنان عليه وتشجيعه على العودة. هل يمكننا التواصل معكم قريبًا لمعرفة ما إذا كان هناك ما يمكننا تقديمه للمساعدة؟",
+          "parent_phone": "+9665••••••39",
+          "phone_flag": "ok"
+        }
+      ]
+    },
+    "facilitator3@noon.com": {
+      "actionable": [
+        {
+          "priority": "Critical",
+          "base_tier_numbers_only": "Critical",
+          "risk_score": 6,
+          "student_id": "S044",
+          "campus": "C02",
+          "track": "Remedial",
+          "lane": "queue",
+          "action": "call_parent",
+          "note_state": "needs_help",
+          "confidence": "high",
+          "note_changed_priority": false,
+          "story": "Laila is performing poorly across all metrics and requires immediate parental contact.",
+          "why": [
+            "failed Quiz 1 (scored 39 < 60)",
+            "chronically low attendance (recent avg 39 min/session)",
+            "little sustained practice (median 2 questions/day)"
+          ],
+          "evidence_ar": "ليلى اداء ضعيف بكل المقاييس. لازم تواصل مع الاهل فوري",
+          "draft_message_ar": "السلام عليكم، ليلى تواجه صعوبات في أدائها الأكاديمي مؤخرًا. هل يمكننا التحدث معًا حول كيفية دعمها بشكل أفضل في واجباتها اليومية؟",
+          "parent_phone": "+9665••••••44",
+          "phone_flag": "ok"
+        },
+        {
+          "priority": "Critical",
+          "base_tier_numbers_only": "Critical",
+          "risk_score": 6,
+          "student_id": "S054",
+          "campus": "C02",
+          "track": "Remedial",
+          "lane": "queue",
+          "action": "call_parent",
+          "note_state": "needs_help",
+          "confidence": "high",
+          "note_changed_priority": false,
+          "story": "Noura needs comprehensive intervention as all indicators are negative.",
+          "why": [
+            "failed Quiz 1 (scored 36 < 60)",
+            "chronically low attendance (recent avg 36 min/session)",
+            "little sustained practice (median 2 questions/day)"
+          ],
+          "evidence_ar": "كل المؤشرات سلبية",
+          "draft_message_ar": "",
+          "parent_phone": "+9665••••••54",
+          "phone_flag": "ok"
+        },
+        {
+          "priority": "Critical",
+          "base_tier_numbers_only": "Critical",
+          "risk_score": 6,
+          "student_id": "S061",
+          "campus": "C02",
+          "track": "Remedial",
+          "lane": "queue",
+          "action": "call_parent",
+          "note_state": "needs_help",
+          "confidence": "high",
+          "note_changed_priority": false,
+          "story": "Omar is one of the most struggling students and requires an urgent plan.",
+          "why": [
+            "failed Quiz 1 (scored 29 < 60)",
+            "chronically low attendance (recent avg 31 min/session)",
+            "little sustained practice (median 1 questions/day)"
+          ],
+          "evidence_ar": "عمر من الطلاب الاكثر تعثراً. لازم خطة عاجلة",
+          "draft_message_ar": "",
+          "parent_phone": "+9665••••••61",
+          "phone_flag": "ok"
+        },
+        {
+          "priority": "Critical",
+          "base_tier_numbers_only": "Critical",
+          "risk_score": 6,
+          "student_id": "S073",
+          "campus": "C02",
+          "track": "Remedial",
+          "lane": "queue",
+          "action": "call_parent",
+          "note_state": "needs_help",
+          "confidence": "high",
+          "note_changed_priority": false,
+          "story": "Sarah is a major cause for concern with all indicators being red.",
+          "why": [
+            "failed Quiz 1 (scored 27 < 60)",
+            "chronically low attendance (recent avg 29 min/session)",
+            "little sustained practice (median 0 questions/day)"
+          ],
+          "evidence_ar": "سارة حالة قلق كبير. كل المؤشرات حمراء",
+          "draft_message_ar": "",
+          "parent_phone": "+9665••••••73",
+          "phone_flag": "ok"
+        },
+        {
+          "priority": "Critical",
+          "base_tier_numbers_only": "Critical",
+          "risk_score": 6,
+          "student_id": "S049",
+          "campus": "C02",
+          "track": "Remedial",
+          "lane": "queue",
+          "action": "call_parent",
+          "note_state": "failing",
+          "confidence": "high",
+          "note_changed_priority": false,
+          "story": "Ahmed is struggling across the board with low grades, attendance, and practice.",
+          "why": [
+            "failed Quiz 1 (scored 31 < 60)",
+            "chronically low attendance (recent avg 34 min/session)",
+            "little sustained practice (median 0 questions/day)",
+            "an attempted intervention is failing — recent contact has NOT resolved it, so this is NOT lower priority"
+          ],
+          "evidence_ar": "احمد حالة متعثرة. الدرجات والحضور والتمارين كلها ضعيفة",
+          "draft_message_ar": "السلام عليكم، لاحظت أن أداء أحمد في الدرجات والحضور والتمارين ضعيف هذا الأسبوع. هل يمكننا مساعدته بتحديد وقت للدراسة والمتابعة معه؟",
+          "parent_phone": "+9665••••••49",
+          "phone_flag": "ok"
+        },
+        {
+          "priority": "Critical",
+          "base_tier_numbers_only": "Critical",
+          "risk_score": 6,
+          "student_id": "S066",
+          "campus": "C02",
+          "track": "Remedial",
+          "lane": "queue",
+          "action": "call_parent",
+          "note_state": "needs_help",
+          "confidence": "high",
+          "note_changed_priority": false,
+          "story": "Fatima is in a difficult situation and requires intensive support.",
+          "why": [
+            "failed Quiz 1 (scored 34 < 60)",
+            "chronically low attendance (recent avg 34 min/session)",
+            "little sustained practice (median 2 questions/day)"
+          ],
+          "evidence_ar": "محتاجه دعم مكثف",
+          "draft_message_ar": "",
+          "parent_phone": "+9665••••••66",
+          "phone_flag": "ok"
+        },
+        {
+          "priority": "High",
+          "base_tier_numbers_only": "High",
+          "risk_score": 4,
+          "student_id": "S069",
+          "campus": "C02",
+          "track": "Standard",
+          "lane": "queue",
+          "action": "message",
+          "note_state": "needs_help",
+          "confidence": "high",
+          "note_changed_priority": false,
+          "story": "Hassan attends regularly but completes no practice exercises, indicating a potential systemic issue with student understanding of the program's requirements.",
+          "why": [
+            "failed Quiz 1 (scored 58 < 60)",
+            "little sustained practice (median 0 questions/day)"
+          ],
+          "evidence_ar": "صفر تمارين",
+          "draft_message_ar": "السلام عليكم، حسن يحضر بانتظام ولكن لا يكمل التمارين. من المهم جدًا أن يفهم أن التمارين جزء أساسي من التعلم. هل يمكن تشجيعه على إكمال تمرين واحد يوميًا؟",
+          "parent_phone": "+9665••••••69",
+          "phone_flag": "ok"
+        },
+        {
+          "priority": "High",
+          "base_tier_numbers_only": "High",
+          "risk_score": 4,
+          "student_id": "S041",
+          "campus": "C02",
+          "track": "Standard",
+          "lane": "queue",
+          "action": "message",
+          "note_state": "on_track",
+          "confidence": "high",
+          "note_changed_priority": false,
+          "story": "Noura's parents were unaware that practice exercises were required, thinking attendance was sufficient; the issue has been clarified.",
+          "why": [
+            "failed Quiz 1 (scored 59 < 60)",
+            "little sustained practice (median 0 questions/day)"
+          ],
+          "evidence_ar": "التمارين مطلوبه! كانوا يفكرون الحصص كافية",
+          "draft_message_ar": "السلام عليكم، نورة طالبة مجتهدة في الحضور. بعد توضيح أهمية التمارين اليومية، نتوقع منها تحسنًا كبيرًا في أدائها. تشجيعها على حل ٥ تمارين يوميًا سيساعدها كثيرًا قبل الاختبار.",
+          "parent_phone": "+9665••••••41",
+          "phone_flag": "ok"
+        }
+      ],
+      "overflow": [
+        {
+          "priority": "High",
+          "base_tier_numbers_only": "High",
+          "risk_score": 4,
+          "student_id": "S051",
+          "campus": "C02",
+          "track": "Remedial",
+          "lane": "queue",
+          "action": "message",
+          "note_state": "on_track",
+          "confidence": "high",
+          "note_changed_priority": false,
+          "story": "Youssef initially crammed practice questions, failed the quiz, but is now improving after understanding the need for regular study.",
+          "why": [
+            "failed Quiz 1 (scored 52 < 60)",
+            "little sustained practice (a 120-question cram day is not counted as engagement) (median 1 questions/day)"
+          ],
+          "evidence_ar": "يوسف بدا يتحسن بعد ما فهم ان المذاكرة بالعجلة ما تنفع. الحين يتمرن بانتظام",
+          "draft_message_ar": "السلام عليكم، يوسف، رؤية مجهودك في حل الأسئلة أمر رائع. الاستمرار على هذا النهج المنتظم سيساعدك على تثبيت المعلومات بشكل أفضل للاختبارات القادمة.",
+          "parent_phone": "+9665••••••51",
+          "phone_flag": "ok"
+        },
+        {
+          "priority": "High",
+          "base_tier_numbers_only": "Medium",
+          "risk_score": 2,
+          "student_id": "S067",
+          "campus": "C02",
+          "track": "Standard",
+          "lane": "queue",
+          "action": "call_parent",
+          "note_state": "failing",
+          "confidence": "high",
+          "note_changed_priority": true,
+          "story": "Omar is consistently attending for very short periods due to feeling unwell, and his mother has been informed.",
+          "why": [
+            "chronically low attendance (recent avg 22 min/session)",
+            "an attempted intervention is failing — recent contact has NOT resolved it, so this is NOT lower priority"
+          ],
+          "evidence_ar": "عمر لسا تعبان. قلت لأمه اذا ما تحسن يروح دكتور",
+          "draft_message_ar": "السلام عليكم، لاحظنا أن عمر يحضر لمدة قصيرة بسبب عدم شعوره بالراحة. إذا استمرّ التعب، ننصح بعرضه على طبيب للتأكد من صحته.",
+          "parent_phone": "+9665••••••67",
+          "phone_flag": "ok"
+        },
+        {
+          "priority": "Medium",
+          "base_tier_numbers_only": "Medium",
+          "risk_score": 3,
+          "student_id": "S063",
+          "campus": "C02",
+          "track": "Remedial",
+          "lane": "queue",
+          "action": "one_on_one",
+          "note_state": "needs_help",
+          "confidence": "high",
+          "note_changed_priority": false,
+          "story": "Sarah is focusing only on easy exercises and needs more challenging material.",
+          "why": [
+            "failed Quiz 1 (scored 56 < 60)"
+          ],
+          "evidence_ar": "سارة لسا تركز على السهل. لازم تدخل اقوى",
+          "draft_message_ar": "",
+          "parent_phone": "+9665••••••63",
+          "phone_flag": "ok"
+        },
+        {
+          "priority": "Medium",
+          "base_tier_numbers_only": "Medium",
+          "risk_score": 3,
+          "student_id": "S075",
+          "campus": "C02",
+          "track": "Remedial",
+          "lane": "queue",
+          "action": "one_on_one",
+          "note_state": "needs_help",
+          "confidence": "high",
+          "note_changed_priority": false,
+          "story": "Omar avoids difficult questions and needs more time to build self-confidence.",
+          "why": [
+            "failed Quiz 1 (scored 54 < 60)"
+          ],
+          "evidence_ar": "عمر يتهرب من الاسئلة الصعبة. لازم نشتغل على ثقته بنفسه",
+          "draft_message_ar": "",
+          "parent_phone": "+9665••••••75",
+          "phone_flag": "ok"
+        },
+        {
+          "priority": "Medium",
+          "base_tier_numbers_only": "Medium",
+          "risk_score": 2,
+          "student_id": "S050",
+          "campus": "C02",
+          "track": "Standard",
+          "lane": "queue",
+          "action": "call_parent",
+          "note_state": "needs_help",
+          "confidence": "high",
+          "note_changed_priority": false,
+          "story": "Layla has been attending significantly less and reports feeling unwell.",
+          "why": [
+            "chronically low attendance (recent avg 38 min/session)"
+          ],
+          "evidence_ar": "ليلى جت ٣٠ دقيقة بس. سألتها ايش المشكلة - قالت تحس بتعب.",
+          "draft_message_ar": "السلام عليكم، لاحظنا أن ليلى حضرت اليوم ٣٠ دقيقة فقط وتشعر بالتعب. هل هناك أي شيء يمكننا المساعدة به لدعمها في هذه الفترة؟",
+          "parent_phone": "+9665••••••50",
+          "phone_flag": "ok"
+        },
+        {
+          "priority": "Medium",
+          "base_tier_numbers_only": "Low",
+          "risk_score": 1,
+          "student_id": "S057",
+          "campus": "C02",
+          "track": "Standard",
+          "lane": "queue",
+          "action": "call_parent",
+          "note_state": "needs_help",
+          "confidence": "high",
+          "note_changed_priority": true,
+          "story": "Noura has excellent attendance but completes no practice exercises.",
+          "why": [
+            "little sustained practice (median 1 questions/day)",
+            "the metrics look fine but the note reveals a problem the numbers miss"
+          ],
+          "evidence_ar": "نورة حضور ممتاز بس حرفياً صفر تمارين ابداً",
+          "draft_message_ar": "السلام عليكم، نورة تحضر دروسها بانتظام وهذا ممتاز. لكن لاحظنا أنها لا تكمل التمارين المطلوبة. هل يمكننا الاتفاق على تخصيص وقت محدد لها يوميًا لإنجاز هذه التمارين؟",
+          "parent_phone": "+9665••••••57",
+          "phone_flag": "ok"
+        }
+      ],
+      "review": []
+    },
+    "facilitator4@noon.com": {
+      "actionable": [
+        {
+          "priority": "Critical",
+          "base_tier_numbers_only": "Critical",
+          "risk_score": 6,
+          "student_id": "S078",
+          "campus": "C03",
+          "track": "Remedial",
+          "lane": "queue",
+          "action": "call_parent",
+          "note_state": "needs_help",
+          "confidence": "high",
+          "note_changed_priority": false,
+          "story": "The student, Mohammed, is in a remedial learning track and failed his quiz, indicating a need for urgent intervention.",
+          "why": [
+            "failed Quiz 1 (scored 30 < 60)",
+            "chronically low attendance (recent avg 31 min/session)",
+            "little sustained practice (median 1 questions/day)"
+          ],
+          "evidence_ar": "يحتاج تدخل عاجل قبل ما الوضع يتفاقم اكثر",
+          "draft_message_ar": "السلام عليكم، لاحظنا أن محمد في مسار تعليمي يحتاج لدعم إضافي وأن نتيجة اختباره الأخير كانت أقل من المتوقع. هل يمكننا التحدث معه حول كيفية مساعدته على التحسن في الأيام القادمة؟",
+          "parent_phone": "+9665••••••78",
+          "phone_flag": "ok"
+        },
+        {
+          "priority": "Critical",
+          "base_tier_numbers_only": "Critical",
+          "risk_score": 6,
+          "student_id": "S089",
+          "campus": "C03",
+          "track": "Remedial",
+          "lane": "queue",
+          "action": "call_parent",
+          "note_state": "needs_help",
+          "confidence": "high",
+          "note_changed_priority": false,
+          "story": "Ahmed is performing very poorly and requires immediate intervention.",
+          "why": [
+            "failed Quiz 1 (scored 33 < 60)",
+            "chronically low attendance (recent avg 29 min/session)",
+            "little sustained practice (median 2 questions/day)"
+          ],
+          "evidence_ar": "احمد اداء ضعيف جداً. لازم نتحرك بسرعة",
+          "draft_message_ar": "السلام عليكم، قلقون جدًا بشأن أداء أحمد الأكاديمي الحالي. حضوره منخفض ونتائجه في الاختبارات ضعيفة جدًا. نحتاج لمساعدته على استعادة تركيزه. هل يمكننا التحدث معه حول تحديد وقت للدراسة كل يوم؟",
+          "parent_phone": "+9665••••••89",
+          "phone_flag": "ok"
+        },
+        {
+          "priority": "Critical",
+          "base_tier_numbers_only": "Critical",
+          "risk_score": 6,
+          "student_id": "S091",
+          "campus": "C03",
+          "track": "Remedial",
+          "lane": "queue",
+          "action": "call_parent",
+          "note_state": "failing",
+          "confidence": "high",
+          "note_changed_priority": false,
+          "story": "Student Maryam's attendance has suddenly dropped to zero, and her mother is unresponsive to calls.",
+          "why": [
+            "failed Quiz 1 (scored 48 < 60)",
+            "chronically low attendance (recent avg 0 min/session)",
+            "little sustained practice (median 4 questions/day)",
+            "an attempted intervention is failing — recent contact has NOT resolved it, so this is NOT lower priority"
+          ],
+          "evidence_ar": "مريم ما جت ابداً. اتصلت على امها - ما في رد",
+          "draft_message_ar": "السلام عليكم، لاحظت غياب مريم المفاجئ عن الحصص مؤخرًا. هل هناك أي شيء يمكننا تقديمه للمساعدة؟ أرجو التواصل معي في أقرب وقت ممكن.",
+          "parent_phone": "+9665••••••91",
+          "phone_flag": "ok"
+        },
+        {
+          "priority": "Critical",
+          "base_tier_numbers_only": "Critical",
+          "risk_score": 6,
+          "student_id": "S084",
+          "campus": "C03",
+          "track": "Remedial",
+          "lane": "queue",
+          "action": "call_parent",
+          "note_state": "needs_help",
+          "confidence": "high",
+          "note_changed_priority": false,
+          "story": "Layla is one of the weakest students and needs a rescue plan.",
+          "why": [
+            "failed Quiz 1 (scored 26 < 60)",
+            "chronically low attendance (recent avg 26 min/session)",
+            "little sustained practice (median 0 questions/day)"
+          ],
+          "evidence_ar": "ليلى من اضعف الطلاب. محتاجه خطة انقاذ",
+          "draft_message_ar": "",
+          "parent_phone": "+9665••••••84",
+          "phone_flag": "ok"
+        },
+        {
+          "priority": "Critical",
+          "base_tier_numbers_only": "Critical",
+          "risk_score": 6,
+          "student_id": "S096",
+          "campus": "C03",
+          "track": "Remedial",
+          "lane": "queue",
+          "action": "call_parent",
+          "note_state": "needs_help",
+          "confidence": "high",
+          "note_changed_priority": false,
+          "story": "Noura is identified as a struggling student requiring special attention.",
+          "why": [
+            "failed Quiz 1 (scored 24 < 60)",
+            "chronically low attendance (recent avg 24 min/session)",
+            "little sustained practice (median 0 questions/day)"
+          ],
+          "evidence_ar": "نورة حالة متعثرة تحتاج اهتمام خاص",
+          "draft_message_ar": "",
+          "parent_phone": "+9665••••••96",
+          "phone_flag": "ok"
+        },
+        {
+          "priority": "Critical",
+          "base_tier_numbers_only": "High",
+          "risk_score": 4,
+          "student_id": "S093",
+          "campus": "C03",
+          "track": "Standard",
+          "lane": "queue",
+          "action": "call_parent",
+          "note_state": "failing",
+          "confidence": "high",
+          "note_changed_priority": true,
+          "story": "Ali attends all classes but refuses to do any exercises, and his parents need to intervene.",
+          "why": [
+            "failed Quiz 1 (scored 57 < 60)",
+            "little sustained practice (median 0 questions/day)",
+            "an attempted intervention is failing — recent contact has NOT resolved it, so this is NOT lower priority"
+          ],
+          "evidence_ar": "يرفض التمارين تماماً. الاهل لازم يتدخلون",
+          "draft_message_ar": "السلام عليكم، لاحظنا أن علي يحضر جميع الحصص لكنه لا يكمل التمارين. هل يمكنكم التحدث معه لتشجيعه على حل تمرين واحد على الأقل يوميًا؟ هذا سيساعده كثيرًا في تحسين أدائه.",
+          "parent_phone": "+9665••••••93",
+          "phone_flag": "ok"
+        },
+        {
+          "priority": "Medium",
+          "base_tier_numbers_only": "Medium",
+          "risk_score": 3,
+          "student_id": "S086",
+          "campus": "C03",
+          "track": "Remedial",
+          "lane": "queue",
+          "action": "message",
+          "note_state": "on_track",
+          "confidence": "high",
+          "note_changed_priority": false,
+          "story": "Layla is starting to attempt harder practice questions, showing progress.",
+          "why": [
+            "failed Quiz 1 (scored 53 < 60)"
+          ],
+          "evidence_ar": "ليلى بدت تحاول الاسئلة الصعبة. هذا تقدم",
+          "draft_message_ar": "مرحباً، لاحظنا أن ليلى بدأت تحاول حل الأسئلة الأصعب في التمارين، وهذا تقدم رائع. تشجيعها على الاستمرار في هذا النهج سيساعدها كثيرًا في الاختبار القادم.",
+          "parent_phone": "+9665••••••86",
+          "phone_flag": "ok"
+        }
+      ],
+      "overflow": [],
+      "review": []
+    },
+    "facilitator5@noon.com": {
+      "actionable": [
+        {
+          "priority": "Critical",
+          "base_tier_numbers_only": "Critical",
+          "risk_score": 6,
+          "student_id": "S101",
+          "campus": "C03",
+          "track": "Standard",
+          "lane": "queue",
+          "action": "call_parent",
+          "note_state": "needs_help",
+          "confidence": "high",
+          "note_changed_priority": false,
+          "story": "The student, previously excellent, has suddenly disappeared without a clear reason, and attempts to contact his parents have been unsuccessful.",
+          "why": [
+            "attendance collapsed from a strong baseline (87 min) to near-zero in the last days — possible silent dropout"
+          ],
+          "evidence_ar": "عمر ما جا اليوم. كان ممتاز قبل كذا (٨٤ بالاختبار). ايش صار؟",
+          "draft_message_ar": "السلام عليكم، عمر كان طالبًا ممتازًا وحصل على 84 في الاختبار الأخير. لاحظنا غيابه المفاجئ هذا الأسبوع، ونود الاطمئنان عليه. هل يمكننا التواصل معكم لمعرفة سبب غيابه؟",
+          "parent_phone": "+9665••••••01",
+          "phone_flag": "ok"
+        },
+        {
+          "priority": "Critical",
+          "base_tier_numbers_only": "Critical",
+          "risk_score": 6,
+          "student_id": "S108",
+          "campus": "C03",
+          "track": "Remedial",
+          "lane": "queue",
+          "action": "call_parent",
+          "note_state": "needs_help",
+          "confidence": "high",
+          "note_changed_priority": false,
+          "story": "Fatima's performance is poor, and her situation requires immediate intervention.",
+          "why": [
+            "failed Quiz 1 (scored 28 < 60)",
+            "chronically low attendance (recent avg 26 min/session)",
+            "little sustained practice (median 1 questions/day)"
+          ],
+          "evidence_ar": "فاطمة وضعها يتطلب تدخل سريع",
+          "draft_message_ar": "السلام عليكم، فاطمة تحتاج دعمًا إضافيًا في مادتها الدراسية. هل يمكننا تحديد وقت قصير لمناقشة كيف يمكننا مساعدتها على تحسين أدائها قبل الاختبار القادم؟",
+          "parent_phone": "+9665••••••08",
+          "phone_flag": "ok"
+        },
+        {
+          "priority": "Critical",
+          "base_tier_numbers_only": "Critical",
+          "risk_score": 6,
+          "student_id": "S113",
+          "campus": "C03",
+          "track": "Remedial",
+          "lane": "queue",
+          "action": "call_parent",
+          "note_state": "needs_help",
+          "confidence": "high",
+          "note_changed_priority": false,
+          "story": "Sarah is clearly struggling and requires an action plan.",
+          "why": [
+            "failed Quiz 1 (scored 31 < 60)",
+            "chronically low attendance (recent avg 29 min/session)",
+            "little sustained practice (median 1 questions/day)"
+          ],
+          "evidence_ar": "سارة حالة تعثر واضحة. لازم خطة عمل",
+          "draft_message_ar": "السلام عليكم، سارة تواجه صعوبات واضحة في دراستها حاليًا. لمساعدتها على استعادة تركيزها، هل يمكننا الاتفاق على تخصيص وقت محدد لها لمراجعة دروسها يوميًا؟",
+          "parent_phone": "+9665••••••13",
+          "phone_flag": "ok"
+        },
+        {
+          "priority": "High",
+          "base_tier_numbers_only": "High",
+          "risk_score": 4,
+          "student_id": "S102",
+          "campus": "C03",
+          "track": "Remedial",
+          "lane": "queue",
+          "action": "one_on_one",
+          "note_state": "needs_help",
+          "confidence": "high",
+          "note_changed_priority": false,
+          "story": "Omar is a struggling student who needs comprehensive support.",
+          "why": [
+            "failed Quiz 1 (scored 41 < 60)",
+            "little sustained practice (median 4 questions/day)"
+          ],
+          "evidence_ar": "عمر من الطلاب المتعثرين. محتاج دعم شامل",
+          "draft_message_ar": "",
+          "parent_phone": "+9665••••••02",
+          "phone_flag": "ok"
+        },
+        {
+          "priority": "High",
+          "base_tier_numbers_only": "High",
+          "risk_score": 4,
+          "student_id": "S105",
+          "campus": "C03",
+          "track": "Standard",
+          "lane": "queue",
+          "action": "one_on_one",
+          "note_state": "needs_help",
+          "confidence": "high",
+          "note_changed_priority": false,
+          "story": "Fatima attends regularly but does not practice at all, leading to failing quiz scores.",
+          "why": [
+            "failed Quiz 1 (scored 59 < 60)",
+            "little sustained practice (median 0 questions/day)"
+          ],
+          "evidence_ar": "فاطمة تحضر زين بس حرفياً ما تتمرن ابداً",
+          "draft_message_ar": "فاطمة تحضر بانتظام لكنها لا تقوم بالتدريب، مما أثر على درجاتها. هل يمكننا تشجيعها على حل ٥ مسائل تدريبية يوميًا؟",
+          "parent_phone": "+9665••••••05",
+          "phone_flag": "ok"
+        },
+        {
+          "priority": "Medium",
+          "base_tier_numbers_only": "Medium",
+          "risk_score": 3,
+          "student_id": "S110",
+          "campus": "C03",
+          "track": "Remedial",
+          "lane": "queue",
+          "action": "message",
+          "note_state": "on_track",
+          "confidence": "high",
+          "note_changed_priority": false,
+          "story": "Ahmed understands the importance of challenges and is now pushing himself with harder exercises.",
+          "why": [
+            "failed Quiz 1 (scored 58 < 60)"
+          ],
+          "evidence_ar": "احمد فهم النقطة. بدا يتحدى نفسه اكثر بالتمارين",
+          "draft_message_ar": "",
+          "parent_phone": "+9665••••••10",
+          "phone_flag": "ok"
+        },
+        {
+          "priority": "Medium",
+          "base_tier_numbers_only": "Low",
+          "risk_score": 1,
+          "student_id": "S116",
+          "campus": "C03",
+          "track": "Standard",
+          "lane": "queue",
+          "action": "message",
+          "note_state": "needs_help",
+          "confidence": "high",
+          "note_changed_priority": true,
+          "story": "Sarah has perfect attendance but is not completing any practice exercises.",
+          "why": [
+            "little sustained practice (median 1 questions/day)",
+            "the metrics look fine but the note reveals a problem the numbers miss"
+          ],
+          "evidence_ar": "حضور مثالي بس ٠ تمارين",
+          "draft_message_ar": "مرحباً سارة، لاحظت أن حضورك ممتاز لكنك لم تكملي أي تمارين هذا الأسبوع. هل هناك صعوبة معينة تواجهينها؟ لو حاولتِ حل تمرين واحد يوميًا، سيساعدك ذلك كثيرًا على فهم المادة بشكل أفضل.",
+          "parent_phone": "+9665••••••16",
+          "phone_flag": "ok"
+        }
+      ],
+      "overflow": [],
+      "review": [
+        {
+          "priority": "Medium",
+          "base_tier_numbers_only": "Medium",
+          "risk_score": 2,
+          "student_id": "S117",
+          "campus": "C03",
+          "track": "Standard",
+          "lane": "human_review",
+          "action": "call_parent",
+          "note_state": "needs_help",
+          "confidence": "low",
+          "note_changed_priority": false,
+          "story": "Abdullah's attendance has drastically decreased due to a persistent headache, and his father was advised to take him to the hospital.",
+          "why": [
+            "chronically low attendance (recent avg 18 min/session)",
+            "the note is ambiguous — needs a human read before acting"
+          ],
+          "evidence_ar": "",
+          "draft_message_ar": "السلام عليكم، لاحظت أن عبدالله حضر ١٠ دقائق فقط اليوم بسبب الصداع. أتمنى أن يكون بخير. هل هناك أي مستجدات أو ما يمكننا تقديمه للمساعدة؟",
+          "parent_phone": "+9665••••••17",
+          "phone_flag": "ok"
+        }
+      ]
+    },
+    "facilitator8@noon.com": {
+      "actionable": [
+        {
+          "priority": "Critical",
+          "base_tier_numbers_only": "Critical",
+          "risk_score": 6,
+          "student_id": "S190",
+          "campus": "C05",
+          "track": "Remedial",
+          "lane": "queue",
+          "action": "call_parent",
+          "note_state": "failing",
+          "confidence": "high",
+          "note_changed_priority": false,
+          "story": "The student's attendance has drastically decreased, and attempts to contact the parent have been unsuccessful.",
+          "why": [
+            "failed Quiz 1 (scored 46 < 60)",
+            "chronically low attendance (recent avg 0 min/session)",
+            "little sustained practice (median 4 questions/day)",
+            "an attempted intervention is failing — recent contact has NOT resolved it, so this is NOT lower priority"
+          ],
+          "evidence_ar": "ليلى ما جت اليوم. حاولت اتصل على الام، ما ردت",
+          "draft_message_ar": "السلام عليكم، لاحظنا غياب ليلى المتكرر مؤخرًا، حيث انخفض حضورها بشكل كبير. نود الاطمئنان عليها ومساعدتها على العودة للمسار التعليمي. هل يمكننا تحديد وقت مناسب للتواصل معكم؟",
+          "parent_phone": "+9665••••••90",
+          "phone_flag": "ok"
+        },
+        {
+          "priority": "Critical",
+          "base_tier_numbers_only": "Critical",
+          "risk_score": 6,
+          "student_id": "S166",
+          "campus": "C05",
+          "track": "Remedial",
+          "lane": "queue",
+          "action": "call_parent",
+          "note_state": "none",
+          "confidence": "high",
+          "note_changed_priority": false,
+          "story": "Failed Quiz 1 (scored 17 < 60)",
+          "why": [
+            "failed Quiz 1 (scored 17 < 60)",
+            "chronically low attendance (recent avg 14 min/session)",
+            "little sustained practice (median 0 questions/day)"
+          ],
+          "evidence_ar": "",
+          "draft_message_ar": "",
+          "parent_phone": "+9665••••••66",
+          "phone_flag": "ok"
+        },
+        {
+          "priority": "Critical",
+          "base_tier_numbers_only": "Critical",
+          "risk_score": 6,
+          "student_id": "S171",
+          "campus": "C05",
+          "track": "Remedial",
+          "lane": "queue",
+          "action": "call_parent",
+          "note_state": "none",
+          "confidence": "high",
+          "note_changed_priority": false,
+          "story": "Failed Quiz 1 (scored 20 < 60)",
+          "why": [
+            "failed Quiz 1 (scored 20 < 60)",
+            "chronically low attendance (recent avg 16 min/session)",
+            "little sustained practice (median 1 questions/day)"
+          ],
+          "evidence_ar": "",
+          "draft_message_ar": "",
+          "parent_phone": "+9665••••••71",
+          "phone_flag": "ok"
+        },
+        {
+          "priority": "Critical",
+          "base_tier_numbers_only": "Critical",
+          "risk_score": 6,
+          "student_id": "S177",
+          "campus": "C05",
+          "track": "Remedial",
+          "lane": "queue",
+          "action": "call_parent",
+          "note_state": "none",
+          "confidence": "high",
+          "note_changed_priority": false,
+          "story": "Failed Quiz 1 (scored 18 < 60)",
+          "why": [
+            "failed Quiz 1 (scored 18 < 60)",
+            "chronically low attendance (recent avg 14 min/session)",
+            "little sustained practice (median 0 questions/day)"
+          ],
+          "evidence_ar": "",
+          "draft_message_ar": "",
+          "parent_phone": "+9665••••••77",
+          "phone_flag": "ok"
+        },
+        {
+          "priority": "Critical",
+          "base_tier_numbers_only": "Critical",
+          "risk_score": 6,
+          "student_id": "S182",
+          "campus": "C05",
+          "track": "Remedial",
+          "lane": "queue",
+          "action": "call_parent",
+          "note_state": "none",
+          "confidence": "high",
+          "note_changed_priority": false,
+          "story": "Failed Quiz 1 (scored 15 < 60)",
+          "why": [
+            "failed Quiz 1 (scored 15 < 60)",
+            "chronically low attendance (recent avg 11 min/session)",
+            "little sustained practice (median 0 questions/day)"
+          ],
+          "evidence_ar": "",
+          "draft_message_ar": "",
+          "parent_phone": "+9665••••••82",
+          "phone_flag": "ok"
+        },
+        {
+          "priority": "Critical",
+          "base_tier_numbers_only": "Critical",
+          "risk_score": 6,
+          "student_id": "S188",
+          "campus": "C05",
+          "track": "Remedial",
+          "lane": "queue",
+          "action": "call_parent",
+          "note_state": "none",
+          "confidence": "high",
+          "note_changed_priority": false,
+          "story": "Failed Quiz 1 (scored 13 < 60)",
+          "why": [
+            "failed Quiz 1 (scored 13 < 60)",
+            "chronically low attendance (recent avg 9 min/session)",
+            "little sustained practice (median 0 questions/day)"
+          ],
+          "evidence_ar": "",
+          "draft_message_ar": "",
+          "parent_phone": "+9665••••••88",
+          "phone_flag": "ok"
+        },
+        {
+          "priority": "Critical",
+          "base_tier_numbers_only": "Critical",
+          "risk_score": 6,
+          "student_id": "S194",
+          "campus": "C05",
+          "track": "Remedial",
+          "lane": "queue",
+          "action": "call_parent",
+          "note_state": "none",
+          "confidence": "high",
+          "note_changed_priority": false,
+          "story": "Failed Quiz 1 (scored 11 < 60)",
+          "why": [
+            "failed Quiz 1 (scored 11 < 60)",
+            "chronically low attendance (recent avg 6 min/session)",
+            "little sustained practice (median 0 questions/day)"
+          ],
+          "evidence_ar": "",
+          "draft_message_ar": "",
+          "parent_phone": "+9665••••••94",
+          "phone_flag": "ok"
+        },
+        {
+          "priority": "Critical",
+          "base_tier_numbers_only": "Critical",
+          "risk_score": 6,
+          "student_id": "S199",
+          "campus": "C05",
+          "track": "Remedial",
+          "lane": "queue",
+          "action": "call_parent",
+          "note_state": "none",
+          "confidence": "high",
+          "note_changed_priority": false,
+          "story": "Failed Quiz 1 (scored 9 < 60)",
+          "why": [
+            "failed Quiz 1 (scored 9 < 60)",
+            "chronically low attendance (recent avg 4 min/session)",
+            "little sustained practice (median 0 questions/day)"
+          ],
+          "evidence_ar": "",
+          "draft_message_ar": "",
+          "parent_phone": "+9665••••••99",
+          "phone_flag": "ok"
+        }
+      ],
+      "overflow": [
+        {
+          "priority": "Critical",
+          "base_tier_numbers_only": "High",
+          "risk_score": 5,
+          "student_id": "S196",
+          "campus": "C05",
+          "track": "Remedial",
+          "lane": "queue",
+          "action": "one_on_one",
+          "note_state": "failing",
+          "confidence": "high",
+          "note_changed_priority": true,
+          "story": "Sarah is not responding to guidance and is a difficult case, similar to other students with the same issue.",
+          "why": [
+            "failed Quiz 1 (scored 45 < 60)",
+            "chronically low attendance (recent avg 30 min/session)",
+            "an attempted intervention is failing — recent contact has NOT resolved it, so this is NOT lower priority"
+          ],
+          "evidence_ar": "سارة الحالة صعبة. مو مستجيبة للتوجيهات",
+          "draft_message_ar": "",
+          "parent_phone": "+9665••••••96",
+          "phone_flag": "ok"
+        },
+        {
+          "priority": "Critical",
+          "base_tier_numbers_only": "High",
+          "risk_score": 4,
+          "student_id": "S174",
+          "campus": "C05",
+          "track": "Standard",
+          "lane": "queue",
+          "action": "one_on_one",
+          "note_state": "refused",
+          "confidence": "high",
+          "note_changed_priority": true,
+          "story": "The student, Mohammed, has perfect attendance but completely refuses to do practice exercises.",
+          "why": [
+            "failed Quiz 1 (scored 54 < 60)",
+            "little sustained practice (median 0 questions/day)",
+            "an attempted intervention is failing — recent contact has NOT resolved it, so this is NOT lower priority"
+          ],
+          "evidence_ar": "يرفض التمارين كلياً",
+          "draft_message_ar": "",
+          "parent_phone": "+9665••••••74",
+          "phone_flag": "ok"
+        },
+        {
+          "priority": "Critical",
+          "base_tier_numbers_only": "High",
+          "risk_score": 4,
+          "student_id": "S185",
+          "campus": "C05",
+          "track": "Standard",
+          "lane": "queue",
+          "action": "call_parent",
+          "note_state": "failing",
+          "confidence": "high",
+          "note_changed_priority": true,
+          "story": "Fatima attends regularly but completes no practice exercises, leading to a failing quiz score.",
+          "why": [
+            "failed Quiz 1 (scored 53 < 60)",
+            "little sustained practice (median 0 questions/day)",
+            "an attempted intervention is failing — recent contact has NOT resolved it, so this is NOT lower priority"
+          ],
+          "evidence_ar": "فاطمة تحضر بس صفر تمارين",
+          "draft_message_ar": "السلام عليكم، فاطمة تحضر بانتظام لكنها لا تكمل التمارين، وهذا أثر على درجتها في الاختبار. لو نتفق معها على إكمال تمرين واحد يوميًا، نتوقع تحسنًا ملحوظًا.",
+          "parent_phone": "+9665••••••85",
+          "phone_flag": "ok"
+        },
+        {
+          "priority": "High",
+          "base_tier_numbers_only": "High",
+          "risk_score": 5,
+          "student_id": "S179",
+          "campus": "C05",
+          "track": "Remedial",
+          "lane": "queue",
+          "action": "one_on_one",
+          "note_state": "needs_help",
+          "confidence": "high",
+          "note_changed_priority": false,
+          "story": "Ali is focusing on quantity over quality in his work, and the facilitator needs to clarify the difference.",
+          "why": [
+            "failed Quiz 1 (scored 49 < 60)",
+            "chronically low attendance (recent avg 38 min/session)"
+          ],
+          "evidence_ar": "علي يركز على الكمية ويهمل النوعية. لازم نوضح الفرق",
+          "draft_message_ar": "",
+          "parent_phone": "+9665••••••79",
+          "phone_flag": "ok"
+        },
+        {
+          "priority": "High",
+          "base_tier_numbers_only": "High",
+          "risk_score": 5,
+          "student_id": "S191",
+          "campus": "C05",
+          "track": "Remedial",
+          "lane": "queue",
+          "action": "one_on_one",
+          "note_state": "needs_help",
+          "confidence": "high",
+          "note_changed_priority": false,
+          "story": "Maryam's exercises are all at the easy level, and she needs better guidance to move to the harder level.",
+          "why": [
+            "failed Quiz 1 (scored 47 < 60)",
+            "chronically low attendance (recent avg 35 min/session)"
+          ],
+          "evidence_ar": "مريم تمارينها كلها من المستوى السهل. محتاجه تنتقل للمستوى الاصعب\nمريم محتاجه توجيه افضل. لازم اقعد معاها بعد الحصة",
+          "draft_message_ar": "",
+          "parent_phone": "+9665••••••91",
+          "phone_flag": "ok"
+        },
+        {
+          "priority": "High",
+          "base_tier_numbers_only": "High",
+          "risk_score": 4,
+          "student_id": "S184",
+          "campus": "C05",
+          "track": "Remedial",
+          "lane": "queue",
+          "action": "one_on_one",
+          "note_state": "none",
+          "confidence": "high",
+          "note_changed_priority": false,
+          "story": "Failed Quiz 1 (scored 55 < 60)",
+          "why": [
+            "failed Quiz 1 (scored 55 < 60)",
+            "little sustained practice (median 4 questions/day)"
+          ],
+          "evidence_ar": "",
+          "draft_message_ar": "",
+          "parent_phone": "+9665••••••84",
+          "phone_flag": "ok"
+        },
+        {
+          "priority": "Medium",
+          "base_tier_numbers_only": "Medium",
+          "risk_score": 3,
+          "student_id": "S168",
+          "campus": "C05",
+          "track": "Remedial",
+          "lane": "queue",
+          "action": "one_on_one",
+          "note_state": "on_track",
+          "confidence": "medium",
+          "note_changed_priority": false,
+          "story": "Fatima is starting to understand the importance of challenges and shows slight improvement.",
+          "why": [
+            "failed Quiz 1 (scored 51 < 60)"
+          ],
+          "evidence_ar": "تحسن بسيط بس موجود",
+          "draft_message_ar": "فاطمة بدأت تفهم أهمية التحدي وتظهر تحسنًا بسيطًا. تشجيعها على حل مسألة واحدة صعبة يوميًا سيساعدها على تطوير مهاراتها بشكل أكبر.",
+          "parent_phone": "+9665••••••68",
+          "phone_flag": "ok"
+        },
+        {
+          "priority": "Medium",
+          "base_tier_numbers_only": "Medium",
+          "risk_score": 3,
+          "student_id": "S173",
+          "campus": "C05",
+          "track": "Standard",
+          "lane": "queue",
+          "action": "message",
+          "note_state": "none",
+          "confidence": "high",
+          "note_changed_priority": false,
+          "story": "Failed Quiz 1 (scored 57 < 60)",
+          "why": [
+            "failed Quiz 1 (scored 57 < 60)"
+          ],
+          "evidence_ar": "",
+          "draft_message_ar": "",
+          "parent_phone": "+9665••••••73",
+          "phone_flag": "ok"
+        },
+        {
+          "priority": "Medium",
+          "base_tier_numbers_only": "Medium",
+          "risk_score": 2,
+          "student_id": "S163",
+          "campus": "C05",
+          "track": "Standard",
+          "lane": "queue",
+          "action": "call_parent",
+          "note_state": "needs_help",
+          "confidence": "high",
+          "note_changed_priority": false,
+          "story": "Ahmed's attendance has significantly dropped recently, with him attending only 15-25 minutes on two separate occasions.",
+          "why": [
+            "chronically low attendance (recent avg 20 min/session)"
+          ],
+          "evidence_ar": "احمد جا ٢٥ دقيقة بس اليوم. غريب - عادة ملتزم\nاحمد جا ١٥ دقيقة وطلع.",
+          "draft_message_ar": "السلام عليكم، لاحظت أن أحمد لم يتمكن من الحضور كاملًا في آخر حصتين. هل هناك أي شيء يمكننا تقديمه للمساعدة في عودته؟",
+          "parent_phone": "+9665••••••63",
+          "phone_flag": "ok"
+        }
+      ],
+      "review": []
+    },
+    "facilitator7@noon.com": {
+      "actionable": [
+        {
+          "priority": "Critical",
+          "base_tier_numbers_only": "Critical",
+          "risk_score": 6,
+          "student_id": "S144",
+          "campus": "C04",
+          "track": "Remedial",
+          "lane": "queue",
+          "action": "call_parent",
+          "note_state": "none",
+          "confidence": "high",
+          "note_changed_priority": false,
+          "story": "Failed Quiz 1 (scored 21 < 60)",
+          "why": [
+            "failed Quiz 1 (scored 21 < 60)",
+            "chronically low attendance (recent avg 19 min/session)",
+            "little sustained practice (median 0 questions/day)"
+          ],
+          "evidence_ar": "",
+          "draft_message_ar": "",
+          "parent_phone": "+9665••••••44",
+          "phone_flag": "ok"
+        },
+        {
+          "priority": "Critical",
+          "base_tier_numbers_only": "Critical",
+          "risk_score": 6,
+          "student_id": "S149",
+          "campus": "C04",
+          "track": "Remedial",
+          "lane": "queue",
+          "action": "call_parent",
+          "note_state": "none",
+          "confidence": "high",
+          "note_changed_priority": false,
+          "story": "Failed Quiz 1 (scored 25 < 60)",
+          "why": [
+            "failed Quiz 1 (scored 25 < 60)",
+            "chronically low attendance (recent avg 21 min/session)",
+            "little sustained practice (median 1 questions/day)"
+          ],
+          "evidence_ar": "",
+          "draft_message_ar": "",
+          "parent_phone": "+9665••••••49",
+          "phone_flag": "ok"
+        },
+        {
+          "priority": "Critical",
+          "base_tier_numbers_only": "Critical",
+          "risk_score": 6,
+          "student_id": "S155",
+          "campus": "C04",
+          "track": "Remedial",
+          "lane": "queue",
+          "action": "call_parent",
+          "note_state": "none",
+          "confidence": "high",
+          "note_changed_priority": false,
+          "story": "Failed Quiz 1 (scored 19 < 60)",
+          "why": [
+            "failed Quiz 1 (scored 19 < 60)",
+            "chronically low attendance (recent avg 16 min/session)",
+            "little sustained practice (median 0 questions/day)"
+          ],
+          "evidence_ar": "",
+          "draft_message_ar": "",
+          "parent_phone": "+9665••••••55",
+          "phone_flag": "ok"
+        },
+        {
+          "priority": "Critical",
+          "base_tier_numbers_only": "Critical",
+          "risk_score": 6,
+          "student_id": "S159",
+          "campus": "C04",
+          "track": "Remedial",
+          "lane": "queue",
+          "action": "call_parent",
+          "note_state": "none",
+          "confidence": "high",
+          "note_changed_priority": false,
+          "story": "Failed Quiz 1 (scored 23 < 60)",
+          "why": [
+            "failed Quiz 1 (scored 23 < 60)",
+            "chronically low attendance (recent avg 19 min/session)",
+            "little sustained practice (median 1 questions/day)"
+          ],
+          "evidence_ar": "",
+          "draft_message_ar": "",
+          "parent_phone": "+9665••••••59",
+          "phone_flag": "ok"
+        },
+        {
+          "priority": "Critical",
+          "base_tier_numbers_only": "High",
+          "risk_score": 4,
+          "student_id": "S152",
+          "campus": "C04",
+          "track": "Standard",
+          "lane": "queue",
+          "action": "call_parent",
+          "note_state": "failing",
+          "confidence": "high",
+          "note_changed_priority": true,
+          "story": "Ali attends regularly but completes zero practice exercises, leading to a failing quiz score.",
+          "why": [
+            "failed Quiz 1 (scored 56 < 60)",
+            "little sustained practice (median 0 questions/day)",
+            "an attempted intervention is failing — recent contact has NOT resolved it, so this is NOT lower priority"
+          ],
+          "evidence_ar": "تمارين صفر",
+          "draft_message_ar": "السلام عليكم، لاحظت أن علي يحضر بانتظام لكنه لا يكمل التمارين. هذا يؤثر على أدائه في الاختبارات. هل يمكن تشجيعه على حل تمرين واحد يوميًا على الأقل؟",
+          "parent_phone": "+9665••••••52",
+          "phone_flag": "ok"
+        },
+        {
+          "priority": "Critical",
+          "base_tier_numbers_only": "High",
+          "risk_score": 4,
+          "student_id": "S162",
+          "campus": "C04",
+          "track": "Standard",
+          "lane": "queue",
+          "action": "call_parent",
+          "note_state": "refused",
+          "confidence": "high",
+          "note_changed_priority": true,
+          "story": "Hassan attends regularly but refuses to do practice exercises.",
+          "why": [
+            "failed Quiz 1 (scored 55 < 60)",
+            "little sustained practice (median 0 questions/day)",
+            "an attempted intervention is failing — recent contact has NOT resolved it, so this is NOT lower priority"
+          ],
+          "evidence_ar": "رافض يتمرن",
+          "draft_message_ar": "",
+          "parent_phone": "+9665••••••62",
+          "phone_flag": "ok"
+        },
+        {
+          "priority": "Medium",
+          "base_tier_numbers_only": "Medium",
+          "risk_score": 3,
+          "student_id": "S146",
+          "campus": "C04",
+          "track": "Remedial",
+          "lane": "queue",
+          "action": "one_on_one",
+          "note_state": "needs_help",
+          "confidence": "high",
+          "note_changed_priority": false,
+          "story": "Youssef is avoiding difficult questions and requires ongoing emotional support, as the issue is deeper than just exercises.",
+          "why": [
+            "failed Quiz 1 (scored 54 < 60)"
+          ],
+          "evidence_ar": "محتاج دعم نفسي اكثر",
+          "draft_message_ar": "",
+          "parent_phone": "+9665••••••46",
+          "phone_flag": "ok"
+        },
+        {
+          "priority": "Medium",
+          "base_tier_numbers_only": "Medium",
+          "risk_score": 3,
+          "student_id": "S161",
+          "campus": "C04",
+          "track": "Standard",
+          "lane": "queue",
+          "action": "message",
+          "note_state": "none",
+          "confidence": "high",
+          "note_changed_priority": false,
+          "story": "Failed Quiz 1 (scored 59 < 60)",
+          "why": [
+            "failed Quiz 1 (scored 59 < 60)"
+          ],
+          "evidence_ar": "",
+          "draft_message_ar": "",
+          "parent_phone": "+9665••••••61",
+          "phone_flag": "ok"
+        }
+      ],
+      "overflow": [],
+      "review": []
+    }
+  }
+}

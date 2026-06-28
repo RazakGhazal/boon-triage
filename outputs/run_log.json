@@ -1,0 +1,16 @@
+{
+  "as_of_date": "2025-10-14",
+  "capacity_per_facilitator": 8,
+  "students_total": 176,
+  "students_surfaced": 73,
+  "students_left_alone": 103,
+  "actionable": 53,
+  "human_review": 2,
+  "overflow_not_now": 18,
+  "by_priority": {
+    "Critical": 40,
+    "Medium": 20,
+    "High": 13
+  },
+  "backend": "gemini"
+}

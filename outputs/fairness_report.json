@@ -1,0 +1,56 @@
+{
+  "risk_features_used": [
+    "attendance",
+    "practice",
+    "quiz_score",
+    "trajectory_cliff"
+  ],
+  "sensitive_attributes_excluded": [
+    "learning_track",
+    "campus_id",
+    "student_name",
+    "parent_phone",
+    "grade"
+  ],
+  "surface_rate_by_track": {
+    "Standard": {
+      "n": 128,
+      "surfaced": 27,
+      "surface_rate_pct": 21
+    },
+    "Accelerated": {
+      "n": 14,
+      "surfaced": 0,
+      "surface_rate_pct": 0
+    },
+    "Remedial": {
+      "n": 58,
+      "surfaced": 46,
+      "surface_rate_pct": 79
+    }
+  },
+  "within_track_top5": {
+    "Standard": [
+      "S123",
+      "S005",
+      "S023",
+      "S039",
+      "S101"
+    ],
+    "Accelerated": [
+      "S002",
+      "S011",
+      "S018",
+      "S026",
+      "S032"
+    ],
+    "Remedial": [
+      "S012",
+      "S022",
+      "S033",
+      "S038",
+      "S044"
+    ]
+  },
+  "note": "Surfacing correlates with track because Remedial students are genuinely failing more (behavior), not because track is a model input. The within-track view guarantees the top-risk Standard/Accelerated students are still surfaced, and calibrating within track prevents Remedial membership from re-flagging itself."
+}
