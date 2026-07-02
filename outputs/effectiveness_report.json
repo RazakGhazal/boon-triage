@@ -1,6 +1,6 @@
 {
   "summary": {
-    "students_with_logged_intervention": 75,
+    "students_with_logged_contact": 75,
     "by_outcome": {
       "no_change": 51,
       "declined": 7,
@@ -9,7 +9,12 @@
     },
     "logged_too_late_pct": 13,
     "re_engaged_pct_of_measurable": 11,
-    "still_declining_pct_of_measurable": 11
+    "still_declining_pct_of_measurable": 11,
+    "caveats": [
+      "descriptive only — no control group; the 125 un-noted students are never measured",
+      "regression to the mean: notes are written at dips, and dips revert",
+      "'first note = intervention' is a proxy; many notes are observations"
+    ]
   },
   "students": {
     "S004": {

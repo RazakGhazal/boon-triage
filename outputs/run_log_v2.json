@@ -2,16 +2,21 @@
   "as_of_date": "2025-10-14",
   "backend": "gemini",
   "capacity_per_facilitator": 8,
-  "arms": {
-    "treatment_surfaced": 73,
-    "holdout_students": 24
+  "invocation": "python main.py --v2",
+  "kpi": {
+    "failers_total": 66,
+    "failers_with_action_today": 66,
+    "failers_contacted_since_quiz": 29,
+    "contact_rate_pct": 44,
+    "days_to_next_quiz": 6
   },
-  "escalate_prior_intervention_failed": [
+  "escalate_contact_already_failing": [
     "S005",
     "S012",
     "S017",
     "S023",
     "S091",
+    "S123",
     "S190"
   ]
 }

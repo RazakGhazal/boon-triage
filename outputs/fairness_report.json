@@ -3,6 +3,7 @@
     "attendance",
     "practice",
     "quiz_score",
+    "quiz_absence",
     "trajectory_cliff"
   ],
   "sensitive_attributes_excluded": [
@@ -15,8 +16,8 @@
   "surface_rate_by_track": {
     "Standard": {
       "n": 128,
-      "surfaced": 27,
-      "surface_rate_pct": 21
+      "surfaced": 28,
+      "surface_rate_pct": 22
     },
     "Accelerated": {
       "n": 14,
@@ -25,8 +26,8 @@
     },
     "Remedial": {
       "n": 58,
-      "surfaced": 46,
-      "surface_rate_pct": 79
+      "surfaced": 51,
+      "surface_rate_pct": 88
     }
   },
   "within_track_top5": {
@@ -52,5 +53,108 @@
       "S044"
     ]
   },
-  "note": "Surfacing correlates with track because Remedial students are genuinely failing more (behavior), not because track is a model input. The within-track view guarantees the top-risk Standard/Accelerated students are still surfaced, and calibrating within track prevents Remedial membership from re-flagging itself."
+  "facilitator_coverage_equity": {
+    "facilitator1@noon.com": {
+      "students": 20,
+      "quiz_failers": 6,
+      "note_coverage_pct": 55,
+      "failers_contacted_since_quiz_pct": 67,
+      "high_risk_without_post_quiz_note": [
+        "S019"
+      ]
+    },
+    "facilitator2@noon.com": {
+      "students": 20,
+      "quiz_failers": 5,
+      "note_coverage_pct": 45,
+      "failers_contacted_since_quiz_pct": 20,
+      "high_risk_without_post_quiz_note": [
+        "S022",
+        "S027",
+        "S033",
+        "S038"
+      ]
+    },
+    "facilitator3@noon.com": {
+      "students": 35,
+      "quiz_failers": 11,
+      "note_coverage_pct": 51,
+      "failers_contacted_since_quiz_pct": 45,
+      "high_risk_without_post_quiz_note": [
+        "S044",
+        "S049",
+        "S054",
+        "S061",
+        "S066",
+        "S073"
+      ]
+    },
+    "facilitator4@noon.com": {
+      "students": 22,
+      "quiz_failers": 7,
+      "note_coverage_pct": 41,
+      "failers_contacted_since_quiz_pct": 43,
+      "high_risk_without_post_quiz_note": [
+        "S078",
+        "S084",
+        "S089",
+        "S096"
+      ]
+    },
+    "facilitator5@noon.com": {
+      "students": 20,
+      "quiz_failers": 5,
+      "note_coverage_pct": 45,
+      "failers_contacted_since_quiz_pct": 40,
+      "high_risk_without_post_quiz_note": [
+        "S102",
+        "S108",
+        "S113"
+      ]
+    },
+    "facilitator6@noon.com": {
+      "students": 24,
+      "quiz_failers": 8,
+      "note_coverage_pct": 25,
+      "failers_contacted_since_quiz_pct": 50,
+      "high_risk_without_post_quiz_note": [
+        "S120",
+        "S126",
+        "S132",
+        "S137"
+      ]
+    },
+    "facilitator7@noon.com": {
+      "students": 21,
+      "quiz_failers": 8,
+      "note_coverage_pct": 24,
+      "failers_contacted_since_quiz_pct": 38,
+      "high_risk_without_post_quiz_note": [
+        "S144",
+        "S149",
+        "S155",
+        "S159"
+      ]
+    },
+    "facilitator8@noon.com": {
+      "students": 38,
+      "quiz_failers": 16,
+      "note_coverage_pct": 21,
+      "failers_contacted_since_quiz_pct": 44,
+      "high_risk_without_post_quiz_note": [
+        "S166",
+        "S171",
+        "S177",
+        "S182",
+        "S184",
+        "S188",
+        "S194",
+        "S199"
+      ]
+    }
+  },
+  "notes": [
+    "Remedial over-representation in the queue reflects behavior (88% of Remedial failed Quiz 1 vs 0% Accelerated), not a track input — expected, and correct for triage. The within-track view keeps other tracks' top risks reviewable.",
+    "The operative equity risk is note coverage by facilitator (21%–55%): note-informed care must not concentrate where documentation is best. Un-noted students keep full rules scoring + template drafts, and every un-noted card carries a log-one-line nudge to close the coverage gap."
+  ]
 }

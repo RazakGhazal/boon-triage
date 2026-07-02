@@ -1,0 +1,16 @@
+{
+  "as_of": "2025-10-09",
+  "design": "score on days 1-9 only (pre-quiz clock; quiz term structurally absent), label = failed Quiz 1 on Day 10",
+  "n_students": 200,
+  "n_quiz1_failers": 66,
+  "auc": 0.911,
+  "precision_at_k": 0.85,
+  "k": 66,
+  "failers_already_flagged_high_or_critical_pct": 0,
+  "failers_already_surfaced_medium_plus_pct": 56,
+  "caveats": [
+    "validates the behavior terms only (attendance/practice/cliff); the quiz term cannot be backtested against the same quiz",
+    "one quiz, n=200 — directional, not a calibration",
+    "once the queue drives interventions, forward validation against Quiz 2 is post-treatment (see docs/EVAL_PLAN.md for the RD design that handles this)"
+  ]
+}

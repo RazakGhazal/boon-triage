@@ -1,0 +1,155 @@
+{
+  "noted_students": 75,
+  "changed": 18,
+  "direction": {
+    "escalated": 9,
+    "de_escalated": 8,
+    "review": 1
+  },
+  "examples": [
+    {
+      "student_id": "S004",
+      "quiz_failed": true,
+      "rules_only": "High/queue",
+      "with_notes": "Critical/queue",
+      "note_state": "failing",
+      "evidence_ar": "احمد لسا على نفس الوضع. حاولت اتواصل مع الاهل بدون نتيجة"
+    },
+    {
+      "student_id": "S006",
+      "quiz_failed": false,
+      "rules_only": "Medium/queue",
+      "with_notes": "Low/leave_alone",
+      "note_state": "explained",
+      "evidence_ar": "قال في مشكله عائليه - راح ترجع الاسبوع الجاي ان شاء الله"
+    },
+    {
+      "student_id": "S008",
+      "quiz_failed": false,
+      "rules_only": "Low/leave_alone",
+      "with_notes": "High/queue",
+      "note_state": "refused",
+      "evidence_ar": "الام كانت دفاعية: 'هي تحضر الحصص، ايش اكثر من كذا تبون؟' مو متعاونه"
+    },
+    {
+      "student_id": "S012",
+      "quiz_failed": true,
+      "rules_only": "Critical/queue",
+      "with_notes": "Critical/human_review",
+      "note_state": "explained",
+      "evidence_ar": ""
+    },
+    {
+      "student_id": "S013",
+      "quiz_failed": false,
+      "rules_only": "Low/leave_alone",
+      "with_notes": "Medium/queue",
+      "note_state": "needs_help",
+      "evidence_ar": "نور شكلها مشغولة البال. جت ٥٠ دقيقة بس اليوم، عادة تجي كامل الحصة"
+    },
+    {
+      "student_id": "S017",
+      "quiz_failed": false,
+      "rules_only": "Low/leave_alone",
+      "with_notes": "Medium/queue",
+      "note_state": "needs_help",
+      "evidence_ar": "امل محتاجه دعم عاطفي. المشاكل العائلية اثرت عليها بس لسا محافظه على الحضور."
+    },
+    {
+      "student_id": "S028",
+      "quiz_failed": false,
+      "rules_only": "Medium/queue",
+      "with_notes": "Low/leave_alone",
+      "note_state": "explained",
+      "evidence_ar": "مريم تعبانه بس تصر تحضر"
+    },
+    {
+      "student_id": "S030",
+      "quiz_failed": false,
+      "rules_only": "Low/leave_alone",
+      "with_notes": "Medium/queue",
+      "note_state": "needs_help",
+      "evidence_ar": "حسن يحضر دايم بس ما يتمرن. نفس مشكلة خالد - يفكر الحضور كافي"
+    },
+    {
+      "student_id": "S042",
+      "quiz_failed": false,
+      "rules_only": "Low/leave_alone",
+      "with_notes": "High/queue",
+      "note_state": "refused",
+      "evidence_ar": "عرضت عليها مساعده اضافية بعد الحصة، رفضت"
+    },
+    {
+      "student_id": "S050",
+      "quiz_failed": false,
+      "rules_only": "Medium/queue",
+      "with_notes": "Low/leave_alone",
+      "note_state": "explained",
+      "evidence_ar": "قالت تحس بتعب"
+    },
+    {
+      "student_id": "S057",
+      "quiz_failed": false,
+      "rules_only": "Low/leave_alone",
+      "with_notes": "Medium/queue",
+      "note_state": "needs_help",
+      "evidence_ar": "نورة تحضر ١٠٠٪ بس التمارين صفر"
+    },
+    {
+      "student_id": "S067",
+      "quiz_failed": false,
+      "rules_only": "Medium/queue",
+      "with_notes": "Low/leave_alone",
+      "note_state": "explained",
+      "evidence_ar": "عمر لسا تعبان"
+    },
+    {
+      "student_id": "S116",
+      "quiz_failed": false,
+      "rules_only": "Low/leave_alone",
+      "with_notes": "Medium/queue",
+      "note_state": "needs_help",
+      "evidence_ar": "سارة حضور مثالي بس ٠ تمارين"
+    },
+    {
+      "student_id": "S117",
+      "quiz_failed": false,
+      "rules_only": "Medium/queue",
+      "with_notes": "Low/leave_alone",
+      "note_state": "explained",
+      "evidence_ar": "عبدالله قال الصداع مستمر من امس"
+    },
+    {
+      "student_id": "S134",
+      "quiz_failed": false,
+      "rules_only": "Low/leave_alone",
+      "with_notes": "Medium/queue",
+      "note_state": "needs_help",
+      "evidence_ar": "الاب يشتغل ليل وما يقدر يصحيه"
+    },
+    {
+      "student_id": "S141",
+      "quiz_failed": false,
+      "rules_only": "Critical/queue",
+      "with_notes": "Medium/queue",
+      "note_state": "explained",
+      "evidence_ar": "الام قالت لسا مريض، راح يرجع الاسبوع الجاي ان شاء الله"
+    },
+    {
+      "student_id": "S145",
+      "quiz_failed": false,
+      "rules_only": "Medium/queue",
+      "with_notes": "Low/leave_alone",
+      "note_state": "improving",
+      "evidence_ar": "يوسف محافظ على الحضور الحين - ٧٠ دقيقة اليوم. والتمارين كمان احسن - ١٥ سؤال"
+    },
+    {
+      "student_id": "S163",
+      "quiz_failed": false,
+      "rules_only": "Medium/queue",
+      "with_notes": "Low/leave_alone",
+      "note_state": "explained",
+      "evidence_ar": "احمد ارسل واتساب يقول مو قادر يحضر اليوم"
+    }
+  ]
+}

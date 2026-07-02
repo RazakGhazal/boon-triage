@@ -1,16 +1,90 @@
 {
   "as_of_date": "2025-10-14",
+  "invocation": "python main.py --v2",
   "capacity_per_facilitator": 8,
-  "students_total": 176,
-  "students_surfaced": 73,
-  "students_left_alone": 103,
-  "actionable": 53,
-  "human_review": 2,
-  "overflow_not_now": 18,
+  "students_total": 200,
+  "students_surfaced": 79,
+  "students_left_alone": 121,
+  "priority_actions": 57,
+  "messages_today": 21,
+  "human_review": 1,
+  "call_waitlist": 10,
   "by_priority": {
-    "Critical": 40,
-    "Medium": 20,
-    "High": 13
+    "Critical": 39,
+    "High": 21,
+    "Medium": 19
   },
-  "backend": "gemini"
+  "failers_total": 66,
+  "failers_with_action_today": 66,
+  "failers_contacted_since_quiz": 29,
+  "contact_rate_pct": 44,
+  "days_to_next_quiz": 6,
+  "per_facilitator": {
+    "facilitator6@noon.com": {
+      "students": 24,
+      "failers": 8,
+      "failers_reached_since_quiz": 4,
+      "priority": 8,
+      "messages": 2,
+      "review": 0
+    },
+    "facilitator3@noon.com": {
+      "students": 35,
+      "failers": 11,
+      "failers_reached_since_quiz": 5,
+      "priority": 8,
+      "messages": 5,
+      "review": 0
+    },
+    "facilitator4@noon.com": {
+      "students": 22,
+      "failers": 7,
+      "failers_reached_since_quiz": 3,
+      "priority": 6,
+      "messages": 1,
+      "review": 0
+    },
+    "facilitator5@noon.com": {
+      "students": 20,
+      "failers": 5,
+      "failers_reached_since_quiz": 2,
+      "priority": 6,
+      "messages": 1,
+      "review": 0
+    },
+    "facilitator2@noon.com": {
+      "students": 20,
+      "failers": 5,
+      "failers_reached_since_quiz": 1,
+      "priority": 7,
+      "messages": 1,
+      "review": 0
+    },
+    "facilitator7@noon.com": {
+      "students": 21,
+      "failers": 8,
+      "failers_reached_since_quiz": 3,
+      "priority": 7,
+      "messages": 1,
+      "review": 0
+    },
+    "facilitator8@noon.com": {
+      "students": 38,
+      "failers": 16,
+      "failers_reached_since_quiz": 7,
+      "priority": 8,
+      "messages": 8,
+      "review": 0
+    },
+    "facilitator1@noon.com": {
+      "students": 20,
+      "failers": 6,
+      "failers_reached_since_quiz": 4,
+      "priority": 7,
+      "messages": 2,
+      "review": 1
+    }
+  },
+  "backend": "gemini",
+  "model": "gemini-2.5-flash-lite"
 }
