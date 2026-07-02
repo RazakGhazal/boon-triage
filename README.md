@@ -1,29 +1,30 @@
 # Boon Academy — Intervention Triage
 
-Tells each facilitator **who to help first, and why** — a ranked, capacity-bounded action
-queue — to lift the intervention rate from ~30% toward 80%+.
+Tells each facilitator **who to help first, and why** — a two-tier action queue (calls
+capped at 8, drafted messages uncapped) that hands every Quiz-1 failer a ready action —
+to lift the intervention rate from ~30% toward 80%+.
 
-The edge: it **reads** the Arabic facilitator notes instead of just counting them. Rules score
-risk from the numbers; Gemini reads each note thread for the *state* of any intervention; a
-3-rule fusion corrects where they disagree (a failing intervention escalates; a working one is
-demoted to free capacity). It then measures whether past interventions actually worked.
+The edge: it **reads** the Arabic facilitator notes instead of just counting them. Rules
+score risk from the numbers (Day-9 backtest: **AUC 0.91**); Gemini reads each note thread
+into a structured state (**κ=0.82** vs 75 human gold labels); a 3-family fusion corrects
+where they disagree. Every claim quotes a verbatim Arabic span or goes to human review.
 
 📹 **Video walkthrough:** `<ADD LOOM LINK>`
 
 ## Run
     make setup                  # install deps
     cp .env.example .env        # add your GEMINI_API_KEY
-    make demo                   # full closed-loop run, LLM on -> outputs/
+    make demo                   # full run + measurement layer, LLM on -> outputs/
     make no-llm                 # rules-only baseline (no key needed)
     make lift                   # what the note-reader changed vs rules-only
-    make test                   # 13 acceptance tests (the demo students)
+    make backtest               # Day-9 ranking vs Quiz-1 outcomes (no LLM)
+    make eval                   # note-reader vs the human gold labels
+    make test                   # 22 acceptance tests
 
 ## Outputs (outputs/)
-`action_queue.html` (the product — open in a browser) · `queue.csv` · `queue.json` · plus the
-closed-loop reports `effectiveness_report.json` · `fairness_report.json` · `v2_report.md`.
+`action_queue.html` (the product — open it, mark contacts, export the log) · `queue.csv/json`
+· `v2_report.md` · `extractor_eval.json` · `backtest_day9.json` · effectiveness/fairness/lift.
 
 ## Docs
-ingest → risk (attendance/practice/quiz + collapse term) → notes (Gemini, faithfulness-checked)
-→ decide (3 rules) → output. Keys/config via `.env`; "today" is `AS_OF_DATE`, not `now()`, so
-runs reproduce; the LLM is one swappable module (KSA/local for PDPL).
-Full map: [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) · [docs/MODEL_CARD.md](docs/MODEL_CARD.md).
+[ARCHITECTURE](docs/ARCHITECTURE.md) · [MODEL_CARD](docs/MODEL_CARD.md) ·
+[EVAL_PLAN](docs/EVAL_PLAN.md) (pre-registered Day-20 readout) · gold labels + codebook: `eval/`.

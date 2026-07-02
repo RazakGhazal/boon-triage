@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Boon Academy — How I Cracked It</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&family=IBM+Plex+Sans+Arabic:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+/* ============ NOON × NEO-BRUTALISM TOKENS ============ */
+:root{
+  --ink:#172740; --ink-2:#4a5a72; --surface:#edeeea; --white:#ffffff;
+  --mint:#17e4a1; --mint-deep:#0b9160;
+  --red:#e5342a; --amber:#e0891c; --purple:#6f4fd8;
+  --fd:"Space Grotesk",sans-serif; --fb:"Inter",sans-serif; --fm:"JetBrains Mono",monospace; --fa:"IBM Plex Sans Arabic",sans-serif;
+  --sh:6px 6px 0 0 var(--ink); --sh-lg:9px 9px 0 0 var(--ink);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%;background:#0a1322;font-family:var(--fb);-webkit-font-smoothing:antialiased}
+#viewport{position:fixed;inset:0;overflow:hidden}
+#stage{position:absolute;top:50%;left:50%;width:1280px;height:720px;transform:translate(-50%,-50%);transform-origin:center}
+.slide{position:absolute;inset:0;background:var(--surface);color:var(--ink);padding:52px 60px 58px;display:none;flex-direction:column}
+.slide.active{display:flex}
+.slide.dark{background:var(--ink);color:#fff}
+
+h1{font-family:var(--fd);font-weight:700;font-size:76px;line-height:.98;letter-spacing:-.02em}
+h2{font-family:var(--fd);font-weight:700;font-size:50px;line-height:1.02;letter-spacing:-.015em;margin-bottom:18px}
+.lead{font-family:var(--fb);font-size:23px;line-height:1.5;color:var(--ink-2);max-width:30ch}
+.slide.dark .lead{color:#c0cddf}
+.body{font-family:var(--fb);font-size:20px;line-height:1.5}
+.big{font-family:var(--fd);font-weight:700;font-size:180px;line-height:.8;letter-spacing:-.04em}
+.mint{color:var(--mint-deep)} .slide.dark .mint{color:var(--mint)}
+.red{color:var(--red)} .amb{color:var(--amber)} .pur{color:var(--purple)}
+em{font-style:normal;color:var(--mint-deep);font-weight:700} .slide.dark em{color:var(--mint)}
+b{font-weight:700}
+.grow{flex:1;min-height:0} .row{display:flex} .col{flex:1}
+.lbl{font-family:var(--fm);font-weight:700;text-transform:uppercase;letter-spacing:.09em;font-size:13px;color:var(--ink-2)}
+.slide.dark .lbl{color:#9fb0c7}
+.head{display:flex;justify-content:space-between;align-items:center;border-bottom:3px solid var(--ink);padding-bottom:14px;margin-bottom:34px}
+.slide.dark .head{border-color:#3a4d69}
+.head .sec{font-family:var(--fm);font-weight:700;text-transform:uppercase;letter-spacing:.1em;font-size:14px}
+.head .sec b{color:var(--mint-deep);margin-right:12px} .slide.dark .head .sec b{color:var(--mint)}
+.mark{font-family:var(--fd);font-weight:700;font-size:18px;letter-spacing:-.01em}
+.mark span{color:var(--mint)}
+.card{background:var(--white);border:3px solid var(--ink);box-shadow:var(--sh);display:flex;flex-direction:column}
+.card .hd{background:var(--ink);color:#fff;font-family:var(--fm);font-weight:700;text-transform:uppercase;letter-spacing:.08em;font-size:13px;padding:11px 16px}
+.card .hd.mint{background:var(--mint);color:var(--ink)} .card .hd.red{background:var(--red);color:#fff} .card .hd.amb{background:var(--amber);color:#fff}
+.card .bd{padding:22px 22px;flex:1;display:flex;flex-direction:column;justify-content:center;gap:10px}
+.slide.dark .card{background:#1d3050;border-color:#fff;box-shadow:8px 8px 0 0 var(--mint);color:#fff}
+.chip{display:inline-block;background:var(--mint);color:var(--ink);border:2px solid var(--ink);font-family:var(--fm);font-weight:700;text-transform:uppercase;letter-spacing:.06em;font-size:12px;padding:5px 10px}
+.chip.line{background:transparent} .chip.red{background:var(--red);color:#fff} .slide.dark .chip{border-color:#fff}
+.stat{border:3px solid var(--ink);box-shadow:var(--sh);background:var(--white);display:flex;flex-direction:column}
+.slide.dark .stat{background:#1d3050;border-color:#fff;box-shadow:8px 8px 0 0 var(--mint)}
+.stat .hd{background:var(--ink);color:#fff;font-family:var(--fm);font-weight:700;text-transform:uppercase;letter-spacing:.07em;font-size:11px;padding:8px 12px}
+.stat.bad .hd{background:var(--red)} .stat .hd.k{background:var(--ink)}
+.stat .n{font-family:var(--fd);font-weight:700;font-size:58px;line-height:1;letter-spacing:-.03em;padding:18px 16px 6px;margin-top:auto}
+.stat .n s{font-size:22px;text-decoration:none;color:var(--ink-2)}
+.stat .l{font-family:var(--fb);font-size:15px;line-height:1.35;color:var(--ink-2);padding:0 16px 16px;margin-bottom:auto}
+.pipe{display:flex;align-items:stretch;gap:0}
+.node{flex:1;background:var(--white);border:3px solid var(--ink);box-shadow:var(--sh);display:flex;flex-direction:column}
+.node.on{box-shadow:6px 6px 0 0 var(--mint)}
+.node .hd{background:var(--ink);color:#fff;font-family:var(--fm);font-weight:700;text-transform:uppercase;letter-spacing:.06em;font-size:11px;padding:7px 10px}
+.node.on .hd{background:var(--mint);color:var(--ink)}
+.node .bd{padding:13px 12px}
+.node .h{font-family:var(--fd);font-weight:700;font-size:18px;margin-bottom:5px}
+.node .d{font-family:var(--fb);font-size:13px;line-height:1.35;color:var(--ink-2)}
+.arw{display:flex;align-items:center;font-family:var(--fd);font-weight:700;font-size:26px;color:var(--ink);padding:0 8px}
+.slide.dark .arw{color:#fff}
+.lv{display:flex;gap:16px;align-items:flex-start;padding:14px 0}
+.lv+.lv{border-top:3px solid var(--ink)}
+.lv .num{font-family:var(--fd);font-weight:700;font-size:26px;color:var(--mint-deep);min-width:26px;line-height:1}
+.lv .tx{font-family:var(--fb);font-size:18px;line-height:1.4}
+.facts{display:flex;flex-direction:column;gap:16px}
+.fact{display:flex;gap:16px;align-items:flex-start;font-family:var(--fb);font-size:21px;line-height:1.4}
+.fact .m{flex:0 0 20px;height:20px;background:var(--mint);border:2px solid var(--ink);margin-top:3px}
+.fact.red .m{background:var(--red)} .fact.pur .m{background:var(--purple)}
+.note{direction:rtl;text-align:right;font-family:var(--fa);font-weight:600;font-size:23px;line-height:1.7;color:var(--ink)}
+.slide.dark .note{color:#fff}
+.trans{font-family:var(--fb);font-size:16px;line-height:1.5;color:var(--ink-2);margin-top:12px}
+.slide.dark .trans{color:#aebccf}
+.counter{position:absolute;right:60px;bottom:26px;font-family:var(--fm);font-weight:700;font-size:12px;letter-spacing:.12em;color:var(--ink-2)}
+.progress{position:absolute;left:0;bottom:0;height:6px;width:100%}
+.progress .pbar{height:100%;background:var(--mint);width:8%;border-top:3px solid var(--ink);transition:width .22s}
+</style>
+</head>
+<body>
+<div id="viewport"><div id="stage">
+
+<!-- 01 — TITLE -->
+<section class="slide dark active">
+  <div class="head" style="border-color:#3a4d69"><span class="mark">boon<span>●</span>academy</span><span class="lbl" style="color:#9fb0c7">AI Systems Engineer · Case Study</span></div>
+  <div class="grow" style="display:flex;flex-direction:column;justify-content:center">
+    <span class="chip" style="align-self:flex-start;margin-bottom:24px">How I actually cracked it</span>
+    <h1 style="color:#fff;max-width:16ch;font-size:84px">The plan was easy. The data had other ideas.</h1>
+    <p class="lead" style="margin-top:26px;max-width:48ch;font-size:24px">How a simple risk model fell apart on one student — and became a system that <em>reads the notes nobody reads.</em></p>
+  </div>
+</section>
+
+<!-- 02 — MY FIRST PLAN -->
+<section class="slide">
+  <div class="head"><span class="sec"><b>01</b>My first plan</span><span class="mark">boon<span>●</span>academy</span></div>
+  <div class="row grow" style="align-items:center;gap:52px">
+    <div class="col">
+      <h2>Honestly? I thought<br>this was easy.</h2>
+      <p class="lead">We have the data. Score the risk, rank the failing kids, hand facilitators a list. A day's work.</p>
+      <span class="chip red" style="margin-top:22px">…then I validated it against the real data</span>
+    </div>
+    <div class="col"><div class="card"><div class="hd">The 20-minute plan</div><div class="bd" style="gap:0">
+      <div class="lv"><div class="num">1</div><div class="tx">Load the three CSVs.</div></div>
+      <div class="lv"><div class="num">2</div><div class="tx">Risk score = attendance + practice + quiz.</div></div>
+      <div class="lv"><div class="num">3</div><div class="tx">Rank the failing students.</div></div>
+      <div class="lv"><div class="num">4</div><div class="tx">Hand each facilitator the list. Ship.</div></div>
+    </div></div></div>
+  </div>
+</section>
+
+<!-- 03 — THEN I MET AHMAD -->
+<section class="slide">
+  <div class="head"><span class="sec"><b>02</b>The validation</span><span class="mark">boon<span>●</span>academy</span></div>
+  <h2>Then I met Ahmad.</h2>
+  <p class="lead" style="max-width:78ch">Two of his three numbers scream <em>model student</em> — and a naive risk score lets them <b>bury</b> the third. He lands mid-pack; with 8 slots per facilitator, mid-pack gets no help.</p>
+  <div class="grow" style="display:flex;flex-direction:column;justify-content:center">
+    <div class="row" style="gap:22px;align-items:stretch">
+      <div class="stat col"><div class="hd">Attendance</div><div class="n mint">88<s>min</s></div><div class="l">every day — never misses class</div></div>
+      <div class="stat col"><div class="hd">Practice</div><div class="n mint">120</div><div class="l">in one day — looks like a grinder</div></div>
+      <div class="stat col bad"><div class="hd">Quiz 1</div><div class="n red">52</div><div class="l"><b>failed</b> — and the good numbers hide it</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- 04 — WHAT THE NUMBERS HID -->
+<section class="slide dark">
+  <div class="head" style="border-color:#3a4d69"><span class="sec" style="color:#cdd8e6"><b style="color:var(--mint)">03</b>What the numbers hid</span><span class="mark">boon<span>●</span>academy</span></div>
+  <div class="row grow" style="align-items:center;gap:52px">
+    <div class="col">
+      <h2 style="color:#fff">The real story was one line<br>of Arabic.</h2>
+      <p class="lead">His 120 “practice” questions were a single panic-cram the night before. Even the practice count lied — so my risk score uses <em>median</em> practice, not the total.</p>
+      <p class="lead" style="margin-top:16px;font-size:19px;color:#9fb0c7">The roster calls him <b style="color:#fff">Ahmad</b>. The note calls him <b style="color:#fff">Yusuf</b>. The systems don't agree on his name — so I join on <em>ID, not name.</em></p>
+    </div>
+    <div class="col"><div class="card"><div class="hd mint">Facilitator note</div><div class="bd" style="gap:0">
+      <div class="note">يوسف جاب ٥٢ رغم كل التمارين اللي سواها باللحظة الاخيرة. كان يبان عليه الاحباط. شرحت له ان المذاكرة بالعجلة ما تنفع</div>
+      <p class="trans">“Yusuf got <b style="color:#fff">52</b> despite all the practice he crammed at the last minute. He looked crushed. I explained that rushing doesn't work.”</p>
+    </div></div></div>
+  </div>
+</section>
+
+<!-- 05 — NOT JUST AHMAD -->
+<section class="slide">
+  <div class="head"><span class="sec"><b>04</b>The pattern</span><span class="mark">boon<span>●</span>academy</span></div>
+  <h2>And it wasn't just Ahmad.</h2>
+  <p class="lead" style="max-width:74ch;margin-bottom:26px"><b style="color:var(--ink)">12 students</b>, the same shape — strong attendance, failed the quiz. Attendance measures who's <em>in the room</em>, not who's learning. And the facilitators had already diagnosed it — in prose:</p>
+  <div class="row grow" style="gap:22px">
+    <div class="card col"><div class="hd">Facilitator note</div><div class="bd" style="gap:12px"><div class="note" style="font-size:20px">كلمت اهلها - ما كانوا يدرون ان التمارين مطلوبه! كانوا يفكرون الحصص كافية</div><p class="body" style="font-size:16px;color:var(--ink-2)">“I called the parents — they didn't know practice was even required. They thought classes were enough.”</p></div></div>
+    <div class="card col"><div class="hd">Facilitator note</div><div class="bd" style="gap:12px"><div class="note" style="font-size:20px">يقول يفهم كل شي بالحصة فليش يتمرن؟ لازم يشوف العلاقة بين التمارين والدرجات</div><p class="body" style="font-size:16px;color:var(--ink-2)">“He says he understands everything in class — so why practice? He needs to see the link between practice and grades.”</p></div></div>
+  </div>
+</section>
+
+<!-- 06 — SO I BROUGHT IN AN LLM -->
+<section class="slide">
+  <div class="head"><span class="sec"><b>05</b>The build</span><span class="mark">boon<span>●</span>academy</span></div>
+  <h2>The truth was in the prose.<br>So I taught a model to read it.</h2>
+  <p class="lead" style="max-width:78ch;margin-bottom:32px">Rules still do the maths. The LLM does the one job they can't — read short, informal Arabic. An <em>extractor, not an oracle</em>: it turns prose into a structured state; the rules still decide.</p>
+  <div class="pipe">
+    <div class="node"><div class="hd">Data</div><div class="bd"><div class="h">Ingest</div><div class="d">3 messy CSVs, joined on ID</div></div></div>
+    <div class="arw">→</div>
+    <div class="node"><div class="hd">Need</div><div class="bd"><div class="h">Risk score</div><div class="d">attendance · median practice · quiz</div></div></div>
+    <div class="arw">＋</div>
+    <div class="node on"><div class="hd">State · LLM</div><div class="bd"><div class="h">Note-reader</div><div class="d">Gemini → working / failing, + the Arabic span</div></div></div>
+    <div class="arw">→</div>
+    <div class="node"><div class="hd">Fuse</div><div class="bd"><div class="h">3 rules</div><div class="d">escalate · demote · review</div></div></div>
+    <div class="arw">→</div>
+    <div class="node"><div class="hd">Ship</div><div class="bd"><div class="h">Queue</div><div class="d">who first · why · message</div></div></div>
+  </div>
+</section>
+
+<!-- 07 — THE PRODUCT -->
+<section class="slide">
+  <div class="head"><span class="sec"><b>06</b>The product</span><span class="mark">boon<span>●</span>academy</span></div>
+  <div class="row grow" style="align-items:center;gap:52px">
+    <div class="col">
+      <h2>What a facilitator<br>opens on Monday.</h2>
+      <p class="lead">Grouped by facilitator, capped at the top 8 — so it's doable. Every card: priority, the story, the action, a ready-to-send message.</p>
+    </div>
+    <div class="col"><div class="card"><div class="hd red">Critical · Escalate — Standard · C01</div><div class="bd" style="gap:14px">
+      <div style="font-family:var(--fd);font-weight:700;font-size:30px">Ahmed</div>
+      <p class="body" style="font-size:17px;color:var(--ink-2)">Passing on the numbers — but the logged contact <b style="color:var(--ink)">failed twice.</b> Don't re-send; escalate.</p>
+      <div class="note" style="font-size:19px">احمد محتاج متابعه فورية</div>
+      <div style="display:flex;gap:10px;margin-top:2px"><span class="chip">Call parent</span><span class="chip line">Draft ready</span></div>
+    </div></div></div>
+  </div>
+</section>
+
+<!-- 08 — RESULTS -->
+<section class="slide dark">
+  <div class="head" style="border-color:#3a4d69"><span class="sec" style="color:#cdd8e6"><b style="color:var(--mint)">07</b>The results</span><span class="mark">boon<span>●</span>academy</span></div>
+  <h2 style="color:#fff;margin-bottom:8px">What the data actually said.</h2>
+  <p class="lead" style="max-width:74ch">Numbers, not vibes — every one reproducible from the committed run. The ranking itself is backtested: Day-9 score vs who actually failed Quiz 1 = <b style="color:var(--mint)">AUC 0.91</b>.</p>
+  <div class="grow" style="display:flex;flex-direction:column;justify-content:center"><div class="row" style="gap:22px;align-items:stretch">
+    <div class="stat col"><div class="hd">Notes moved</div><div class="n mint">18<s>/75</s></div><div class="l">noted students vs rules alone — 9 escalated · 8 freed capacity · 1 to review</div></div>
+    <div class="stat col"><div class="hd">Re-engaged after contact</div><div class="n" style="color:var(--red)">11%</div><div class="l">descriptive — no control group. Today we can't even tell; hence the outcome log.</div></div>
+    <div class="stat col"><div class="hd">Gold-set κ</div><div class="n mint">0.82</div><div class="l">vs 75 human-labeled threads (88% strict / 99% lenient) — the eval caught &amp; fixed a real bug</div></div>
+    <div class="stat col"><div class="hd">Fairness</div><div class="n" style="font-size:38px;padding-top:22px">behaviour<br><span class="mint">only</span></div><div class="l">never track, campus, or grade</div></div>
+  </div></div>
+</section>
+
+<!-- 09 — VERDICT -->
+<section class="slide dark">
+  <div class="head" style="border-color:#3a4d69"><span class="sec" style="color:#cdd8e6"><b style="color:var(--mint)">08</b>The engineer's verdict</span><span class="mark">boon<span>●</span>academy</span></div>
+  <div class="grow" style="display:flex;flex-direction:column;justify-content:center">
+    <h1 style="color:#fff;font-size:70px;max-width:20ch">The ceiling isn't the model. It's the <span class="mint">data.</span></h1>
+    <p class="lead" style="margin-top:24px;max-width:66ch;font-size:24px">Sparse, abstract data lets even perfect logic see each student only from a kilometre up. The real job isn't a better classifier — it's <em>governing the data the model is built on.</em></p>
+  </div>
+</section>
+
+<!-- 10 — GOVERN THE INPUT -->
+<section class="slide">
+  <div class="head"><span class="sec"><b>09</b>Govern the input</span><span class="mark">boon<span>●</span>academy</span></div>
+  <div class="row grow" style="align-items:center;gap:52px">
+    <div class="col">
+      <h2>The notes are sparse —<br>and uneven by luck.</h2>
+      <div class="facts">
+        <div class="fact red"><div class="m"></div><div><b>62%</b> of students have <b>no note at all</b> — 30% of failers invisible.</div></div>
+        <div class="fact"><div class="m"></div><div>Coverage swings <b>21% → 55%</b>; the largest classroom is <b>least documented.</b></div></div>
+        <div class="fact pur"><div class="m"></div><div>One facilitator carries <b>up to 38 students</b> — no time to note each.</div></div>
+      </div>
+    </div>
+    <div class="col"><div class="card"><div class="hd mint">Govern the process, not the output</div><div class="bd" style="gap:0">
+      <div class="lv"><div class="num">1</div><div class="tx"><b>Keep the free text.</b> That mess is what the LLM tolerates — no rigid forms.</div></div>
+      <div class="lv"><div class="num">2</div><div class="tx"><b>Add one structured field</b> — <em>“did it land?”</em> — proxy becomes ground truth.</div></div>
+      <div class="lv"><div class="num">3</div><div class="tx"><b>Fix the ratio.</b> Coverage is a staffing problem before a model one.</div></div>
+    </div></div></div>
+  </div>
+</section>
+
+<!-- 11 — INTO THE QUIZZES -->
+<section class="slide">
+  <div class="head"><span class="sec"><b>10</b>Into the quizzes</span><span class="mark">boon<span>●</span>academy</span></div>
+  <h2>Stop scoring the student.<br>Start diagnosing them.</h2>
+  <div class="row grow" style="align-items:center;gap:0;margin-top:12px">
+    <div class="card col"><div class="hd">Today — one lump-sum score</div><div class="bd" style="gap:12px"><div style="font-family:var(--fd);font-weight:700;font-size:52px">Quiz <span class="red">47</span></div><p class="body" style="font-size:18px;color:var(--ink-2)">“She failed.” …but <b style="color:var(--ink)">why?</b> We can only flag <em>at-risk.</em></p></div></div>
+    <div class="arw" style="font-size:40px;padding:0 26px">→</div>
+    <div class="card col"><div class="hd mint">Tomorrow — per question</div><div class="bd" style="gap:12px"><div style="font-family:var(--fd);font-weight:700;font-size:23px;line-height:1.5">Quadratics <span class="red">2/8</span> · Geometry <span class="mint">7/8</span> · Fractions <span class="red">1/6</span></div><p class="body" style="font-size:18px;color:var(--ink-2)"><b style="color:var(--ink)">Per-student diagnosis.</b> Weak on quadratics — not just “at risk.”</p></div></div>
+  </div>
+  <p class="lead" style="margin-top:30px;align-self:center;text-align:center;max-width:70ch">Richer data turns triage into <em>teaching.</em></p>
+</section>
+
+<!-- 12 — CLOSE -->
+<section class="slide dark">
+  <div class="head" style="border-color:#3a4d69"><span class="mark">boon<span>●</span>academy</span><span class="lbl" style="color:#9fb0c7">Boon Academy · Intervention Triage</span></div>
+  <div class="grow" style="display:flex;flex-direction:column;justify-content:center">
+    <h1 style="color:#fff;font-size:60px;max-width:20ch">I started with a risk model. I ended up reading the notes.</h1>
+    <p class="lead" style="margin-top:26px;max-width:62ch;font-size:23px">Rank who to help, measure if it worked — and the lever that unlocks the rest: <em>better data.</em></p>
+    <div style="display:flex;gap:14px;margin-top:30px"><span class="chip">make demo · 1.6s · LLM on</span><span class="chip line" style="color:#fff">13 / 13 tests green</span></div>
+  </div>
+</section>
+
+<div class="counter">01 / 12</div>
+<div class="progress"><div class="pbar"></div></div>
+</div></div>
+
+<script>
+const stage=document.getElementById('stage'),viewport=document.getElementById('viewport');
+const slides=[...document.querySelectorAll('.slide')];
+const counter=document.querySelector('.counter'),pbar=document.querySelector('.pbar');
+let i=0;
+function show(n){i=Math.max(0,Math.min(slides.length-1,n));
+  slides.forEach((s,k)=>s.classList.toggle('active',k===i));
+  counter.textContent=`${String(i+1).padStart(2,'0')} / ${slides.length}`;
+  pbar.style.width=`${(i+1)/slides.length*100}%`;}
+function fit(){const s=Math.min(window.innerWidth/1280,window.innerHeight/720);
+  stage.style.transform=`translate(-50%,-50%) scale(${s})`;}
+addEventListener('keydown',e=>{
+  if([' ','ArrowRight','ArrowDown','PageDown'].includes(e.key)){show(i+1);e.preventDefault();}
+  else if(['ArrowLeft','ArrowUp','PageUp'].includes(e.key)){show(i-1);e.preventDefault();}
+  else if(e.key==='f'){document.fullscreenElement?document.exitFullscreen():document.documentElement.requestFullscreen();}
+  else if(e.key==='Home')show(0); else if(e.key==='End')show(slides.length-1);});
+viewport.addEventListener('click',e=>{e.clientX/window.innerWidth<0.28?show(i-1):show(i+1);});
+addEventListener('resize',fit);fit();show(0);
+</script>
+</body>
+</html>

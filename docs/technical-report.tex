@@ -17,7 +17,22 @@
 \setlist{nosep,leftmargin=1.4em}
 \usepackage{listings}
 \usepackage{tikz}
-\usetikzlibrary{arrows.meta,positioning,fit,backgrounds}
+\usetikzlibrary{arrows.meta,positioning,fit,backgrounds,calc}
+% --- compat shim: this TeX kernel has the plain socket API (\NewSocket) but
+% predates the tagging wrappers newer tcolorbox calls at load time; undefined,
+% those calls typeset their arguments as literal junk on page 1. Route the
+% wrappers to real sockets (so \UseTaggingSocket finds its registers) and
+% no-op the tagpdf bits; \providecommand yields once the kernel catches up.
+\providecommand\NewStructureName[1]{}
+\providecommand\AssignStructureRole[2]{}
+\providecommand\NewTaggingSocket[2]{\NewSocket{tagsupport/#1}{#2}}
+\providecommand\NewTaggingSocketPlug[3]{\NewSocketPlug{tagsupport/#1}{#2}{#3}}
+\providecommand\AssignTaggingSocketPlug[2]{}% leave sockets on their noop default
+\providecommand\tagstructbegin[1]{}
+\providecommand\tagstructend{}
+\providecommand\tagmcbegin[1]{}
+\providecommand\tagmcend{}
+\providecommand\tagpdfparaOff{}
 \usepackage[most]{tcolorbox}
 \usepackage[colorlinks=true,linkcolor=noongreen,citecolor=noongreen,urlcolor=accent]{hyperref}
 
@@ -38,12 +53,12 @@
 \lstset{style=box}
 
 \newtcolorbox{insight}[1][]{enhanced,breakable,colback=accent!6,colframe=accent,
-  boxrule=0.4pt,left=6pt,right=6pt,top=4pt,bottom=4pt,fonttitle=\bfseries,title=#1}
+  boxrule=0.4pt,left=6pt,right=6pt,top=4pt,bottom=4pt,fonttitle=\bfseries,title={#1}}
 \newtcolorbox{why}[1][Design rationale]{enhanced,breakable,colback=noongreen!5,colframe=noongreen,
   boxrule=0.4pt,left=6pt,right=6pt,top=4pt,bottom=4pt,fonttitle=\bfseries\color{white},
-  coltitle=white,colbacktitle=noongreen,title=#1}
+  coltitle=white,colbacktitle=noongreen,title={#1}}
 \newtcolorbox{caveat}[1][Honest limitation]{enhanced,breakable,colback=amber!8,colframe=amber,
-  boxrule=0.4pt,left=6pt,right=6pt,top=4pt,bottom=4pt,fonttitle=\bfseries,coltitle=amber,title=#1}
+  boxrule=0.4pt,left=6pt,right=6pt,top=4pt,bottom=4pt,fonttitle=\bfseries,coltitle=amber,title={#1}}
 
 \title{Boon Academy --- Intervention Triage}
 \subtitle{\normalsize\color{black}A facilitator-mediated, closed-loop system for getting help to failing students\\ before the next quiz --- technical report}
@@ -57,14 +72,16 @@
 \begin{abstract}
 \noindent Boon Academy already knows \emph{who} is failing; only \textasciitilde30\% of those
 students get any intervention before the next quiz. The bottleneck is not detection --- it is
-\textbf{triage, action, and never knowing whether the help worked}. This system produces a ranked,
-capacity-bounded \emph{action queue} per facilitator by fusing a transparent rule engine (the
-numbers) with an LLM that \emph{reads} the Arabic facilitator notes (the story), and then --- the
-part that distinguishes it --- \textbf{measures whether past interventions actually re-engaged
-students}. On the provided 200-student sample, only \textbf{11\%} of logged interventions show
-re-engagement: a logged note is not an effective intervention, and that gap is the real problem
-behind the 30\%. Every design choice is grounded in the early-warning and behavioural-nudge
-evidence base and stated with its limitations.
+\textbf{triage, action, and never knowing whether the help worked}. This system produces a \textbf{two-tier
+action queue} per facilitator --- calls capped at what a human can do, drafted WhatsApp messages
+uncapped, so every quiz-failer leaves with a ready action --- by fusing a transparent rule engine
+(the numbers, backtested at \textbf{AUC 0.91} against Quiz-1 outcomes) with an LLM that
+\emph{reads} the Arabic facilitator notes (measured at \(\kappa=0.82\) against 75 human gold
+labels). The measurement layer claims only what the data supports: only \textbf{44\%} of
+quiz-failers have any logged contact since the quiz, and of the contacts that exist, just 11\%
+were followed by re-engagement --- a descriptive gap (no control group) that motivates the
+one-field outcome log in the roadmap. Every design choice is grounded in the early-warning and
+behavioural-nudge evidence base and stated with its limitations.
 \end{abstract}
 
 \tableofcontents
@@ -116,16 +133,17 @@ never echoed raw (privacy).
 
 \subsection{Data insights}
 \begin{table}[h]\centering\footnotesize
-\caption{Quiz-1 failure by learning track --- track is nearly destiny.}
+\caption{Quiz-1 failure by learning track --- track is nearly destiny. (One further
+Remedial ``0'' is an exam-day \emph{absence}, not a failure --- counted separately.)}
 \begin{tabular}{lrr}
 \toprule
 Track & Failed / total & Fail rate \\
 \midrule
 Accelerated & 0 / 14 & \textbf{0\%} \\
 Standard & 15 / 128 & 12\% \\
-Remedial & 52 / 58 & \textbf{90\%} \\
+Remedial & 51 / 58 & \textbf{88\%} \\
 \midrule
-All & 67 / 200 & 34\% \\
+All & 66 / 200 & 33\% \\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -170,8 +188,9 @@ facilitator8 & 38 & 8 & \textbf{21\%} & 21 & \textbf{9} \\
 The two facilitators with the \emph{largest} rosters (38 and 35 students) have the two \emph{lowest}
 note-coverage rates (21\% and 34\%) and, for the 38-student case, the \emph{tersest} notes (median 9
 words). Bigger caseload \textrightarrow{} less documentation \textrightarrow{} more students falling through.
-This is precisely the capacity problem the system is built to relieve --- and a reason the action queue
-is \textbf{capacity-bounded per facilitator}, not a global dump.
+This is precisely the capacity problem the system is built to relieve --- and the reason the queue caps
+\textbf{only the expensive actions} per facilitator (drafted messages scale with need, facilitator
+minutes do not), rather than dumping a global list.
 \end{insight}
 
 Practical consequences for the LLM: notes are \emph{short and dialectal} (12 words median), so the
@@ -226,7 +245,7 @@ A deliberately small linear pipeline (\textasciitilde1{,}450 lines of Python; pa
 \draw[arr](dec)--(out);
 \node[draw=amber,dashed,rounded corners,align=left,fill=amber!5,inner sep=5pt,
   right=8mm of dec,text width=4.2cm,font=\scriptsize]
-  (v2){\textbf{v2 layer} (\texttt{pipeline.run\_v2})\\ \texttt{effectiveness.py} --- did past notes re-engage?\\ \texttt{fairness.py} --- within-track audit\\ holdout (by facilitator)\\ $\rightarrow$ \texttt{output\_v2.py} reports};
+  (v2){\textbf{measurement layer} (\texttt{run\_v2})\\ \texttt{backtest.py} --- Day-9 ranking vs Quiz 1\\ \texttt{eval\_extractor.py} --- vs 75 gold labels\\ \texttt{effectiveness.py} --- descriptive outcomes\\ \texttt{fairness.py} --- track + coverage equity\\ $\rightarrow$ \texttt{output\_v2.py} reports};
 \draw[->,thick,amber,dashed](out.east)--(v2.west);
 \end{tikzpicture}
 \caption{Data flow. \texttt{config.py} feeds constants everywhere; \texttt{pipeline.py} wires it;
@@ -234,22 +253,25 @@ A deliberately small linear pipeline (\textasciitilde1{,}450 lines of Python; pa
 \end{figure}
 
 \begin{table}[h]\centering\footnotesize
-\caption{Files and responsibilities (\textasciitilde1{,}450 lines total).}
+\caption{Files and responsibilities (\textasciitilde2{,}300 lines total).}
 \begin{tabular}{llr}
 \toprule
 File & Job & Lines \\
 \midrule
-\texttt{config.py} & tunables, \texttt{.env} loader, \texttt{AS\_OF\_DATE} & 66 \\
-\texttt{ingest.py} & 3 CSVs $\rightarrow$ StudentRecord; every trap, once & 212 \\
-\texttt{risk.py} & NEED: 3 signals + cliff $\rightarrow$ tier + reasons (no AI) & 79 \\
-\texttt{notes.py} & the LLM seam: Gemini reads notes $\rightarrow$ NoteState & 231 \\
-\texttt{decide.py} & fusion: NEED\,$\times$\,STATE, 3 rules $\rightarrow$ ActionRow & 148 \\
-\texttt{output.py} & rank, capacity-bound, write CSV/JSON/HTML & 173 \\
-\texttt{pipeline.py} & orchestrator: run / run\_v2 / compute\_lift & 119 \\
-\texttt{effectiveness.py} & v2: retrospective ``did it work?'' & 124 \\
-\texttt{fairness.py} & v2: within-track flag audit & 48 \\
-\texttt{output\_v2.py} & v2: write the reports & 66 \\
-\texttt{tests/test\_cast.py} & 13 acceptance tests (the demo cast) & 109 \\
+\texttt{config.py} & tunables, \texttt{.env} loader, the case calendar & 73 \\
+\texttt{ingest.py} & 3 CSVs $\rightarrow$ StudentRecord; every trap, once; dated notes & 219 \\
+\texttt{risk.py} & NEED: 4 signals + cliff $\rightarrow$ tier + reasons (no AI) & 84 \\
+\texttt{notes.py} & the LLM seam: Gemini reads threads $\rightarrow$ NoteState & 281 \\
+\texttt{drafts.py} & template MSA drafts for the un-noted majority (no AI) & 67 \\
+\texttt{decide.py} & fusion: NEED\,$\times$\,STATE, 3 rule families $\rightarrow$ ActionRow & 171 \\
+\texttt{output.py} & two-tier queue, KPI counters, contact log, CSV/JSON/HTML & 368 \\
+\texttt{pipeline.py} & orchestrator: run / run\_v2 / lift & 114 \\
+\texttt{backtest.py} & Day-9 ranking backtest vs Quiz-1 outcomes & 88 \\
+\texttt{eval\_extractor.py} & note-reader vs the human gold labels & 104 \\
+\texttt{effectiveness.py} & descriptive post-contact outcomes (+caveats) & 135 \\
+\texttt{fairness.py} & track audit + facilitator coverage equity & 86 \\
+\texttt{output\_v2.py} & write the measurement reports & 133 \\
+\texttt{tests/test\_cast.py} & 22 acceptance tests (traps, guards, KPI invariants) & 193 \\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -297,21 +319,26 @@ polite register for a Saudi family message anyway), not synthetic colloquial.
 \subsection{The prompt}
 The system prompt (lightly abridged) --- the schema \emph{is} the architecture:
 \begin{lstlisting}
-You read a single facilitator's notes about ONE student (short, informal Saudi-dialect Arabic).
-Your ONLY job is to report the STATE of any intervention -- you do not score risk. Return JSON:
-- state: on_track | needs_help | failing | refused | none
-    on_track   was struggling, now improving / intervention clearly working
-    failing    intervention tried but NOT working -- parent/student unresponsive, worsening
-    refused    parent or student declined help
-    needs_help a real problem/crisis, attention needed, no working intervention yet
-    none       descriptive only / no clear signal
+You read one facilitator's note THREAD about ONE student (short, informal Saudi-dialect
+Arabic, chronological, each line dated [Day N]). You never see the metrics -- a rules
+engine scores those. Report what the PROSE says, weighting the most recent days. JSON:
+- state: improving | explained | needs_help | failing | refused | none
+    improving  was struggling, now clearly better / intervention working
+    explained  known, managed, temporary cause (illness, family event) AND the
+               parent is aware -- monitoring is enough for now
+    needs_help real problem, no working intervention yet (incl. "we must intervene")
+    failing    help WAS attempted and is NOT working -- incl. a vanished student
+               with unreachable parents (the contact channel itself is failing)
+    refused    parent/student EXPLICITLY declined or pushed back on offered help
+    none       administrative or positive-only
+- blocker: academic | motivation | family | health | logistics | unknown
 - summary       one plain sentence: what is going on
 - root_cause    e.g. gaming, family issue, unaware of program  (or "")
 - suggested_action  call_parent | one_on_one | message | none
 - draft_message a short, warm WhatsApp message in SIMPLE Modern Standard Arabic, to the PARENT,
     sent BY the named facilitator: cite ONE specific fact; be improvement-focused (not praise/blame);
     propose exactly ONE doable step (NEVER a meeting); 2-3 sentences.
-- evidence      an EXACT short Arabic span copied from the notes
+- evidence      an EXACT Arabic span from the notes -- REQUIRED for any non-"none" state
 - concern       low | neutral | worried | urgent
 - confidence    low | medium | high   (use low when vague -- do not guess)
 Be faithful. Do not invent facts.
@@ -349,30 +376,40 @@ note from rescuing a quiz-failing crammer (S051).
 \end{enumerate}
 \textbf{Surfacing rule:} a student is queued if the numbers flag them \emph{or} the note is non-positive
 --- the single \texttt{OR} that catches S017 (clean numbers, a hidden family crisis). The queue is then
-ranked and \textbf{capacity-bounded} to the top-$N$ per facilitator.
+ranked into \textbf{two tiers}: calls/1-on-1s capped at the top-$N$ per facilitator (facilitator time is
+the scarce resource), and ready-to-send drafts \emph{uncapped} --- the largest classroom has 16
+quiz-failers, so any flat top-8 list would cap its coverage at 50\% forever. Every surfaced student
+leaves with a message (the LLM's if there are notes, a metric-filled MSA template otherwise).
 
 \section{v2: closing the loop --- measuring whether help worked}
 A ranked queue is necessary but, on its own, insufficient: the early-warning literature shows that
 identifying at-risk students reliably fails to improve outcomes unless the data drives a real,
 completed intervention (\S\,\ref{sec:evidence}). v2 adds the measurement layer.
 
-\begin{insight}[The headline: attempted $\neq$ effective]
-Every facilitator note is a dated intervention; the metrics are daily. So we measure what each student's
-engagement did \emph{after} contact. Of \textbf{75 logged interventions: only 11\% re-engaged the
-student, 11\% kept declining despite contact, and 13\% were logged too late to act} (final-day notes).
-A logged note is not help. This measured gap is the real story behind the 30\%.
+\begin{insight}[The headline: attempted $\neq$ effective --- and today we cannot even tell]
+Every facilitator note is a dated contact; the metrics are daily. Descriptively, of \textbf{75 logged
+contact threads: only 11\% were followed by re-engagement, 11\% kept declining, and 13\% were logged
+too late to act} (final-day notes). This is \emph{not} a causal estimate --- there is no control group,
+and notes are written at dips, which revert (regression to the mean). What it does establish is worse:
+\textbf{from current logs, contact effectiveness is unknowable} --- which is exactly the argument for
+the one-field outcome log (``did it land?'') in the roadmap.
 \end{insight}
 
 \begin{itemize}
-\item \textbf{Note-reader, checked against reality:} on the students whose engagement decisively moved,
-the LLM's read agreed with the actual outcome \textbf{100\%} of the time (\(n=14\)) --- a data-grounded
-accuracy check (\texttt{working}\,\textrightarrow\,re-engaged; \texttt{failing}\,\textrightarrow\,declined).
+\item \textbf{Note-reader, measured against humans:} all 75 note threads were hand-labelled from the
+notes alone, against a written codebook, \emph{before} the extractor ran (\texttt{eval/}). v3.1 agrees
+with the gold labels at \(\kappa=0.82\) (88\% strict, 99\% lenient) --- and the eval earned its keep
+by catching a real bug first: v3 read ``vanished + unreachable parents'' as \texttt{needs\_help}
+(failing-recall 0.15); one prompt revision fixed it.
 \item \textbf{Closing the loop:} 6 surfaced students were \emph{already contacted and still declined} ---
 they do not need another drafted message; they are flagged for \textbf{escalation beyond messaging}
 (S005, S023, \dots).
-\item \textbf{Measurement arms:} an always-on holdout, randomised \emph{by facilitator} (cluster, so
-parents/facilitators talking cannot leak treatment), reserves a control group so program lift can be
-measured rather than assumed.
+\item \textbf{Measurement without a holdout:} denying triage to a live classroom is ethically wrong
+and, at one cluster, statistically empty. Instead, three pre-registered designs
+(\texttt{docs/EVAL\_PLAN.md}): a Day-20 primary readout (failer contact rate vs the measured 44\%
+baseline), a regression discontinuity at the capacity cutoff (the top-\(k\) call list creates
+near-identical students on either side of an arbitrary line), and a stepped-wedge rollout for
+20\,$\to$\,100 campuses --- the deployment order \emph{is} the experiment.
 \end{itemize}
 
 \subsection{Fairness}\label{sec:fair}
@@ -380,8 +417,11 @@ measured rather than assumed.
 The risk score uses \emph{behaviour only} (attendance, practice, quiz, trajectory) --- never
 \texttt{learning\_track}, \texttt{campus}, name, phone, or grade. The audit reports surface-rate by track
 (Remedial is surfaced more because it is genuinely failing more, by behaviour, not by membership), and a
-\emph{within-track} view guarantees the most-at-risk Standard/Accelerated students are still seen ---
-and that Remedial membership never becomes a self-entrenching re-flag. This directly answers the
+\emph{within-track} report view keeps the most-at-risk Standard/Accelerated students visible for review
+--- and Remedial membership never becomes a self-entrenching re-flag. The audit also tracks the equity
+axis specific to a notes-reading system: per-facilitator note coverage (21--55\%, and the largest
+classroom is the least documented), so note-informed care cannot silently concentrate where
+documentation happens to be best. This directly answers the
 real-world failures where recall-maxed dropout models concentrated false alarms on the most
 disadvantaged with no benefit.
 \end{why}
@@ -405,19 +445,24 @@ and draft in warm MSA.}
 \begin{caveat}[What the evidence does \emph{not} establish]
 Confirmed effect sizes are modest (single-digit percentage points). \textbf{None} of the causal
 evidence is Saudi or Arabic --- external validity for Boon's context is a hypothesis to pilot, which is
-exactly why the holdout is built in. ``Two-way beats one-way'' and ``nudges survive at scale'' did not
+exactly why the rollout is pre-registered as a stepped wedge rather than assumed to transfer. ``Two-way beats one-way'' and ``nudges survive at scale'' did not
 survive verification and are treated as open.
 \end{caveat}
 
 \section{Results and how quality is measured}
 \begin{itemize}
 \item \textbf{Runs end-to-end}, one command, LLM on; committed \texttt{outputs/} (queue + Arabic drafts).
-\item \textbf{13/13 acceptance tests} pass --- the demo cast, including the two bug-fix guarantees (S051
-cannot be demoted; S145 never reads as a real failure).
-\item \textbf{LLM lift:} the notes re-prioritised \textbf{13 of 75} noted students vs.\ rules-only (5
-hidden crises surfaced, 8 failing/refused interventions escalated).
-\item \textbf{Note-reader accuracy vs.\ outcomes:} 100\% directional agreement (\(n=14\)).
-\item \textbf{Effectiveness:} 11\% re-engaged / 11\% declined / 13\% logged too late, of 75.
+\item \textbf{22/22 acceptance tests} pass --- the demo cast plus the system invariants: every
+quiz-failer leaves with a ready action; the cap binds only calls/1-on-1s; the faithfulness gate blocks
+unevidenced and fabricated claims; the Day-9 backtest stays predictive.
+\item \textbf{Ranking backtested:} scored on days 1--9 only (pre-quiz clock), the risk score ranks who
+actually failed Quiz 1 at \textbf{AUC 0.911} (precision@66 = 0.85).
+\item \textbf{LLM lift:} the notes changed the outcome for \textbf{18 of 75} noted students vs.\
+rules-only (9 escalated, 8 de-escalated to hand capacity back, 1 to human review).
+\item \textbf{Note-reader vs.\ human gold labels:} \(\kappa=0.82\), 88\% strict / 99\% lenient
+(\(n=75\), single-rater, codebook-adjudicated).
+\item \textbf{Contact outcomes (descriptive):} 11\% re-engaged / 11\% declined / 13\% logged too late,
+of 75 --- reported with its limitations (no control group; regression to the mean).
 \item \textbf{Faithfulness} (evidence must be a real substring) and \textbf{abstention} (low confidence
 $\rightarrow$ human) guard the AI; quality is reproducible (temp 0 + content-hash cache).
 \end{itemize}
@@ -425,15 +470,17 @@ $\rightarrow$ human) guard the AI; quality is reproducible (temp 0 + content-has
 \section{Limitations and what I would build next}
 \begin{caveat}
 The decision logic is tuned against a 200-student sample (it is both the design target and the test
-set); the \(n=14\) accuracy check is small; the effectiveness ``no-change'' bucket includes stable
-passing students, so the headline percentages are directional, not a clean trial; and the holdout is a
-\emph{mechanism} on a static snapshot, not yet a measured lift.
+set); the gold labels are single-rater (a second Arabic-speaking rater is the planned upgrade to true
+inter-rater \(\kappa\)); the effectiveness ``no-change'' bucket includes stable passing students, so
+those percentages are directional; and the causal designs (RD at the cutoff, stepped wedge) are
+pre-registered but unrun until Quiz-2 data exists.
 \end{caveat}
 \textbf{Next}, gated on richer data and scale: a per-student \emph{temporal narrative} (the shape of the
 decline, not a tier); \emph{knowledge tracing} to diagnose the specific concept a student fails (needs
 per-question data); a \emph{student-voice} two-way check-in; and a causal \emph{what-works-for-whom}
-loop (uplift / bandits) once volume justifies it. The single most important addition is turning the
-holdout into a live measurement of realised intervention lift --- moving the metric from
-\emph{attempted} to \emph{effective}.
+loop (uplift / bandits) once volume justifies it. The single most important addition is the one-field
+outcome log (``did the contact land?'') plus per-question quiz instrumentation --- moving the metric
+from \emph{attempted} to \emph{effective}, and the diagnosis from ``at risk'' to ``weak on
+quadratics''.
 
 \end{document}
