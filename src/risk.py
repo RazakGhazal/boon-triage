@@ -4,9 +4,11 @@ Deliberately simple and explainable (a facilitator must understand why a
 student is #1). No ML: 14 days, no labels. Each signal carries human-readable
 reasons that flow straight into the action queue.
 
-The four contributors (severity-ordered, no double counting):
+The five contributors (severity-ordered, no double counting):
   CLIFF   a strong attendant who collapsed to ~zero in the last days  (S023, S005)
   FAIL    failed Quiz 1                                               (S049, S199...)
+  ABSENT  skipped Quiz 1 — never a "failure", but never silently OK:
+          unexplained test avoidance is a classic disengagement flag  (S145)
   CHRONIC chronically low attendance, but never high (so not a cliff) (S199, S049)
   PRACTICE little sustained practice — median ignores cram spikes     (S051, S199)
 """
@@ -56,6 +58,11 @@ def assess(r: StudentRecord) -> Risk:
     if fail:
         score += 3
         reasons.append(f"failed Quiz 1 (scored {r.quiz_score} < {C.PASS_THRESHOLD})")
+    if r.absent_during_quiz:
+        score += 2
+        reasons.append(
+            "missed Quiz 1 (the '0' is an exam-day absence, not a real score) — verify why"
+        )
     if chronic:
         score += 2
         reasons.append(
@@ -68,12 +75,10 @@ def assess(r: StudentRecord) -> Risk:
             verb += f" (a {r.practice_max_day}-question cram day is not counted as engagement)"
         reasons.append(f"{verb} (median {r.practice_median:.0f} questions/day)")
 
-    if r.absent_during_quiz:
-        reasons.append("note: the Quiz-1 '0' is an exam-day absence, not a real failing score")
-
     return Risk(
         tier=_tier(score),
         score=score,
         reasons=reasons,
-        signals={"cliff": cliff, "fail": fail, "chronic_low_att": chronic, "low_practice": low_practice},
+        signals={"cliff": cliff, "fail": fail, "quiz_absent": r.absent_during_quiz,
+                 "chronic_low_att": chronic, "low_practice": low_practice},
     )

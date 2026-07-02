@@ -10,9 +10,12 @@ pipeline can trust the record:
   - blank session cells kept distinct from real 0.0 minutes
   - the recency window is computed relative to as_of_date, so trajectory/cliff
     detection works on any "today", not just the final day
+  - notes keep their DATES ([Day N] prefix) — a thread where "improving" came
+    before the collapse must not read like it came after
 """
 from __future__ import annotations
 
+import datetime as _dt
 import os
 import re
 import statistics
@@ -22,6 +25,12 @@ from typing import Optional
 import pandas as pd
 
 from . import config as C
+
+
+def _day_no(date_str: str) -> int:
+    """Program day number: Day 1 = the first program date."""
+    d0 = _dt.date.fromisoformat(C.PROGRAM_START) - _dt.timedelta(days=1)
+    return (_dt.date.fromisoformat(date_str) - d0).days
 
 
 # --------------------------------------------------------------------------- #
@@ -57,32 +66,23 @@ class StudentRecord:
     # trajectory (T)
     recent_cliff: bool
 
-    # notes
+    # notes — dated thread; contact recency drives the coverage KPI
     has_notes: bool
-    note_text_concat: str
+    note_text_concat: str         # "[Day N] text" per line, chronological
+    last_note_day: Optional[int]  # program-day of the latest note
+    contacted_since_quiz: bool    # any note on/after Quiz-1 day = post-quiz contact
 
-    # ---- the only thing the model ever sees ----
+    # ---- the only thing the model ever sees: the notes, nothing else ----
+    # No metrics in the payload. The extractor's state/evidence must come from
+    # the prose alone; if the numbers were included, "agreement with outcomes"
+    # would measure number-echoing, and the rules-vs-notes fusion would be
+    # fused twice (once inside the prompt, once in decide.py).
     def to_llm_payload(self) -> dict:
-        return {
-            "student_id": self.student_id,
-            "notes": self.note_text_concat,
-            "metrics": {
-                "learning_track": self.learning_track,
-                "attendance_recent_min": _r(self.attendance_recent_min),
-                "attendance_baseline_min": _r(self.attendance_baseline_min),
-                "practice_median_per_day": self.practice_median,
-                "quiz_score": self.quiz_score,
-                "quiz_taken": self.quiz_taken,
-                "absent_during_quiz": self.absent_during_quiz,
-                "quiz_failed": self.quiz_failed,
-                "attendance_collapsed_recently": self.recent_cliff,
-                "target_score_is_corrupt": self.target_corrupt,
-            },
-        }
+        return {"student_id": self.student_id, "notes": self.note_text_concat}
 
-
-def _r(x):
-    return None if x is None else round(x, 1)
+    @property
+    def first_name(self) -> str:
+        return (self.student_name or "").split(" ")[0] or "الطالب"
 
 
 # --------------------------------------------------------------------------- #
@@ -126,10 +126,11 @@ def load_records(data_dir: str = None, as_of_date: str = None) -> dict[str, Stud
     baseline = active - recent
     daily = daily[daily["date"].isin(active)]
 
-    # notes grouped by student_id ONLY
-    notes_by_id: dict[str, list] = {}
+    # notes grouped by student_id ONLY — clamp to the as_of horizon (no look-ahead), mirroring the daily/quiz guards
+    notes = notes[notes["date"] <= as_of_date].sort_values("date", kind="stable")
+    notes_by_id: dict[str, list] = {}  # sid -> [(date, text)] chronological
     for _, n in notes.iterrows():
-        notes_by_id.setdefault(n["student_id"], []).append(str(n["note_text"]))
+        notes_by_id.setdefault(n["student_id"], []).append((n["date"], str(n["note_text"])))
 
     records: dict[str, StudentRecord] = {}
     for _, m in meta.iterrows():
@@ -158,6 +159,10 @@ def load_records(data_dir: str = None, as_of_date: str = None) -> dict[str, Stud
         target_corrupt = _int(m.get("target_score"), 0) < C.CORRUPT_TARGET_THRESHOLD
         e164, phone_flag = normalize_phone(m.get("parent_phone"))
         nlist = notes_by_id.get(sid, [])
+        note_lines = [f"[Day {_day_no(d)}] {txt}" for d, txt in nlist]
+        last_note_day = _day_no(nlist[-1][0]) if nlist else None
+        quiz_happened = C.QUIZ1_DATE <= as_of_date
+        contacted_since_quiz = quiz_happened and bool(nlist) and nlist[-1][0] >= C.QUIZ1_DATE
 
         records[sid] = StudentRecord(
             student_id=sid,
@@ -179,7 +184,9 @@ def load_records(data_dir: str = None, as_of_date: str = None) -> dict[str, Stud
             quiz_failed=quiz_failed,
             recent_cliff=cliff,
             has_notes=len(nlist) > 0,
-            note_text_concat="\n".join(nlist),
+            note_text_concat="\n".join(note_lines),
+            last_note_day=last_note_day,
+            contacted_since_quiz=contacted_since_quiz,
         )
     return records
 

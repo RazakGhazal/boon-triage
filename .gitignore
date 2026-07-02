@@ -4,3 +4,9 @@ __pycache__/
 .venv/
 outputs/.cache/
 .DS_Store
+outputs/demo-live/
+.pytest_cache/
+docs/technical-report.toc
+docs/technical-report.aux
+docs/technical-report.log
+docs/technical-report.out

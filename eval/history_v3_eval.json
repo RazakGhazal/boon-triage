@@ -1,0 +1,125 @@
+{
+  "n_threads": 75,
+  "strict_agreement_pct": 80,
+  "lenient_agreement_pct": 89,
+  "cohen_kappa_state": 0.68,
+  "blocker_agreement_pct": 73,
+  "per_state": {
+    "none": {
+      "gold_n": 1,
+      "precision": 1.0,
+      "recall": 1.0
+    },
+    "improving": {
+      "gold_n": 14,
+      "precision": 1.0,
+      "recall": 1.0
+    },
+    "explained": {
+      "gold_n": 6,
+      "precision": 0.67,
+      "recall": 1.0
+    },
+    "needs_help": {
+      "gold_n": 38,
+      "precision": 0.74,
+      "recall": 0.92
+    },
+    "failing": {
+      "gold_n": 13,
+      "precision": 1.0,
+      "recall": 0.15
+    },
+    "refused": {
+      "gold_n": 3,
+      "precision": 1.0,
+      "recall": 0.67
+    }
+  },
+  "confusion_gold_to_pred": {
+    "failing": {
+      "needs_help": 11,
+      "failing": 2
+    },
+    "explained": {
+      "explained": 6
+    },
+    "improving": {
+      "improving": 14
+    },
+    "refused": {
+      "refused": 2,
+      "needs_help": 1
+    },
+    "needs_help": {
+      "explained": 3,
+      "needs_help": 35
+    },
+    "none": {
+      "none": 1
+    }
+  },
+  "guardrails": {
+    "faithfulness_gate_trips": 1,
+    "low_confidence_abstentions": 3
+  },
+  "disagreements": [
+    {
+      "student_id": "S004",
+      "gold": "failing",
+      "pred": "needs_help",
+      "confidence": "high",
+      "rationale": "Day 14: still the same, tried to reach the family with no result — attempted contact, no change"
+    },
+    {
+      "student_id": "S015",
+      "gold": "failing",
+      "pred": "needs_help",
+      "confidence": "high",
+      "rationale": "Talked to him about practice; Day 14 same 'understands in class' stance — guidance given, no change"
+    },
+    {
+      "student_id": "S023",
+      "gold": "failing",
+      "pred": "needs_help",
+      "confidence": "high",
+      "rationale": "88-scorer vanished; WhatsApp to parents unanswered — attempted contact failing"
+    },
+    {
+      "student_id": "S039",
+      "gold": "failing",
+      "pred": "needs_help",
+      "confidence": "high",
+      "rationale": "84-scorer stopped coming; WhatsApp undelivered, calls unanswered — contact attempts failing"
+    },
+    {
+      "student_id": "S041",
+      "gold": "needs_help",
+      "pred": "explained",
+      "confidence": "high",
+      "rationale": "Parents didn't know practice was required; explained — intervention landed, outcome still unobserved"
+    },
+    {
+      "student_id": "S042",
+      "gold": "refused",
+      "pred": "needs_help",
+      "confidence": "medium",
+      "rationale": "Sick week explained, but the LATEST decisive event is refusing offered extra help"
+    },
+    {
+      "student_id": "S101",
+      "gold": "failing",
+      "pred": "needs_help",
+      "confidence": "high",
+      "rationale": "Excellent student (84) suddenly vanished; calls unanswered"
+    },
+    {
+      "student_id": "S190",
+      "gold": "failing",
+      "pred": "needs_help",
+      "confidence": "high",
+      "rationale": "90→20 min collapse, unconvincing 'ما في شي', then gone; mother unreachable — urgent"
+    }
+  ],
+  "provenance": "gold labels drafted from notes only, before the v3 extractor ran (eval/CODEBOOK.md)"
+}

@@ -24,7 +24,11 @@ def _load_dotenv(path: str) -> None:
 _load_dotenv(os.path.join(_HERE, ".env"))
 
 # --- the case clock (Day 14; Quiz 1 = Day 10; Quiz 2 = Day 20) ---
+# NOTE for 100 campuses: this calendar becomes a per-campus data table (each
+# campus has its own quiz dates and active days); the pipeline already takes
+# every date from here, so the swap is confined to this block.
 AS_OF_DATE = os.environ.get("AS_OF_DATE", "2025-10-14")
+PROGRAM_START = "2025-10-01"   # Day 1
 QUIZ1_DATE = "2025-10-10"
 NEXT_QUIZ_DATE = "2025-10-20"
 
@@ -49,11 +53,11 @@ CLIFF_RECENT_MAX = 10      # "...then collapsed to near-zero in the last days"
 TIER_CUTOFFS = [(6, "Critical"), (4, "High"), (2, "Medium"), (0, "Low")]
 
 # --- product ---
-DEFAULT_CAPACITY = 8  # max actionable students surfaced per facilitator before Day 20
-
-# --- measurement (v2): an always-on holdout, randomized by FACILITATOR (cluster),
-#     so program lift can be measured and parents/facilitators talking can't leak treatment ---
-HOLDOUT_FRACTION = 0.15
+# Capacity bounds only the EXPENSIVE actions (calls, 1-on-1s). Drafted WhatsApp
+# messages cost ~1 minute to review+send, so they are never capped — otherwise a
+# facilitator with 16 quiz-failers (facilitator8) could mathematically never
+# reach the 80% intervention target under any ranking.
+DEFAULT_CAPACITY = 8  # max calls/1-on-1s surfaced per facilitator before Day 20
 
 # --- paths ---
 DATA_DIR = os.environ.get("DATA_DIR", os.path.join(_HERE, "data"))
@@ -63,4 +67,7 @@ CACHE_DIR = os.environ.get("CACHE_DIR", os.path.join(OUTPUT_DIR, ".cache"))
 # --- LLM (the note-reader; one swappable seam) ---
 GEMINI_API_KEY = os.environ.get("GEMINI_API_KEY", "")
 GEMINI_MODEL = os.environ.get("GEMINI_MODEL", "gemini-2.5-flash-lite")
-PROMPT_VERSION = "v2"  # bump to invalidate the content-hash cache (v2: facilitator-sent MSA message)
+# v3:   notes-only payload (no metrics), dated threads, blocker_type, evidence required
+# v3.1: eval-driven fix — the gold set caught failing-recall 0.15 (unreachable-parent
+#       dropouts read as needs_help); sharpened the failing definition + 1 few-shot
+PROMPT_VERSION = "v3.1"

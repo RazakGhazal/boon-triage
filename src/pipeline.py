@@ -1,15 +1,18 @@
 """Orchestrate: load -> assess (NEED) -> read notes (STATE) -> decide -> emit."""
 from __future__ import annotations
 
+import os
+
 from . import config as C
 from .ingest import load_records
-from .notes import extract_states, make_backend
+from .notes import NoteState, extract_states, make_backend
 from .output import build_queue, write_outputs
 from .risk import assess
 
 
 def run(use_llm: bool, as_of_date: str = None, capacity: int = None,
-        campus: str = None, use_cache: bool = True, write: bool = True) -> dict:
+        campus: str = None, use_cache: bool = True, write: bool = True,
+        invocation: str = None) -> dict:
     capacity = C.DEFAULT_CAPACITY if capacity is None else capacity
     as_of = as_of_date or C.AS_OF_DATE
     records = load_records(as_of_date=as_of)
@@ -20,7 +23,7 @@ def run(use_llm: bool, as_of_date: str = None, capacity: int = None,
     backend = make_backend(use_llm)
     states = extract_states(records, backend, use_cache=use_cache)
 
-    result = build_queue(records, risks, states, capacity, as_of)
+    result = build_queue(records, risks, states, capacity, as_of, invocation=invocation)
     result["summary"]["backend"] = backend.name
     if backend.name == "gemini":
         result["summary"]["model"] = C.GEMINI_MODEL
@@ -30,90 +33,82 @@ def run(use_llm: bool, as_of_date: str = None, capacity: int = None,
     return result
 
 
-def compute_lift(as_of_date: str = None, capacity: int = None) -> dict:
-    """How much the LLM's note-reading changes the queue vs rules-only.
-    Runs the decision layer with real note-states and with all-'none' states."""
+# --------------------------------------------------------------------------- #
+def _lift_vs_rules(records, risks, states, noted) -> dict:
+    """What the note-reading changed vs rules-only: run the decision layer with
+    the real note-states and with all-'none' states, diff the outcomes."""
     from .decide import decide
-    capacity = C.DEFAULT_CAPACITY if capacity is None else capacity
-    records = load_records(as_of_date=as_of_date)
-    risks = {sid: assess(r) for sid, r in records.items()}
-
-    states_on = extract_states(records, make_backend(True), use_cache=True)
-    states_off = extract_states(records, make_backend(False), use_cache=False)
-
-    noted = [sid for sid, r in records.items() if r.has_notes]
-    changed, examples = [], []
+    changed, examples, direction = [], [], {"escalated": 0, "de_escalated": 0, "review": 0}
+    order = ["Low", "Medium", "High", "Critical"]
     for sid in noted:
-        on = decide(records[sid], risks[sid], states_on[sid])
-        off = decide(records[sid], risks[sid], states_off[sid])
+        on = decide(records[sid], risks[sid], states[sid])
+        off = decide(records[sid], risks[sid], NoteState(student_id=sid))
         if on.priority != off.priority or on.lane != off.lane:
             changed.append(sid)
-            examples.append({"student_id": sid, "rules_only": f"{off.priority}/{off.lane}",
-                             "with_notes": f"{on.priority}/{on.lane}", "note_state": on.note_state})
+            if on.lane == "human_review":
+                direction["review"] += 1
+            elif order.index(on.priority) > order.index(off.priority):
+                direction["escalated"] += 1
+            else:
+                direction["de_escalated"] += 1
+            examples.append({
+                "student_id": sid, "quiz_failed": records[sid].quiz_failed,
+                "rules_only": f"{off.priority}/{off.lane}", "with_notes": f"{on.priority}/{on.lane}",
+                "note_state": on.note_state, "evidence_ar": states[sid].evidence,
+            })
     return {"noted_students": len(noted), "changed": len(changed),
-            "changed_ids": changed, "examples": examples}
+            "direction": direction, "examples": examples}
+
+
+def compute_lift(as_of_date: str = None, capacity: int = None) -> dict:
+    records = load_records(as_of_date=as_of_date)
+    risks = {sid: assess(r) for sid, r in records.items()}
+    states = extract_states(records, make_backend(True), use_cache=True)
+    noted = [sid for sid, r in records.items() if r.has_notes]
+    return _lift_vs_rules(records, risks, states, noted)
 
 
 # --------------------------------------------------------------------------- #
-# v2: the closed-loop action layer (effectiveness + fairness + holdout + escalation)
+# v2: the measurement & audit layer. No holdout — denying triage to a live
+# classroom is ethically wrong and statistically empty at this scale; the
+# causal designs live in docs/EVAL_PLAN.md (RD at the capacity cutoff, stepped-
+# wedge rollout). What v2 DOES claim is only what the data can support:
+# the measured KPI baseline, a Day-9 backtest, a gold-set extractor eval,
+# the notes' lift over rules-only, and honest descriptive effectiveness.
 # --------------------------------------------------------------------------- #
-def _holdout_facilitators(records, fraction):
-    """Hold out whole facilitators (clusters), deterministically, at least one."""
-    import hashlib
-    facs = sorted({r.facilitator_email for r in records.values()})
-    k = max(1, round(fraction * len(facs)))
-    ranked = sorted(facs, key=lambda f: int(hashlib.sha256(f.encode()).hexdigest(), 16))
-    return set(ranked[:k])
-
-
-def _llm_vs_outcome(states, outcomes):
-    """Data-grounded check on the note-reader: among students whose engagement
-    DECISIVELY moved (re-engaged or declined), did the LLM's read point the right
-    way? (no_change / too-late are excluded — they're not a directional test.)"""
-    rows, agree, total = [], 0, 0
-    for sid, o in outcomes.items():
-        if o.label not in ("re_engaged", "declined"):
-            continue
-        st = states.get(sid)
-        if not st:
-            continue
-        predicted = ("re_engaged" if st.state == "on_track"
-                     else "declined" if st.state in ("failing", "refused", "needs_help") else None)
-        if predicted is None:  # state == 'none' makes no directional claim
-            continue
-        total += 1
-        ok = predicted == o.label
-        agree += ok
-        rows.append({"student_id": sid, "llm_state": st.state, "outcome": o.label, "match": ok})
-    return {"n": total, "agreement_pct": round(100 * agree / total) if total else None, "rows": rows}
-
-
-def run_v2(use_llm: bool, as_of_date: str = None, capacity: int = None, use_cache: bool = True) -> dict:
-    from . import effectiveness, fairness, output_v2
+def run_v2(use_llm: bool, as_of_date: str = None, capacity: int = None,
+           use_cache: bool = True, invocation: str = None) -> dict:
+    from . import backtest, effectiveness, eval_extractor, fairness, output_v2
     capacity = C.DEFAULT_CAPACITY if capacity is None else capacity
     as_of = as_of_date or C.AS_OF_DATE
 
     records = load_records(as_of_date=as_of)
-    holdout_facs = _holdout_facilitators(records, C.HOLDOUT_FRACTION)
-    holdout_ids = {sid for sid, r in records.items() if r.facilitator_email in holdout_facs}
-    treatment = {sid: r for sid, r in records.items() if sid not in holdout_ids}
-
     risks = {sid: assess(r) for sid, r in records.items()}
     backend = make_backend(use_llm)
-    states = extract_states(records, backend, use_cache=use_cache)  # read all; effectiveness cross-tab needs them
+    states = extract_states(records, backend, use_cache=use_cache)
 
-    result = build_queue(treatment, {s: risks[s] for s in treatment},
-                         {s: states[s] for s in treatment}, capacity, as_of)
+    result = build_queue(records, risks, states, capacity, as_of, invocation=invocation)
     result["summary"]["backend"] = backend.name
+    if backend.name == "gemini":
+        result["summary"]["model"] = C.GEMINI_MODEL
     write_outputs(result)
 
     eff = effectiveness.assess(as_of_date=as_of)
     surfaced_ids = {r.student_id for r in result["surfaced"]}
     fair = fairness.audit(records, risks, surfaced_ids)
-    cross = _llm_vs_outcome(states, eff["outcomes"])
     escalate = sorted(sid for sid in surfaced_ids
                       if eff["outcomes"].get(sid) and eff["outcomes"][sid].label == "declined")
+    bt = backtest.run_backtest()
 
-    output_v2.write(result, eff, fair, cross, holdout_ids, escalate, as_of, capacity, backend.name)
-    return {"queue": result["summary"], "effectiveness": eff["summary"], "llm_vs_outcome": cross,
-            "fairness": fair, "holdout": len(holdout_ids), "escalate": escalate, "backend": backend.name}
+    ext = None
+    if backend.name == "gemini" and os.path.exists(eval_extractor.GOLD_PATH):
+        ext = eval_extractor.evaluate(states)
+        eval_extractor.write_report(ext)
+
+    noted = [sid for sid, r in records.items() if r.has_notes]
+    lift = _lift_vs_rules(records, risks, states, noted) if backend.name == "gemini" else None
+
+    output_v2.write(result, eff, fair, ext, bt, lift, escalate, as_of, capacity, backend.name)
+    return {"queue": result["summary"], "effectiveness": eff["summary"], "extractor_eval": ext,
+            "backtest": bt, "lift": lift, "fairness": fair, "escalate": escalate,
+            "backend": backend.name}

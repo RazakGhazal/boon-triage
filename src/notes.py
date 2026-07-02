@@ -20,17 +20,19 @@ from typing import Literal, Optional
 from . import config as C
 from .ingest import StudentRecord
 
-State = Literal["none", "on_track", "needs_help", "failing", "refused"]
+State = Literal["none", "improving", "explained", "needs_help", "failing", "refused"]
+Blocker = Literal["academic", "motivation", "family", "health", "logistics", "unknown"]
 
 
 @dataclass
 class NoteState:
     student_id: str
     state: str = "none"
+    blocker: str = "unknown"         # what stands in the way (academic/motivation/...)
     summary: str = ""
     root_cause: str = ""
     suggested_action: str = "none"   # call_parent | one_on_one | message | none
-    draft_message: str = ""          # short Arabic WhatsApp draft (LLM only)
+    draft_message: str = ""          # Arabic WhatsApp draft with a literal {name} placeholder
     evidence: str = ""               # exact Arabic span from a note
     concern: str = "neutral"         # low | neutral | worried | urgent
     confidence: str = "high"         # low | medium | high
@@ -38,53 +40,90 @@ class NoteState:
 
 
 # --------------------------------------------------------------------------- #
-SYSTEM_PROMPT = """You read a single Boon Academy facilitator's notes about ONE student.
-The notes are short, informal Saudi-dialect Arabic. The facilitator's job is to help
-failing students (call the parent, 1-on-1 tutoring, motivational messages).
+SYSTEM_PROMPT = """You read a single Boon Academy facilitator's note thread about ONE student.
+The notes are short, informal Saudi-dialect Arabic, in chronological order, each line
+prefixed [Day N]. Quiz 1 was Day 10; the next quiz is Day 20. The facilitator's job is
+to help failing students (call the parent, 1-on-1 tutoring, motivational messages).
 
-Your ONLY job is to report the STATE of any intervention — you do not score risk.
-Return JSON with these fields:
+You never see the attendance/quiz numbers — a rules engine scores those. Your ONLY job
+is to report what the PROSE says, weighting the most recent days. Return JSON:
 
-- state:
-    "on_track"   the student was struggling but is now improving, OR an intervention
-                 is clearly working / the trajectory is positive.
-    "failing"    an intervention was tried but is NOT working — parent or student
-                 unresponsive, problem worsening, facilitator worried/urgent.
-    "refused"    the parent or student declined help or pushed back.
-    "needs_help" the note reveals a real problem or crisis (academic, family,
-                 emotional) and the student needs attention, but no working
-                 intervention is in place yet.
-    "none"       purely descriptive/administrative, or no clear intervention signal.
-- summary: ONE plain sentence (English) — what is going on for this student.
-- root_cause: the underlying cause if stated (e.g. gaming, family issue, unaware of
-  program, lost motivation), else "".
+- state (as of the latest notes):
+    "improving"  was struggling but is now clearly better, OR an intervention is working.
+    "explained"  the problem (usually an absence) has a known, managed, likely temporary
+                 cause — illness, a family event — AND the parent is aware or was
+                 contacted. Monitoring is enough for now.
+    "needs_help" a real problem (academic, motivational, family, emotional) with no
+                 working intervention in place yet — including notes that only say
+                 "we must intervene".
+    "failing"    help WAS attempted and it is NOT working. This includes: a student who
+                 stopped coming while calls/WhatsApp to the parents go unanswered or
+                 undelivered (the contact channel itself is failing — needs escalation);
+                 and guidance that was given but behavior is unchanged ("لسا نفس الشي").
+    "refused"    the parent or student EXPLICITLY declined or pushed back on offered
+                 help (defensive parent, rejected offer, quit the program). A student
+                 merely not doing exercises is needs_help, not refused.
+    "none"       purely administrative or positive-only notes; nothing to act on.
+- blocker: what stands in the way — academic | motivation | family | health |
+  logistics | unknown. (Fear of hard questions / low confidence = motivation; a parent
+  unaware of the program = family; schedule/transport/night-shift issues = logistics.)
+- summary: ONE plain sentence (English) — what is going on right now.
+- root_cause: the specific cause if stated (e.g. "late-night gaming"), else "".
 - suggested_action: one of call_parent | one_on_one | message | none.
 - draft_message: a short WhatsApp message in SIMPLE, WARM Modern Standard Arabic (فصحى
-  مبسطة — never stiff/bureaucratic), addressed to the PARENT and sent BY the named
-  facilitator. It must: cite ONE specific fact about the student; be improvement-focused
-  (what to do next, not praise or blame); propose exactly ONE doable step (NEVER a meeting
-  or anything requiring scheduling); be 2-3 sentences. "" if no outreach is warranted.
+  مبسطة — never stiff/bureaucratic), addressed to the PARENT and sent BY the facilitator.
+  Refer to the student ONLY as {name} — a literal placeholder the system fills in later
+  (you are never given the real name). It must: cite ONE specific fact from the notes;
+  be improvement-focused (what to do next, not blame); propose exactly ONE doable step
+  (NEVER a meeting or anything requiring scheduling); be 2-3 sentences. "" if no
+  outreach is warranted.
 - evidence: copy an EXACT short Arabic span from the notes that justifies the state.
+  REQUIRED for every state except "none" — if you cannot point to a real span, the
+  state must be "none".
 - concern: low | neutral | worried | urgent (how worried the facilitator sounds).
 - confidence: low | medium | high. Use "low" when the notes are vague or you are guessing.
 
-Be faithful. Do not invent facts. If the notes are too vague to judge, say state="needs_help"
-or "none" with confidence="low" rather than guessing."""
+Be faithful. Do not invent facts. Vague worry with no clear picture = "needs_help"
+with confidence="low" rather than a guess."""
 
+# Few-shots are FICTIONAL threads (not students from the dataset) so the gold-set
+# evaluation in eval/ stays untouched by memorised examples.
 FEWSHOT = [
     (
-        'notes: "اتصلت مرتين على الام، ما ردت. قلقانه عليه. بدا باللعب وصار اسوأ"\nmetrics: quiz 85, attendance collapsed',
-        {"state": "failing", "summary": "Repeatedly contacted the mother about worsening gaming; no response.",
+        'notes:\n[Day 5] اتصلت على ام فهد بخصوص غيابه. قالت يسهر على الالعاب ووعدت تراقب الجوال\n'
+        '[Day 12] فهد لسا ما يجي. اتصلت مرتين على الام، ما ردت. قلقان عليه',
+        {"state": "failing", "blocker": "motivation",
+         "summary": "Contact about late-night gaming went nowhere; the mother has stopped answering and he is still absent.",
          "root_cause": "late-night gaming", "suggested_action": "call_parent",
-         "draft_message": "السلام عليكم، أحمد طالب قادر لكن حضوره ومذاكرته تراجعا هذا الأسبوع بسبب السهر على الألعاب. لو نتفق معه على وقت ثابت للنوم وإغلاق الألعاب قبله بساعة، نتوقّع تحسّنًا واضحًا قبل الاختبار القادم.",
-         "evidence": "ما ردت. قلقانه عليه", "concern": "urgent", "confidence": "high"},
+         "draft_message": "السلام عليكم، نفتقد {name} في الحصص هذه الأيام ويهمنا الاطمئنان. نعرف أن تنظيم وقت الألعاب ليس سهلًا، لكن الاتفاق على وقت ثابت لإغلاق الجهاز قبل النوم يصنع فرقًا واضحًا قبل الاختبار القادم — ونحن معكم خطوة بخطوة.",
+         "evidence": "اتصلت مرتين على الام، ما ردت", "concern": "urgent", "confidence": "high"},
     ),
     (
-        'notes: "تحول كبير! صار يحضر بانتظام، الاب صار متفاعل. قصة نجاح"\nmetrics: quiz 72, attendance rising',
-        {"state": "on_track", "summary": "Big turnaround after the father got involved; attending regularly now.",
-         "root_cause": "family was unaware of the program", "suggested_action": "message",
-         "draft_message": "ما شاء الله، يوسف تحسّن كثيرًا بعد متابعتكم — حضوره ومذاكرته في ارتفاع. تشجيعه على حل ١٠ أسئلة يوميًا سيثبّت هذا التقدّم قبل الاختبار.",
-         "evidence": "تحول كبير", "concern": "low", "confidence": "high"},
+        'notes:\n[Day 4] ريم تحضر كامل بس ما تحل تمارين. تواصلت مع امها - ما كانت تدري ان التمارين جزء اساسي من البرنامج\n'
+        '[Day 13] فرق واضح! ريم صارت تحل يوميا والام تتابع معها. قصة نجاح',
+        {"state": "improving", "blocker": "family",
+         "summary": "Big turnaround on daily practice after the mother learned it was required and got involved.",
+         "root_cause": "family was unaware practice is required", "suggested_action": "message",
+         "draft_message": "ما شاء الله، الفرق واضح منذ بدأتم المتابعة — {name} الآن على المسار الصحيح. تثبيت عادة 10 أسئلة يوميًا سيحافظ على هذا التقدّم قبل الاختبار القادم.",
+         "evidence": "فرق واضح!", "concern": "low", "confidence": "high"},
+    ),
+    (
+        'notes:\n[Day 13] سلطان جا ٢٠ دقيقة وطلع. اتصلت على ابوه - قال عنده حرارة\n'
+        '[Day 14] سلطان غايب اليوم. ابوه يقول يحتاج كم يوم راحة وبيرجع ان شاء الله',
+        {"state": "explained", "blocker": "health",
+         "summary": "Absent with a fever; the father is aware and expects him back after a few days of rest.",
+         "root_cause": "illness (fever)", "suggested_action": "message",
+         "draft_message": "السلام عليكم، نطمئن على صحة {name} ونتمنى الشفاء العاجل. لا داعي لأي قلق بخصوص الحصص — متى ما تحسّنت الحالة يسعدنا رجوع {name} بالتدريج، ونحن موجودون لأي مساعدة.",
+         "evidence": "يحتاج كم يوم راحة", "concern": "neutral", "confidence": "high"},
+    ),
+    (
+        'notes:\n[Day 12] رنا ما جت من يومين، وكانت من الممتازات\n'
+        '[Day 14] لسا غايبه. اتصلت على امها مرتين وارسلت واتساب، ما في رد. قلقانه',
+        {"state": "failing", "blocker": "unknown",
+         "summary": "A previously excellent student has vanished and the mother is not answering calls or WhatsApp.",
+         "root_cause": "", "suggested_action": "call_parent",
+         "draft_message": "السلام عليكم، نفتقد {name} في الحصص منذ يومين ويهمنا كثيرًا الاطمئنان أن كل شيء بخير. نرجو التكرم بالرد على هذه الرسالة أو تحديد وقت يناسبكم للاتصال — وجود {name} في حصة الغد يفرق كثيرًا قبل الاختبار القادم.",
+         "evidence": "اتصلت على امها مرتين وارسلت واتساب، ما في رد", "concern": "urgent", "confidence": "high"},
     ),
 ]
 
@@ -109,10 +148,11 @@ class GeminiBackend:
         self.model = model or C.GEMINI_MODEL
 
     def _schema(self):
-        from pydantic import BaseModel, Field
+        from pydantic import BaseModel
 
         class Extraction(BaseModel):
-            state: Literal["none", "on_track", "needs_help", "failing", "refused"]
+            state: State
+            blocker: Blocker = "unknown"
             summary: str
             root_cause: str = ""
             suggested_action: Literal["call_parent", "one_on_one", "message", "none"] = "none"
@@ -129,7 +169,7 @@ class GeminiBackend:
         shots = "\n\n".join(f"INPUT:\n{i}\nOUTPUT:\n{json.dumps(o, ensure_ascii=False)}" for i, o in FEWSHOT)
         user = (
             f"{shots}\n\nNow extract for this student.\nINPUT:\n"
-            f"notes:\n{payload['notes']}\nmetrics: {json.dumps(payload['metrics'], ensure_ascii=False)}\nOUTPUT:"
+            f"notes:\n{payload['notes']}\nOUTPUT:"
         )
         cfg = types.GenerateContentConfig(
             system_instruction=SYSTEM_PROMPT,
@@ -175,6 +215,8 @@ def extract_states(records: dict[str, StudentRecord], backend, use_cache: bool =
     unavailable: list[str] = []
     use_cache = use_cache and getattr(backend, "name", "") != "no-llm"  # rules-only is free; don't cache it
     os.makedirs(C.CACHE_DIR, exist_ok=True)
+    is_gemini = getattr(backend, "name", "") == "gemini"
+    live_n = 0  # notes actually sent to the LLM this run (cache misses) — for visible progress
 
     for sid, r in records.items():
         if not r.has_notes:
@@ -183,12 +225,14 @@ def extract_states(records: dict[str, StudentRecord], backend, use_cache: bool =
 
         payload = r.to_llm_payload()
         raw: Optional[dict] = None
+        was_live = False
         cache_path = os.path.join(C.CACHE_DIR, f"{backend.name}_{_cache_key(payload)}.json")
         if use_cache and os.path.exists(cache_path):
             raw = json.load(open(cache_path, encoding="utf-8"))
         if raw is None:
             try:
                 raw = backend.extract(payload)
+                was_live = True
             except Exception:  # persistent transient failure — rules-only for this student, don't cache
                 unavailable.append(sid)
                 states[sid] = NoteState(student_id=sid, state="none", confidence="low",
@@ -200,6 +244,7 @@ def extract_states(records: dict[str, StudentRecord], backend, use_cache: bool =
         ns = NoteState(
             student_id=sid,
             state=raw.get("state", "none"),
+            blocker=raw.get("blocker", "unknown"),
             summary=raw.get("summary", ""),
             root_cause=raw.get("root_cause", ""),
             suggested_action=raw.get("suggested_action", "none"),
@@ -208,12 +253,17 @@ def extract_states(records: dict[str, StudentRecord], backend, use_cache: bool =
             concern=raw.get("concern", "neutral"),
             confidence=raw.get("confidence", "medium"),
         )
-        # faithfulness gate: a fabricated quote is downgraded, never trusted
-        if ns.state != "none" and ns.evidence and not _faithful(ns.evidence, r.note_text_concat):
+        # faithfulness gate: a non-'none' state MUST be backed by a verbatim span from a real
+        # note. A fabricated OR MISSING quote is downgraded to low-confidence (→ review lane),
+        # never trusted — so "every claim is grounded in a real Arabic span" is actually true.
+        if ns.state != "none" and not (ns.evidence and _faithful(ns.evidence, r.note_text_concat)):
             ns.faithful = False
             ns.evidence = ""
             ns.confidence = "low"
         states[sid] = ns
+        if was_live and is_gemini:  # only real LLM calls print; a warm cache stays silent & instant
+            live_n += 1
+            print(f"  · [{live_n:>2}] {sid}  Arabic note → {ns.state}", flush=True)
     if unavailable:
         print(f"  [note-reader] {len(unavailable)} students fell back to rules-only this run "
               f"(service busy); re-run to fill them from cache.")

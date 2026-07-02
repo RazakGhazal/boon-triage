@@ -1,14 +1,19 @@
-"""Retrospective intervention effectiveness — the 'attempted vs effective' gap, MEASURED.
+"""Retrospective look at logged contacts — DESCRIPTIVE, not causal.
 
-The research's loudest lesson: systems log that an intervention was *attempted*
-(a note) but never check whether it *worked*. We can, from the data we already
-have. Every facilitator note is a dated intervention; we look at what the
-student's engagement did afterward (the re-engagement surrogate) and label each
-past intervention re-engaged / no-change / declined / logged-too-late.
+Every facilitator note is a dated contact; we look at what the student's
+engagement did afterward and label each thread re-engaged / no-change /
+declined / logged-too-late. What this supports: "from current logs we cannot
+even tell whether contact works" — the argument for the one-field outcome log.
 
-This turns the dataset into a measured study of which interventions actually
-re-engage students — and (cross-tabbed with the LLM's read) gives a data-derived
-check on whether the note-reader's state labels match real outcomes.
+What it does NOT support: any causal claim about contact effectiveness. Named
+limitations, reported alongside the numbers:
+  - no control group (the 125 un-noted students are never measured)
+  - regression to the mean: notes are written at dips, and dips revert — the
+    post-note movement would look positive even if contact did nothing
+  - "first note = the intervention" is a proxy: some notes are observations,
+    58/75 threads have several notes, and an early first note leaves a
+    days-thin pre-window
+  - the post window is the last 2 active days — one absence swings the label
 
 Pure data; no LLM. Independent of risk/notes so it can be audited on its own.
 """
@@ -35,8 +40,9 @@ class Outcome:
     label: str  # re_engaged | no_change | declined | logged_too_late
 
 
-# thresholds for the re-engagement surrogate (validated against the cast below)
-_ATT_RISE, _ATT_DROP = 8.0, 12.0     # minutes/session change that counts as a real move
+# thresholds for the re-engagement surrogate — SYMMETRIC on purpose: an easier
+# bar for "re-engaged" than for "declined" would put a thumb on the scale
+_ATT_RISE, _ATT_DROP = 10.0, 10.0    # minutes/session change that counts as a real move
 _PRAC_RISE, _PRAC_DROP = 4.0, 4.0    # questions/day change
 
 
@@ -116,9 +122,14 @@ def _summarize(outcomes: dict) -> dict:
     n = len(outcomes) or 1
     measurable = sum(v for k, v in c.items() if k != "logged_too_late") or 1
     return {
-        "students_with_logged_intervention": len(outcomes),
+        "students_with_logged_contact": len(outcomes),
         "by_outcome": dict(c),
         "logged_too_late_pct": round(100 * c.get("logged_too_late", 0) / n),
         "re_engaged_pct_of_measurable": round(100 * c.get("re_engaged", 0) / measurable),
         "still_declining_pct_of_measurable": round(100 * c.get("declined", 0) / measurable),
+        "caveats": [
+            "descriptive only — no control group; the 125 un-noted students are never measured",
+            "regression to the mean: notes are written at dips, and dips revert",
+            "'first note = intervention' is a proxy; many notes are observations",
+        ],
     }
