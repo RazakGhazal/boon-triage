@@ -28,7 +28,7 @@ layer) · `--lift` · `--backtest` · `--eval-extractor`.
 | `config.py` | All constants — the case calendar, thresholds, capacity, model. Loads `.env`. (At 100 campuses the calendar becomes a per-campus data table; every date already flows from here.) |
 | `ingest.py` | CSVs → `StudentRecord`. Every data trap handled once; notes kept **dated**; `to_llm_payload()` = notes only — no metrics, no PII. |
 | `risk.py` | NEED — transparent score: attendance, median practice, quiz, **quiz absence**, trajectory-cliff. |
-| `notes.py` | STATE — Gemini/NoLLM backends read each thread into state + blocker; evidence-required faithfulness gate; abstention; content-hash cache keyed by prompt version. |
+| `notes.py` | STATE — Gemini/NoLLM backends read each thread into state + blocker; evidence-required faithfulness gate; abstention; content-hash cache keyed by prompt version; cache misses fan out over a thread pool (`--workers`, default 4) — the batch is embarrassingly parallel, which is the 5k-student scale story. |
 | `drafts.py` | Deterministic Arabic template drafts (gender-safe MSA) for the un-noted majority — the cheap intervention is never blocked on note coverage. |
 | `decide.py` | Fusion, 3 rule families: escalate failing/refused · de-escalate improving/explained (with metric + confidence guards) · human-review the ambiguous. |
 | `output.py` | The product: two-tier per-facilitator queue with KPI counters, contact logging (localStorage + CSV export), `queue.csv/json`, `run_log.json` (stamps the invocation). |

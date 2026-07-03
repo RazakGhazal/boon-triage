@@ -210,64 +210,87 @@ def _faithful(evidence: str, note_text: str) -> bool:
     return bool(e) and e in _norm(note_text)
 
 
-def extract_states(records: dict[str, StudentRecord], backend, use_cache: bool = True) -> dict[str, NoteState]:
+def _to_state(sid: str, raw: dict, r: StudentRecord) -> NoteState:
+    ns = NoteState(
+        student_id=sid,
+        state=raw.get("state", "none"),
+        blocker=raw.get("blocker", "unknown"),
+        summary=raw.get("summary", ""),
+        root_cause=raw.get("root_cause", ""),
+        suggested_action=raw.get("suggested_action", "none"),
+        draft_message=raw.get("draft_message", ""),
+        evidence=raw.get("evidence", ""),
+        concern=raw.get("concern", "neutral"),
+        confidence=raw.get("confidence", "medium"),
+    )
+    # faithfulness gate: a non-'none' state MUST be backed by a verbatim span from a real
+    # note. A fabricated OR MISSING quote is downgraded to low-confidence (→ review lane),
+    # never trusted — so "every claim is grounded in a real Arabic span" is actually true.
+    if ns.state != "none" and not (ns.evidence and _faithful(ns.evidence, r.note_text_concat)):
+        ns.faithful = False
+        ns.evidence = ""
+        ns.confidence = "low"
+    return ns
+
+
+def extract_states(records: dict[str, StudentRecord], backend, use_cache: bool = True,
+                   workers: int = 4) -> dict[str, NoteState]:
+    """Read every noted student's thread. Cache hits are instant; cache misses go to
+    the API through a small thread pool — each thread is one independent HTTP call
+    (the batch is embarrassingly parallel; at 5k students this is the scale story).
+    workers=1 keeps the strictly ordered one-by-one stream for the live demo."""
+    from concurrent.futures import ThreadPoolExecutor, as_completed
+
     states: dict[str, NoteState] = {}
     unavailable: list[str] = []
     use_cache = use_cache and getattr(backend, "name", "") != "no-llm"  # rules-only is free; don't cache it
     os.makedirs(C.CACHE_DIR, exist_ok=True)
     is_gemini = getattr(backend, "name", "") == "gemini"
-    live_n = 0  # notes actually sent to the LLM this run (cache misses) — for visible progress
 
+    # pass 1 (sequential, instant): no-notes students + warm cache
+    misses: list[str] = []
     for sid, r in records.items():
         if not r.has_notes:
             states[sid] = NoteState(student_id=sid, state="none", confidence="high")
             continue
-
-        payload = r.to_llm_payload()
-        raw: Optional[dict] = None
-        was_live = False
-        cache_path = os.path.join(C.CACHE_DIR, f"{backend.name}_{_cache_key(payload)}.json")
+        cache_path = os.path.join(C.CACHE_DIR, f"{backend.name}_{_cache_key(r.to_llm_payload())}.json")
         if use_cache and os.path.exists(cache_path):
-            raw = json.load(open(cache_path, encoding="utf-8"))
-        if raw is None:
-            try:
-                raw = backend.extract(payload)
-                was_live = True
-            except Exception:  # persistent transient failure — rules-only for this student, don't cache
+            states[sid] = _to_state(sid, json.load(open(cache_path, encoding="utf-8")), r)
+        else:
+            misses.append(sid)
+
+    # pass 2 (parallel): live API calls for the misses. The worker never raises —
+    # it returns (sid, None) on persistent failure so the failure stays attached
+    # to the right student.
+    def _fetch(sid: str):
+        try:
+            return sid, backend.extract(records[sid].to_llm_payload())
+        except Exception:
+            return sid, None
+
+    live_n = 0
+    with ThreadPoolExecutor(max_workers=max(1, workers)) as pool:
+        futures = [pool.submit(_fetch, sid) for sid in misses]
+        for fut in as_completed(futures):
+            sid, raw = fut.result()
+            if raw is None:  # persistent failure — rules-only for this student, don't cache
                 unavailable.append(sid)
                 states[sid] = NoteState(student_id=sid, state="none", confidence="low",
                                         summary="(note-read unavailable this run — service busy)")
                 continue
             if use_cache:
+                cache_path = os.path.join(
+                    C.CACHE_DIR, f"{backend.name}_{_cache_key(records[sid].to_llm_payload())}.json")
                 json.dump(raw, open(cache_path, "w", encoding="utf-8"), ensure_ascii=False)
+            states[sid] = _to_state(sid, raw, records[sid])
+            if is_gemini:  # only real LLM calls print; a warm cache stays silent & instant
+                live_n += 1
+                print(f"  · [{live_n:>2}] {sid}  Arabic note → {states[sid].state}", flush=True)
 
-        ns = NoteState(
-            student_id=sid,
-            state=raw.get("state", "none"),
-            blocker=raw.get("blocker", "unknown"),
-            summary=raw.get("summary", ""),
-            root_cause=raw.get("root_cause", ""),
-            suggested_action=raw.get("suggested_action", "none"),
-            draft_message=raw.get("draft_message", ""),
-            evidence=raw.get("evidence", ""),
-            concern=raw.get("concern", "neutral"),
-            confidence=raw.get("confidence", "medium"),
-        )
-        # faithfulness gate: a non-'none' state MUST be backed by a verbatim span from a real
-        # note. A fabricated OR MISSING quote is downgraded to low-confidence (→ review lane),
-        # never trusted — so "every claim is grounded in a real Arabic span" is actually true.
-        if ns.state != "none" and not (ns.evidence and _faithful(ns.evidence, r.note_text_concat)):
-            ns.faithful = False
-            ns.evidence = ""
-            ns.confidence = "low"
-        states[sid] = ns
-        if was_live and is_gemini:  # only real LLM calls print; a warm cache stays silent & instant
-            live_n += 1
-            print(f"  · [{live_n:>2}] {sid}  Arabic note → {ns.state}", flush=True)
     if unavailable:
         print(f"  [note-reader] {len(unavailable)} students fell back to rules-only this run "
               f"(service busy); re-run to fill them from cache.")
-    return states
+    return {sid: states[sid] for sid in records if sid in states}
 
 
 def make_backend(use_llm: bool):

@@ -12,7 +12,7 @@ from .risk import assess
 
 def run(use_llm: bool, as_of_date: str = None, capacity: int = None,
         campus: str = None, use_cache: bool = True, write: bool = True,
-        invocation: str = None) -> dict:
+        invocation: str = None, workers: int = 4) -> dict:
     capacity = C.DEFAULT_CAPACITY if capacity is None else capacity
     as_of = as_of_date or C.AS_OF_DATE
     records = load_records(as_of_date=as_of)
@@ -21,7 +21,7 @@ def run(use_llm: bool, as_of_date: str = None, capacity: int = None,
 
     risks = {sid: assess(r) for sid, r in records.items()}
     backend = make_backend(use_llm)
-    states = extract_states(records, backend, use_cache=use_cache)
+    states = extract_states(records, backend, use_cache=use_cache, workers=workers)
 
     result = build_queue(records, risks, states, capacity, as_of, invocation=invocation)
     result["summary"]["backend"] = backend.name
@@ -63,10 +63,10 @@ def _lift_vs_rules(records, risks, states, noted) -> dict:
             "direction": direction, "examples": examples}
 
 
-def compute_lift(as_of_date: str = None, capacity: int = None) -> dict:
+def compute_lift(as_of_date: str = None, capacity: int = None, workers: int = 4) -> dict:
     records = load_records(as_of_date=as_of_date)
     risks = {sid: assess(r) for sid, r in records.items()}
-    states = extract_states(records, make_backend(True), use_cache=True)
+    states = extract_states(records, make_backend(True), use_cache=True, workers=workers)
     noted = [sid for sid, r in records.items() if r.has_notes]
     return _lift_vs_rules(records, risks, states, noted)
 
@@ -80,7 +80,7 @@ def compute_lift(as_of_date: str = None, capacity: int = None) -> dict:
 # the notes' lift over rules-only, and honest descriptive effectiveness.
 # --------------------------------------------------------------------------- #
 def run_v2(use_llm: bool, as_of_date: str = None, capacity: int = None,
-           use_cache: bool = True, invocation: str = None) -> dict:
+           use_cache: bool = True, invocation: str = None, workers: int = 4) -> dict:
     from . import backtest, effectiveness, eval_extractor, fairness, output_v2
     capacity = C.DEFAULT_CAPACITY if capacity is None else capacity
     as_of = as_of_date or C.AS_OF_DATE
@@ -88,7 +88,7 @@ def run_v2(use_llm: bool, as_of_date: str = None, capacity: int = None,
     records = load_records(as_of_date=as_of)
     risks = {sid: assess(r) for sid, r in records.items()}
     backend = make_backend(use_llm)
-    states = extract_states(records, backend, use_cache=use_cache)
+    states = extract_states(records, backend, use_cache=use_cache, workers=workers)
 
     result = build_queue(records, risks, states, capacity, as_of, invocation=invocation)
     result["summary"]["backend"] = backend.name

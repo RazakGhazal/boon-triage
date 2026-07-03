@@ -26,7 +26,7 @@ echo "own Arabic notes — and nobody reads both together."
 step "Watch Gemini READ the notes, live  (real API calls, one campus)"
 echo "Fresh cache in outputs/demo-live — every call below is genuine, not replayed…"
 sleep 1
-$PY main.py --campus C01                       # streams:  · [n] Sxxx  Arabic note → state
+$PY main.py --campus C01 --workers 2           # streams:  · [n] Sxxx  Arabic note → state
 
 step "The product a facilitator opens Monday morning"
 echo "→ outputs/demo-live/action_queue.html"

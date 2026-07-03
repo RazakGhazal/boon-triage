@@ -25,6 +25,8 @@ def main():
     p.add_argument("--capacity", type=int, default=C.DEFAULT_CAPACITY,
                    help="max calls/1-on-1s per facilitator (messages are never capped)")
     p.add_argument("--campus", default=None, help="restrict to one campus_id")
+    p.add_argument("--workers", type=int, default=4,
+                   help="parallel note-reader calls (1 = ordered one-by-one stream for demos)")
     p.add_argument("--lift", action="store_true", help="report the note-reader's lift vs rules-only and exit")
     p.add_argument("--backtest", action="store_true", help="Day-9 ranking backtest vs Quiz-1 outcomes and exit")
     p.add_argument("--eval-extractor", action="store_true", help="gold-set eval of the note-reader and exit")
@@ -46,7 +48,7 @@ def main():
         from src.ingest import load_records
         from src.notes import extract_states, make_backend
         records = load_records(as_of_date=args.as_of_date)
-        states = extract_states(records, make_backend(True), use_cache=True)
+        states = extract_states(records, make_backend(True), use_cache=True, workers=args.workers)
         rep = evaluate(states)
         path = write_report(rep)
         print(f"\nExtractor vs {rep['n_threads']} gold-labeled threads: "
@@ -57,7 +59,7 @@ def main():
         return
 
     if args.lift:
-        rep = compute_lift(args.as_of_date, args.capacity)
+        rep = compute_lift(args.as_of_date, args.capacity, workers=args.workers)
         d = rep["direction"]
         print(f"\nNote-reader lift: the notes changed the queue for "
               f"{rep['changed']} of {rep['noted_students']} noted students "
@@ -68,7 +70,7 @@ def main():
 
     if args.v2:
         rep = run_v2(use_llm=not args.no_llm, as_of_date=args.as_of_date,
-                     capacity=args.capacity, invocation=INVOCATION)
+                     capacity=args.capacity, invocation=INVOCATION, workers=args.workers)
         s, e = rep["queue"], rep["effectiveness"]
         print(f"\nBoon Academy v2 — backend: {rep['backend']} · as of {args.as_of_date}")
         print(f"  KPI: {s['failers_contacted_since_quiz']}/{s['failers_total']} failers contacted since "
@@ -91,7 +93,8 @@ def main():
         return
 
     result = run(use_llm=not args.no_llm, as_of_date=args.as_of_date,
-                 capacity=args.capacity, campus=args.campus, invocation=INVOCATION)
+                 capacity=args.capacity, campus=args.campus, invocation=INVOCATION,
+                 workers=args.workers)
     s = result["summary"]
     print(f"\nBoon Academy triage — backend: {result['backend']} · as of {s['as_of_date']}")
     print(f"  {s['students_total']} students -> {s['priority_actions']} calls/1-on-1s, "
