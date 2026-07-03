@@ -9,7 +9,7 @@ score risk from the numbers (Day-9 backtest: **AUC 0.91**); Gemini reads each no
 into a structured state (**κ=0.80** vs 75 human gold labels); a 3-family fusion corrects
 where they disagree. Every claim quotes a verbatim Arabic span or goes to human review.
 
-📹 **Video walkthrough:** `<ADD LOOM LINK>`
+📹 **Video walkthrough:** https://www.loom.com/share/733df3dc2aa54c1ab5267ac647ffb386
 
 ## Run
     make setup                  # install deps
