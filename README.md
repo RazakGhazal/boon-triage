@@ -22,8 +22,8 @@ where they disagree. Every claim quotes a verbatim Arabic span or goes to human 
     make test                   # 22 acceptance tests
 
 ## Outputs (outputs/)
-`action_queue.html` (the product — open it, mark contacts, export the log) · `queue.csv/json`
-· `v2_report.md` · `extractor_eval.json` · `backtest_day9.json` · effectiveness/fairness/lift.
+`action_queue.html` (the product) · `notes_lift.html` (with vs without the LLM, side by side)
+· `queue.csv/json` · `v2_report.md` · `extractor_eval.json` · `backtest_day9.json` · audits.
 
 ## Docs
 [ARCHITECTURE](docs/ARCHITECTURE.md) · [MODEL_CARD](docs/MODEL_CARD.md) ·

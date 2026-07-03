@@ -53,8 +53,11 @@ def _lift_vs_rules(records, risks, states, noted) -> dict:
                 direction["de_escalated"] += 1
             examples.append({
                 "student_id": sid, "quiz_failed": records[sid].quiz_failed,
+                "rules_only_priority": off.priority, "rules_only_lane": off.lane,
+                "with_notes_priority": on.priority, "with_notes_lane": on.lane,
                 "rules_only": f"{off.priority}/{off.lane}", "with_notes": f"{on.priority}/{on.lane}",
-                "note_state": on.note_state, "evidence_ar": states[sid].evidence,
+                "note_state": on.note_state, "blocker": on.blocker,
+                "summary": states[sid].summary, "evidence_ar": states[sid].evidence,
             })
     return {"noted_students": len(noted), "changed": len(changed),
             "direction": direction, "examples": examples}
