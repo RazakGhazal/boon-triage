@@ -131,8 +131,12 @@ def decide(r: StudentRecord, risk: Risk, ns: NoteState) -> ActionRow:
         action = "message"
 
     # draft: the LLM's (from the notes) if there is one, else a template from the
-    # metrics — every surfaced student leaves with a ready message, not homework
-    draft = (ns.draft_message or "").replace("{name}", r.first_name)
+    # metrics — every surfaced student leaves with a ready message, not homework.
+    # The LLM must write around the {name} placeholder; a draft that names anyone
+    # directly copied a name from the notes — possibly the WRONG child (the
+    # name-mismatch trap) — so it is discarded for the gender-safe template.
+    raw_draft = ns.draft_message or ""
+    draft = raw_draft.replace("{name}", r.first_name) if "{name}" in raw_draft else ""
     if not draft and surfaced and lane != "human_review":
         draft = template_draft(r, risk, s)
 

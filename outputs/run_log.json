@@ -1,6 +1,6 @@
 {
   "as_of_date": "2025-10-14",
-  "invocation": "python main.py --v2",
+  "invocation": "python main.py --v2 --workers 8",
   "capacity_per_facilitator": 8,
   "students_total": 200,
   "students_surfaced": 79,
@@ -10,9 +10,9 @@
   "human_review": 1,
   "call_waitlist": 10,
   "by_priority": {
-    "Critical": 39,
-    "High": 21,
-    "Medium": 19
+    "Critical": 38,
+    "High": 20,
+    "Medium": 21
   },
   "failers_total": 66,
   "failers_with_action_today": 66,
@@ -56,8 +56,8 @@
       "students": 20,
       "failers": 5,
       "failers_reached_since_quiz": 1,
-      "priority": 7,
-      "messages": 1,
+      "priority": 8,
+      "messages": 0,
       "review": 0
     },
     "facilitator7@noon.com": {
@@ -80,8 +80,8 @@
       "students": 20,
       "failers": 6,
       "failers_reached_since_quiz": 4,
-      "priority": 7,
-      "messages": 2,
+      "priority": 6,
+      "messages": 3,
       "review": 1
     }
   },

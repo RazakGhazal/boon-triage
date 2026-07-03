@@ -2,8 +2,8 @@
   "noted_students": 75,
   "changed": 18,
   "direction": {
-    "escalated": 9,
-    "de_escalated": 8,
+    "escalated": 8,
+    "de_escalated": 9,
     "review": 1
   },
   "examples": [
@@ -18,7 +18,7 @@
       "with_notes": "Critical/queue",
       "note_state": "failing",
       "blocker": "unknown",
-      "summary": "Ahmed's poor attendance and lack of practice continue, and attempts to contact his parents have been unsuccessful.",
+      "summary": "Student's poor attendance and lack of practice persist despite attempts to contact the parents, who have been unreachable.",
       "evidence_ar": "احمد لسا على نفس الوضع. حاولت اتواصل مع الاهل بدون نتيجة"
     },
     {
@@ -32,7 +32,7 @@
       "with_notes": "Low/leave_alone",
       "note_state": "explained",
       "blocker": "family",
-      "summary": "Fatima left class early due to a family issue and will return next week; her father is aware.",
+      "summary": "The student left class early due to a family issue and will be absent for a week, with the father aware.",
       "evidence_ar": "قال في مشكله عائليه - راح ترجع الاسبوع الجاي ان شاء الله"
     },
     {
@@ -46,7 +46,7 @@
       "with_notes": "High/queue",
       "note_state": "refused",
       "blocker": "motivation",
-      "summary": "The student attends but refuses to do exercises, and the parent is defensive and uncooperative, blocking any help.",
+      "summary": "The student attends but refuses to do exercises, and the mother is defensive and uncooperative, blocking any help.",
       "evidence_ar": "الام كانت دفاعية: 'هي تحضر الحصص، ايش اكثر من كذا تبون؟' مو متعاونه"
     },
     {
@@ -54,14 +54,14 @@
       "quiz_failed": true,
       "rules_only_priority": "Critical",
       "rules_only_lane": "queue",
-      "with_notes_priority": "Critical",
-      "with_notes_lane": "human_review",
+      "with_notes_priority": "Medium",
+      "with_notes_lane": "queue",
       "rules_only": "Critical/queue",
-      "with_notes": "Critical/human_review",
+      "with_notes": "Medium/queue",
       "note_state": "explained",
       "blocker": "family",
-      "summary": "The father was unaware of the program until recently, which impacted the student's participation and performance; he is now aware and wants the student to continue.",
-      "evidence_ar": ""
+      "summary": "The father was unaware of the program, which impacted the student's performance, but he wants the student to continue.",
+      "evidence_ar": "ما كان يدري عن البرنامج اصلاً!"
     },
     {
       "student_id": "S013",
@@ -69,13 +69,13 @@
       "rules_only_priority": "Low",
       "rules_only_lane": "leave_alone",
       "with_notes_priority": "Medium",
-      "with_notes_lane": "queue",
+      "with_notes_lane": "human_review",
       "rules_only": "Low/leave_alone",
-      "with_notes": "Medium/queue",
+      "with_notes": "Medium/human_review",
       "note_state": "needs_help",
       "blocker": "motivation",
-      "summary": "The student appears distracted and is leaving sessions early, but denies any specific problem when asked.",
-      "evidence_ar": "نور شكلها مشغولة البال. جت ٥٠ دقيقة بس اليوم، عادة تجي كامل الحصة"
+      "summary": "The student is leaving class early and seems distracted and uncomfortable, but is not disclosing a specific reason.",
+      "evidence_ar": ""
     },
     {
       "student_id": "S017",
@@ -88,8 +88,8 @@
       "with_notes": "Medium/queue",
       "note_state": "needs_help",
       "blocker": "family",
-      "summary": "Amal is experiencing family issues causing emotional distress, but she is still attending classes and showing resilience.",
-      "evidence_ar": "امل محتاجه دعم عاطفي. المشاكل العائلية اثرت عليها بس لسا محافظه على الحضور."
+      "summary": "The student is experiencing family issues causing emotional distress, but is still attending classes and showing resilience.",
+      "evidence_ar": "امل محتاجه دعم عاطفي. المشاكل العائلية اثرت عليها بس لسا محافظه على الحضور"
     },
     {
       "student_id": "S028",
@@ -102,7 +102,7 @@
       "with_notes": "Low/leave_alone",
       "note_state": "explained",
       "blocker": "health",
-      "summary": "The student is attending for short periods due to illness, and her mother is aware and has been contacted.",
+      "summary": "The student is attending but leaving early due to illness, and her mother is aware and has been contacted.",
       "evidence_ar": "مريم تعبانه بس تصر تحضر"
     },
     {
@@ -116,21 +116,21 @@
       "with_notes": "Medium/queue",
       "note_state": "needs_help",
       "blocker": "motivation",
-      "summary": "The student attends regularly but does not complete exercises, believing attendance is sufficient, a pattern that needs addressing.",
-      "evidence_ar": "حسن يحضر دايم بس ما يتمرن. نفس مشكلة خالد - يفكر الحضور كافي"
+      "summary": "The student attends regularly but does not complete exercises, believing attendance is sufficient.",
+      "evidence_ar": "حسن يحضر دايم بس ما يتمرن"
     },
     {
       "student_id": "S042",
       "quiz_failed": false,
       "rules_only_priority": "Low",
       "rules_only_lane": "leave_alone",
-      "with_notes_priority": "High",
+      "with_notes_priority": "Medium",
       "with_notes_lane": "queue",
       "rules_only": "Low/leave_alone",
-      "with_notes": "High/queue",
-      "note_state": "refused",
+      "with_notes": "Medium/queue",
+      "note_state": "needs_help",
       "blocker": "motivation",
-      "summary": "Fatima returned after illness but refused extra help, and is still distracted during class.",
+      "summary": "The student returned after an illness but seems distracted and refused extra help.",
       "evidence_ar": "عرضت عليها مساعده اضافية بعد الحصة، رفضت"
     },
     {
@@ -144,8 +144,8 @@
       "with_notes": "Low/leave_alone",
       "note_state": "explained",
       "blocker": "health",
-      "summary": "Leila has been leaving class early for two days due to feeling unwell, possibly illness.",
-      "evidence_ar": "قالت تحس بتعب"
+      "summary": "The student has been attending for shorter periods, citing fatigue and possible illness.",
+      "evidence_ar": "قالت تحس بتعب. يمكن مريضه؟"
     },
     {
       "student_id": "S057",
@@ -158,7 +158,7 @@
       "with_notes": "Medium/queue",
       "note_state": "needs_help",
       "blocker": "academic",
-      "summary": "Noura attends all sessions but completes zero exercises, and her parents need to be informed about the requirement.",
+      "summary": "The student attends all sessions but completes zero exercises, and the parents need to be informed about the requirement.",
       "evidence_ar": "نورة تحضر ١٠٠٪ بس التمارين صفر"
     },
     {
@@ -172,8 +172,8 @@
       "with_notes": "Low/leave_alone",
       "note_state": "explained",
       "blocker": "health",
-      "summary": "The student is feeling unwell and has been attending for short periods, with the mother being kept informed and advised to seek medical attention if symptoms persist.",
-      "evidence_ar": "عمر لسا تعبان"
+      "summary": "The student is attending briefly but feeling unwell, and his mother is managing his rest and considering a doctor visit.",
+      "evidence_ar": "عمر لسا تعبان. قلت لأمه اذا ما تحسن يروح دكتور"
     },
     {
       "student_id": "S116",
@@ -200,7 +200,7 @@
       "with_notes": "Low/leave_alone",
       "note_state": "explained",
       "blocker": "health",
-      "summary": "Abdullah has been leaving sessions early due to a persistent headache, and his father has been informed and advised to seek medical attention.",
+      "summary": "Abdullah is experiencing persistent headaches, leading to reduced attendance, and his father has been advised to seek medical attention.",
       "evidence_ar": "عبدالله قال الصداع مستمر من امس"
     },
     {
@@ -215,7 +215,7 @@
       "note_state": "needs_help",
       "blocker": "logistics",
       "summary": "The student is consistently late due to the father's night shift work, and no solution has been found.",
-      "evidence_ar": "الاب يشتغل ليل وما يقدر يصحيه"
+      "evidence_ar": "محمد لسا يجي متأخر - ٤٨ دقيقة بعد بداية الحصة. نحتاج حل بس ايش نقدر نسوي؟"
     },
     {
       "student_id": "S141",
@@ -242,8 +242,8 @@
       "with_notes": "Low/leave_alone",
       "note_state": "improving",
       "blocker": "family",
-      "summary": "The student is now attending regularly and completing more exercises after his father learned about the program and got involved.",
-      "evidence_ar": "يوسف محافظ على الحضور الحين - ٧٠ دقيقة اليوم. والتمارين كمان احسن - ١٥ سؤال"
+      "summary": "The student is now consistently attending and improving in practice after his father learned about the program and got involved.",
+      "evidence_ar": "يوسف مستمر بالتحسن - ٧٥ دقيقة حضور، ١٨ سؤال. تحول كبير!"
     },
     {
       "student_id": "S163",
@@ -256,7 +256,7 @@
       "with_notes": "Low/leave_alone",
       "note_state": "explained",
       "blocker": "health",
-      "summary": "Ahmed has been attending for shorter periods and then leaving due to feeling unwell, but he is communicating his absences.",
+      "summary": "The student has been attending for shorter periods and then left due to feeling unwell, but he is communicating his absences.",
       "evidence_ar": "احمد ارسل واتساب يقول مو قادر يحضر اليوم"
     }
   ]

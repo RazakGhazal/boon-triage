@@ -73,10 +73,14 @@ is to report what the PROSE says, weighting the most recent days. Return JSON:
 - draft_message: a short WhatsApp message in SIMPLE, WARM Modern Standard Arabic (فصحى
   مبسطة — never stiff/bureaucratic), addressed to the PARENT and sent BY the facilitator.
   Refer to the student ONLY as {name} — a literal placeholder the system fills in later
-  (you are never given the real name). It must: cite ONE specific fact from the notes;
-  be improvement-focused (what to do next, not blame); propose exactly ONE doable step
-  (NEVER a meeting or anything requiring scheduling); be 2-3 sentences. "" if no
-  outreach is warranted.
+  (you are never given the real name). You ARE given student_gender: every Arabic verb,
+  pronoun and adjective referring to the student MUST agree with it (male: يحضر/تقدّمه؛
+  female: تحضر/تقدّمها). NEVER infer gender from names inside the notes — they can belong
+  to someone else. If student_gender is "unknown", write so nothing agrees with the
+  student (use إضافة: حضور {name}، مذاكرة {name}). It must: cite ONE specific fact from
+  the notes; be improvement-focused (what to do next, not blame); propose exactly ONE
+  doable step (NEVER a meeting or anything requiring scheduling); be 2-3 sentences.
+  "" if no outreach is warranted.
 - evidence: copy an EXACT short Arabic span from the notes that justifies the state.
   REQUIRED for every state except "none" — if you cannot point to a real span, the
   state must be "none".
@@ -90,7 +94,7 @@ with confidence="low" rather than a guess."""
 # evaluation in eval/ stays untouched by memorised examples.
 FEWSHOT = [
     (
-        'notes:\n[Day 5] اتصلت على ام فهد بخصوص غيابه. قالت يسهر على الالعاب ووعدت تراقب الجوال\n'
+        'student_gender: male\nnotes:\n[Day 5] اتصلت على ام فهد بخصوص غيابه. قالت يسهر على الالعاب ووعدت تراقب الجوال\n'
         '[Day 12] فهد لسا ما يجي. اتصلت مرتين على الام، ما ردت. قلقان عليه',
         {"state": "failing", "blocker": "motivation",
          "summary": "Contact about late-night gaming went nowhere; the mother has stopped answering and he is still absent.",
@@ -99,16 +103,16 @@ FEWSHOT = [
          "evidence": "اتصلت مرتين على الام، ما ردت", "concern": "urgent", "confidence": "high"},
     ),
     (
-        'notes:\n[Day 4] ريم تحضر كامل بس ما تحل تمارين. تواصلت مع امها - ما كانت تدري ان التمارين جزء اساسي من البرنامج\n'
+        'student_gender: female\nnotes:\n[Day 4] ريم تحضر كامل بس ما تحل تمارين. تواصلت مع امها - ما كانت تدري ان التمارين جزء اساسي من البرنامج\n'
         '[Day 13] فرق واضح! ريم صارت تحل يوميا والام تتابع معها. قصة نجاح',
         {"state": "improving", "blocker": "family",
          "summary": "Big turnaround on daily practice after the mother learned it was required and got involved.",
          "root_cause": "family was unaware practice is required", "suggested_action": "message",
-         "draft_message": "ما شاء الله، الفرق واضح منذ بدأتم المتابعة — {name} الآن على المسار الصحيح. تثبيت عادة 10 أسئلة يوميًا سيحافظ على هذا التقدّم قبل الاختبار القادم.",
+         "draft_message": "ما شاء الله، الفرق واضح منذ بدأتم المتابعة — {name} الآن تحلّ تمارينها يوميًا بانتظام. تثبيت هذه العادة سيحافظ على تقدّمها قبل الاختبار القادم.",
          "evidence": "فرق واضح!", "concern": "low", "confidence": "high"},
     ),
     (
-        'notes:\n[Day 13] سلطان جا ٢٠ دقيقة وطلع. اتصلت على ابوه - قال عنده حرارة\n'
+        'student_gender: male\nnotes:\n[Day 13] سلطان جا ٢٠ دقيقة وطلع. اتصلت على ابوه - قال عنده حرارة\n'
         '[Day 14] سلطان غايب اليوم. ابوه يقول يحتاج كم يوم راحة وبيرجع ان شاء الله',
         {"state": "explained", "blocker": "health",
          "summary": "Absent with a fever; the father is aware and expects him back after a few days of rest.",
@@ -117,7 +121,7 @@ FEWSHOT = [
          "evidence": "يحتاج كم يوم راحة", "concern": "neutral", "confidence": "high"},
     ),
     (
-        'notes:\n[Day 12] رنا ما جت من يومين، وكانت من الممتازات\n'
+        'student_gender: female\nnotes:\n[Day 12] رنا ما جت من يومين، وكانت من الممتازات\n'
         '[Day 14] لسا غايبه. اتصلت على امها مرتين وارسلت واتساب، ما في رد. قلقانه',
         {"state": "failing", "blocker": "unknown",
          "summary": "A previously excellent student has vanished and the mother is not answering calls or WhatsApp.",
@@ -169,6 +173,7 @@ class GeminiBackend:
         shots = "\n\n".join(f"INPUT:\n{i}\nOUTPUT:\n{json.dumps(o, ensure_ascii=False)}" for i, o in FEWSHOT)
         user = (
             f"{shots}\n\nNow extract for this student.\nINPUT:\n"
+            f"student_gender: {payload.get('student_gender', 'unknown')}\n"
             f"notes:\n{payload['notes']}\nOUTPUT:"
         )
         cfg = types.GenerateContentConfig(

@@ -10,17 +10,17 @@
 - Scope: validates the behavior terms only (attendance/practice/cliff); the quiz term cannot be backtested against the same quiz.
 
 ## 3. Is the note-reader reading right? (gold-set eval)
-- Against 75 human-labeled threads (labeled from the notes only, before this extractor version ran — eval/CODEBOOK.md): **88% strict / 99% lenient agreement, Cohen's κ = 0.82** on the 6-state label; blocker agreement 71%.
+- Against 75 human-labeled threads (labeled from the notes only, before this extractor version ran — eval/CODEBOOK.md): **87% strict / 97% lenient agreement, Cohen's κ = 0.8** on the 6-state label; blocker agreement 69%.
 - Guardrails in operation: 1 faithfulness-gate trips (non-'none' state without a verbatim Arabic span), 1 low-confidence abstentions → human-review lane.
-- Remaining disagreements (1) are listed in outputs/extractor_eval.json for qualitative review.
+- Remaining disagreements (2) are listed in outputs/extractor_eval.json for qualitative review.
 
 ## 4. What reading the notes changed (vs rules-only)
-- The notes changed the outcome for **18 of 75 noted students**: 9 escalated, 8 de-escalated (capacity handed back), 1 routed to human review.
+- The notes changed the outcome for **18 of 75 noted students**: 8 escalated, 9 de-escalated (capacity handed back), 1 routed to human review.
   - S004: High/queue → Critical/queue (failing) — “احمد لسا على نفس الوضع. حاولت اتواصل مع الاهل بدون نتيجة”
   - S006: Medium/queue → Low/leave_alone (explained) — “قال في مشكله عائليه - راح ترجع الاسبوع الجاي ان شاء الله”
   - S008: Low/leave_alone → High/queue (refused) — “الام كانت دفاعية: 'هي تحضر الحصص، ايش اكثر من كذا تبون؟' مو متعاونه”
-  - S012: Critical/queue → Critical/human_review (explained) — “”
-  - S013: Low/leave_alone → Medium/queue (needs_help) — “نور شكلها مشغولة البال. جت ٥٠ دقيقة بس اليوم، عادة تجي كامل الحصة”
+  - S012: Critical/queue → Medium/queue (explained) — “ما كان يدري عن البرنامج اصلاً!”
+  - S013: Low/leave_alone → Medium/human_review (needs_help) — “”
 
 ## 5. Contact ≠ effect (descriptive only — limitations attached)
 - Of 75 students with logged contact: {'no_change': 51, 'declined': 7, 'logged_too_late': 10, 're_engaged': 7}. Only 11% of measurable threads re-engaged; 13% were logged too late to act.

@@ -32,8 +32,9 @@ number: failers reached before Quiz 2.
   label event, reclaimable by Quiz-2 recalibration.
 - **A note-reader with a gold set:** Gemini turns each Arabic thread into a 6-state label +
   blocker, quoting a verbatim evidence span (unevidenced claims auto-drop to human review).
-  Against **75 human-labeled threads**: **κ = 0.82** (88% strict / 99% lenient) — and the gold
-  set caught a failing-recall bug (0.15) that one prompt revision fixed (κ 0.68 → 0.82).
+  Against **75 human-labeled threads**: **κ = 0.80** (87% strict / 97% lenient) — and the gold
+  set caught a failing-recall bug (0.15) that one prompt revision fixed (κ 0.68 → 0.80;
+  the two residual misses are documented gray cases).
 - **Fusion, three rule families:** failing/refused contact escalates (≥High); improving with
   agreeing numbers hands capacity back; an *explained* absence (sick, parent already engaged)
   becomes a check-in message instead of burning a call slot; low-confidence reads go to a

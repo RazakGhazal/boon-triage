@@ -36,10 +36,12 @@ def _day_no(date_str: str) -> int:
 # --------------------------------------------------------------------------- #
 @dataclass
 class StudentRecord:
-    # identity / PII — NEVER sent to the LLM
+    # identity / PII — NEVER sent to the LLM (gender alone is sent, for Arabic
+    # agreement in the {name}-placeholder draft)
     student_id: str
     student_name: str
     parent_phone_raw: str
+    gender: str              # male | female | unknown — from the roster
 
     # de-identified metadata
     campus_id: str
@@ -72,17 +74,32 @@ class StudentRecord:
     last_note_day: Optional[int]  # program-day of the latest note
     contacted_since_quiz: bool    # any note on/after Quiz-1 day = post-quiz contact
 
-    # ---- the only thing the model ever sees: the notes, nothing else ----
-    # No metrics in the payload. The extractor's state/evidence must come from
+    # ---- what the model sees: the notes + the student's gender, nothing else ----
+    # No metrics in the payload: the extractor's state/evidence must come from
     # the prose alone; if the numbers were included, "agreement with outcomes"
     # would measure number-echoing, and the rules-vs-notes fusion would be
     # fused twice (once inside the prompt, once in decide.py).
+    # Gender IS included (not the name): the draft is written around a {name}
+    # placeholder, and Arabic verbs/pronouns must agree with the ROSTER child —
+    # the name inside the note can differ from the roster (the name-mismatch
+    # trap), so the model must never infer gender from the note text.
     def to_llm_payload(self) -> dict:
-        return {"student_id": self.student_id, "notes": self.note_text_concat}
+        return {"student_id": self.student_id, "notes": self.note_text_concat,
+                "student_gender": self.gender}
 
     @property
     def first_name(self) -> str:
         return (self.student_name or "").split(" ")[0] or "الطالب"
+
+
+# roster first names in this dataset are gender-unambiguous; in production this
+# is a roster field, not an inference
+_GENDER = {
+    "Abdullah": "male", "Ahmad": "male", "Hassan": "male", "Khalid": "male",
+    "Omar": "male", "Yousef": "male",
+    "Amal": "female", "Fatima": "female", "Layla": "female", "Maryam": "female",
+    "Nora": "female", "Sara": "female",
+}
 
 
 # --------------------------------------------------------------------------- #
@@ -164,10 +181,12 @@ def load_records(data_dir: str = None, as_of_date: str = None) -> dict[str, Stud
         quiz_happened = C.QUIZ1_DATE <= as_of_date
         contacted_since_quiz = quiz_happened and bool(nlist) and nlist[-1][0] >= C.QUIZ1_DATE
 
+        first = str(m.get("student_name", "")).split(" ")[0]
         records[sid] = StudentRecord(
             student_id=sid,
             student_name=m.get("student_name", ""),
             parent_phone_raw=str(m.get("parent_phone", "")),
+            gender=_GENDER.get(first, "unknown"),
             campus_id=m.get("campus_id", ""),
             facilitator_email=m.get("facilitator_email", ""),
             learning_track=m.get("learning_track", ""),

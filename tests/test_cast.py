@@ -138,6 +138,16 @@ def test_gate_blocks_fabricated_evidence():
     ns = _gate({"state": "failing", "confidence": "high", "evidence": "نص غير موجود في الملاحظات"})
     assert ns.faithful is False and ns.confidence == "low" and ns.evidence == ""
 
+def test_draft_without_placeholder_is_discarded_for_template():
+    # a draft naming a child directly copied the name from the notes — possibly the
+    # WRONG child (the name-mismatch trap); it must fall back to the safe template
+    a = _d("S057", state="needs_help", confidence="high",
+           draft_message="نورة تحضر بانتظام لكنها لا تحل التمارين")
+    assert "نورة" not in a.draft_message and a.draft_message
+    a2 = _d("S057", state="needs_help", confidence="high",
+            draft_message="حضور {name} ممتاز لكن التمارين متوقفة — نقترح 10 أسئلة يوميًا")
+    assert RECS["S057"].first_name in a2.draft_message and "{name}" not in a2.draft_message
+
 
 # ---- system invariants: the queue faces the KPI ----
 def _full_queue():

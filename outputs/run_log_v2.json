@@ -2,7 +2,7 @@
   "as_of_date": "2025-10-14",
   "backend": "gemini",
   "capacity_per_facilitator": 8,
-  "invocation": "python main.py --v2",
+  "invocation": "python main.py --v2 --workers 8",
   "kpi": {
     "failers_total": 66,
     "failers_with_action_today": 66,

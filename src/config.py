@@ -70,4 +70,6 @@ GEMINI_MODEL = os.environ.get("GEMINI_MODEL", "gemini-2.5-flash-lite")
 # v3:   notes-only payload (no metrics), dated threads, blocker_type, evidence required
 # v3.1: eval-driven fix — the gold set caught failing-recall 0.15 (unreachable-parent
 #       dropouts read as needs_help); sharpened the failing definition + 1 few-shot
-PROMPT_VERSION = "v3.1"
+# v3.2: student_gender in the payload (never the name) — Arabic agreement in the
+#       {name}-placeholder draft must follow the ROSTER child, not names in notes
+PROMPT_VERSION = "v3.2"

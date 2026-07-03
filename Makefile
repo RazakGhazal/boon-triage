@@ -22,5 +22,5 @@ backtest:      ## Day-9 ranking backtest vs Quiz-1 outcomes (no LLM needed)
 eval:          ## note-reader vs the 75 human gold-labeled threads (uses cache)
 	$(PYTHON) main.py --eval-extractor
 
-test:          ## 22 acceptance tests (traps, fusion guards, KPI invariants)
+test:          ## 23 acceptance tests (traps, fusion guards, KPI invariants)
 	$(PYTHON) tests/test_cast.py

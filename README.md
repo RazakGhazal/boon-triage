@@ -6,7 +6,7 @@ to lift the intervention rate from ~30% toward 80%+.
 
 The edge: it **reads** the Arabic facilitator notes instead of just counting them. Rules
 score risk from the numbers (Day-9 backtest: **AUC 0.91**); Gemini reads each note thread
-into a structured state (**κ=0.82** vs 75 human gold labels); a 3-family fusion corrects
+into a structured state (**κ=0.80** vs 75 human gold labels); a 3-family fusion corrects
 where they disagree. Every claim quotes a verbatim Arabic span or goes to human review.
 
 📹 **Video walkthrough:** `<ADD LOOM LINK>`
@@ -19,7 +19,7 @@ where they disagree. Every claim quotes a verbatim Arabic span or goes to human 
     make lift                   # what the note-reader changed vs rules-only
     make backtest               # Day-9 ranking vs Quiz-1 outcomes (no LLM)
     make eval                   # note-reader vs the human gold labels
-    make test                   # 22 acceptance tests
+    make test                   # 23 acceptance tests
 
 ## Outputs (outputs/)
 `action_queue.html` (the product) · `notes_lift.html` (with vs without the LLM, side by side)

@@ -76,7 +76,7 @@ students get any intervention before the next quiz. The bottleneck is not detect
 action queue} per facilitator --- calls capped at what a human can do, drafted WhatsApp messages
 uncapped, so every quiz-failer leaves with a ready action --- by fusing a transparent rule engine
 (the numbers, backtested at \textbf{AUC 0.91} against Quiz-1 outcomes) with an LLM that
-\emph{reads} the Arabic facilitator notes (measured at \(\kappa=0.82\) against 75 human gold
+\emph{reads} the Arabic facilitator notes (measured at \(\kappa=0.80\) against 75 human gold
 labels). The measurement layer claims only what the data supports: only \textbf{44\%} of
 quiz-failers have any logged contact since the quiz, and of the contacts that exist, just 11\%
 were followed by re-engagement --- a descriptive gap (no control group) that motivates the
@@ -271,7 +271,7 @@ File & Job & Lines \\
 \texttt{effectiveness.py} & descriptive post-contact outcomes (+caveats) & 135 \\
 \texttt{fairness.py} & track audit + facilitator coverage equity & 86 \\
 \texttt{output\_v2.py} & write the measurement reports & 133 \\
-\texttt{tests/test\_cast.py} & 22 acceptance tests (traps, guards, KPI invariants) & 193 \\
+\texttt{tests/test\_cast.py} & 23 acceptance tests (traps, guards, KPI invariants) & 193 \\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -398,7 +398,7 @@ the one-field outcome log (``did it land?'') in the roadmap.
 \begin{itemize}
 \item \textbf{Note-reader, measured against humans:} all 75 note threads were hand-labelled from the
 notes alone, against a written codebook, \emph{before} the extractor ran (\texttt{eval/}). v3.1 agrees
-with the gold labels at \(\kappa=0.82\) (88\% strict, 99\% lenient) --- and the eval earned its keep
+with the gold labels at \(\kappa=0.80\) (87\% strict, 97\% lenient) --- and the eval earned its keep
 by catching a real bug first: v3 read ``vanished + unreachable parents'' as \texttt{needs\_help}
 (failing-recall 0.15); one prompt revision fixed it.
 \item \textbf{Closing the loop:} 6 surfaced students were \emph{already contacted and still declined} ---
@@ -452,14 +452,14 @@ survive verification and are treated as open.
 \section{Results and how quality is measured}
 \begin{itemize}
 \item \textbf{Runs end-to-end}, one command, LLM on; committed \texttt{outputs/} (queue + Arabic drafts).
-\item \textbf{22/22 acceptance tests} pass --- the demo cast plus the system invariants: every
+\item \textbf{22/23 acceptance tests} pass --- the demo cast plus the system invariants: every
 quiz-failer leaves with a ready action; the cap binds only calls/1-on-1s; the faithfulness gate blocks
 unevidenced and fabricated claims; the Day-9 backtest stays predictive.
 \item \textbf{Ranking backtested:} scored on days 1--9 only (pre-quiz clock), the risk score ranks who
 actually failed Quiz 1 at \textbf{AUC 0.911} (precision@66 = 0.85).
 \item \textbf{LLM lift:} the notes changed the outcome for \textbf{18 of 75} noted students vs.\
 rules-only (9 escalated, 8 de-escalated to hand capacity back, 1 to human review).
-\item \textbf{Note-reader vs.\ human gold labels:} \(\kappa=0.82\), 88\% strict / 99\% lenient
+\item \textbf{Note-reader vs.\ human gold labels:} \(\kappa=0.80\), 87\% strict / 97\% lenient
 (\(n=75\), single-rater, codebook-adjudicated).
 \item \textbf{Contact outcomes (descriptive):} 11\% re-engaged / 11\% declined / 13\% logged too late,
 of 75 --- reported with its limitations (no control group; regression to the mean).

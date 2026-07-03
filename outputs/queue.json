@@ -1,7 +1,7 @@
 {
   "summary": {
     "as_of_date": "2025-10-14",
-    "invocation": "python main.py --v2",
+    "invocation": "python main.py --v2 --workers 8",
     "capacity_per_facilitator": 8,
     "students_total": 200,
     "students_surfaced": 79,
@@ -11,9 +11,9 @@
     "human_review": 1,
     "call_waitlist": 10,
     "by_priority": {
-      "Critical": 39,
-      "High": 21,
-      "Medium": 19
+      "Critical": 38,
+      "High": 20,
+      "Medium": 21
     },
     "failers_total": 66,
     "failers_with_action_today": 66,
@@ -57,8 +57,8 @@
         "students": 20,
         "failers": 5,
         "failers_reached_since_quiz": 1,
-        "priority": 7,
-        "messages": 1,
+        "priority": 8,
+        "messages": 0,
         "review": 0
       },
       "facilitator7@noon.com": {
@@ -81,8 +81,8 @@
         "students": 20,
         "failers": 6,
         "failers_reached_since_quiz": 4,
-        "priority": 7,
-        "messages": 2,
+        "priority": 6,
+        "messages": 3,
         "review": 1
       }
     },
@@ -109,7 +109,7 @@
           "blocker": "motivation",
           "confidence": "high",
           "note_changed_priority": false,
-          "story": "The student explicitly stated she sees no benefit and is only attending due to school requirements; the mother was defensive, and the student has now stopped attending.",
+          "story": "The student explicitly stated she sees no benefit and is only attending due to school requirements. The parent was defensive, and the student has now stopped attending, suggesting she has quit.",
           "why": [
             "attendance collapsed from a strong baseline (87 min) to near-zero in the last days — possible silent dropout",
             "failed Quiz 1 (scored 58 < 60)",
@@ -247,8 +247,8 @@
           "contacted_since_quiz": true,
           "last_note_day": 14,
           "note_state": "needs_help",
-          "blocker": "motivation",
-          "confidence": "medium",
+          "blocker": "academic",
+          "confidence": "high",
           "note_changed_priority": false,
           "story": "The student attends but does not complete any exercises, and a systematic solution is needed.",
           "why": [
@@ -256,7 +256,7 @@
             "little sustained practice (median 0 questions/day)"
           ],
           "evidence_ar": "حسن يحضر بس ما في تمارين ابداً",
-          "draft_message_ar": "السلام عليكم، نلاحظ أن Abdullah يحضر الحصص بانتظام ولكن لا يكمل التمارين. هل يمكننا تخصيص وقت قصير معه لمناقشة ما قد يواجهه من صعوبات؟ نريد التأكد من أنه مستعد للاختبار القادم.",
+          "draft_message_ar": "السلام عليكم، نلاحظ أن Abdullah يحضر الحصص لكنه لا يكمل التمارين المطلوبة. لضمان تقدمه قبل الاختبار القادم، هل يمكننا تخصيص وقت قصير بعد الحصة لمناقشة أي صعوبات يواجهها في حل التمارين؟",
           "parent_phone": "+9665••••••29",
           "phone_flag": "ok"
         },
@@ -277,13 +277,13 @@
           "blocker": "motivation",
           "confidence": "high",
           "note_changed_priority": false,
-          "story": "The student attends but consistently refuses to do exercises, and the reason for this refusal needs to be understood.",
+          "story": "The student attends but consistently refuses to do exercises, and the reason is unclear.",
           "why": [
             "failed Quiz 1 (scored 57 < 60)",
             "little sustained practice (median 0 questions/day)"
           ],
           "evidence_ar": "علي يرفض التمارين. لازم نفهم السبب وراء الرفض المستمر",
-          "draft_message_ar": "السلام عليكم، نلاحظ أن Maryam يحضر الحصص بانتظام ولكن يواجه صعوبة في إكمال التمارين. هل يمكننا تخصيص وقت قصير معه الأسبوع القادم لمناقشة أي تحديات قد يواجهها في التمارين؟",
+          "draft_message_ar": "السلام عليكم، لاحظنا أن Maryam تحضر الحصص بانتظام ولكنها لا تقوم بالتمارين المطلوبة. هل هناك سبب معين لهذا الرفض؟ فهمنا لهذا الأمر سيساعدنا على تقديم الدعم المناسب لضمان تقدمها قبل الاختبار القادم.",
           "parent_phone": "+9665••••••40",
           "phone_flag": "ok"
         },
@@ -304,12 +304,12 @@
           "blocker": "academic",
           "confidence": "high",
           "note_changed_priority": false,
-          "story": "The student continues with the same ineffective strategy of doing a lot of easy work, and more assertive intervention is needed.",
+          "story": "Noura continues with the same easy-level, high-volume approach, and more decisive intervention is needed.",
           "why": [
             "failed Quiz 1 (scored 56 < 60)"
           ],
           "evidence_ar": "نورة لسا على نفس النهج. محتاجه تدخل اكثر حزم",
-          "draft_message_ar": "السلام عليكم، نورة تبذل جهدًا كبيرًا ولكننا بحاجة لتوجيه تركيزها نحو التمارين الأكثر تحديًا لضمان استعدادها للاختبار القادم. هل يمكننا تخصيص وقت قصير لمناقشة استراتيجية حل التمارين معها؟",
+          "draft_message_ar": "السلام عليكم، معكم مُيسِّر Layla في بوون أكاديمي. نتيجة Layla في الاختبار الأخير كانت 56 من 100، والوقت كافٍ تمامًا للتحسّن قبل الاختبار القادم. نقترح خطوة واحدة: حل 10 أسئلة تدريب يوميًا هذا الأسبوع، وسنتابع التقدّم أولًا بأول.",
           "parent_phone": "+9665••••••22",
           "phone_flag": "ok"
         }
@@ -338,7 +338,7 @@
             "the absence is explained (illness/family, parent already engaged) — a check-in, not another call slot"
           ],
           "evidence_ar": "الام قالت لسا مريض، راح يرجع الاسبوع الجاي ان شاء الله",
-          "draft_message_ar": "السلام عليكم، نطمئن على صحة Abdullah ونتمنى له الشفاء العاجل. لا داعي للقلق بشأن الحصص، متى ما تحسنت صحته بالكامل يسعدنا عودته بالتدريج، ونحن هنا لدعمه.",
+          "draft_message_ar": "السلام عليكم، نطمئن على صحة Abdullah ونتمنى له الشفاء العاجل. لا داعي للقلق بشأن الحصص، متى ما تعافى تمامًا يسعدنا رجوعه بالتدريج، ونحن هنا لتقديم أي دعم يحتاجه.",
           "parent_phone": "+9665••••••41",
           "phone_flag": "ok"
         },
@@ -363,8 +363,8 @@
           "why": [
             "the metrics look fine but the note reveals a problem the numbers miss"
           ],
-          "evidence_ar": "الاب يشتغل ليل وما يقدر يصحيه",
-          "draft_message_ar": "السلام عليكم، نتابع مع Layla مسألة التأخر المتكرر عن الحصة الصباحية. نفهم تمامًا ظروف جدول عمل الوالد، ونبحث عن حل مبتكر يساعد Layla على الحضور في الوقت المناسب قبل الاختبار القادم.",
+          "evidence_ar": "محمد لسا يجي متأخر - ٤٨ دقيقة بعد بداية الحصة. نحتاج حل بس ايش نقدر نسوي؟",
+          "draft_message_ar": "السلام عليكم، نتابع مع Layla بخصوص تأخرها عن الحصة، ونعلم أن ظروف والدكم الصحية والعملية قد تكون سببًا. هل يمكننا التفكير معًا في حلول إبداعية لضمان حضورها كامل الوقت قبل الاختبار القادم؟",
           "parent_phone": "+9665••••••34",
           "phone_flag": "ok"
         }
@@ -373,6 +373,34 @@
     },
     "facilitator3@noon.com": {
       "priority": [
+        {
+          "priority": "Critical",
+          "base_tier_numbers_only": "Critical",
+          "risk_score": 6,
+          "student_id": "S044",
+          "campus": "C02",
+          "track": "Remedial",
+          "lane": "queue",
+          "action": "call_parent",
+          "call_waitlisted": false,
+          "quiz_failed": true,
+          "contacted_since_quiz": false,
+          "last_note_day": 4,
+          "note_state": "needs_help",
+          "blocker": "academic",
+          "confidence": "high",
+          "note_changed_priority": false,
+          "story": "Leila is performing poorly across the board and requires immediate parental contact.",
+          "why": [
+            "failed Quiz 1 (scored 39 < 60)",
+            "chronically low attendance (recent avg 39 min/session)",
+            "little sustained practice (median 2 questions/day)"
+          ],
+          "evidence_ar": "ليلى اداء ضعيف بكل المقاييس",
+          "draft_message_ar": "السلام عليكم، نود لفت انتباهكم إلى أن أداء Maryam يحتاج إلى بعض الدعم الإضافي في هذه الفترة. نؤمن بقدرتها على التحسن، وسيكون من المفيد جدًا لو تواصلنا معًا لوضع خطة بسيطة لمساعدتها على استعادة تركيزها قبل الاختبار القادم.",
+          "parent_phone": "+9665••••••44",
+          "phone_flag": "ok"
+        },
         {
           "priority": "Critical",
           "base_tier_numbers_only": "Critical",
@@ -390,14 +418,14 @@
           "blocker": "unknown",
           "confidence": "high",
           "note_changed_priority": false,
-          "story": "Student Nura requires comprehensive intervention as all indicators are negative.",
+          "story": "Noura is showing all negative indicators and requires comprehensive intervention.",
           "why": [
             "failed Quiz 1 (scored 36 < 60)",
             "chronically low attendance (recent avg 36 min/session)",
             "little sustained practice (median 2 questions/day)"
           ],
-          "evidence_ar": "نورة محتاجه تدخل شامل. كل المؤشرات سلبية",
-          "draft_message_ar": "السلام عليكم، معكم مُيسِّر Sara في بوون أكاديمي. نتيجة Sara في الاختبار الأخير كانت 36 من 100، والوقت كافٍ تمامًا للتحسّن قبل الاختبار القادم. نقترح خطوة واحدة: حل 10 أسئلة تدريب يوميًا هذا الأسبوع، وسنتابع التقدّم أولًا بأول.",
+          "evidence_ar": "كل المؤشرات سلبية",
+          "draft_message_ar": "السلام عليكم، نود الاطمئنان على Sara ونرى أنها بحاجة لدعم إضافي في هذه الفترة. هل يمكننا مناقشة بعض الأفكار لمساعدتها على استعادة حماسها وتركيزها قبل الاختبار القادم؟ نحن هنا لدعمكم.",
           "parent_phone": "+9665••••••54",
           "phone_flag": "ok"
         },
@@ -409,7 +437,7 @@
           "campus": "C02",
           "track": "Remedial",
           "lane": "queue",
-          "action": "one_on_one",
+          "action": "call_parent",
           "call_waitlisted": false,
           "quiz_failed": true,
           "contacted_since_quiz": false,
@@ -418,14 +446,14 @@
           "blocker": "academic",
           "confidence": "high",
           "note_changed_priority": false,
-          "story": "Omar is one of the most struggling students and requires an urgent plan.",
+          "story": "Omar is identified as one of the most struggling students, requiring an urgent plan.",
           "why": [
             "failed Quiz 1 (scored 29 < 60)",
             "chronically low attendance (recent avg 31 min/session)",
             "little sustained practice (median 1 questions/day)"
           ],
-          "evidence_ar": "عمر من الطلاب الاكثر تعثراً",
-          "draft_message_ar": "السلام عليكم، نود التأكيد على أهمية الدعم الإضافي لـ Yousef في هذه المرحلة. سنقوم بتخصيص وقت إضافي معه لمراجعة المواد الصعبة قبل الاختبار القادم، ونحن على ثقة بأنه سيحدث فرقًا.",
+          "evidence_ar": "عمر من الطلاب الاكثر تعثراً. لازم خطة عاجلة",
+          "draft_message_ar": "السلام عليكم، نود مناقشة خطة دعم لـ Yousef نظرًا لصعوبات يواجهها حاليًا. نؤمن بقدرته على التحسن مع الدعم المناسب، ونرغب في وضع خطة معه قبل الاختبار القادم.",
           "parent_phone": "+9665••••••61",
           "phone_flag": "ok"
         },
@@ -446,43 +474,15 @@
           "blocker": "unknown",
           "confidence": "high",
           "note_changed_priority": false,
-          "story": "Sarah is in a state of great anxiety with all indicators red.",
+          "story": "The student is in a state of great anxiety with all indicators being red.",
           "why": [
             "failed Quiz 1 (scored 27 < 60)",
             "chronically low attendance (recent avg 29 min/session)",
             "little sustained practice (median 0 questions/day)"
           ],
           "evidence_ar": "سارة حالة قلق كبير. كل المؤشرات حمراء",
-          "draft_message_ar": "السلام عليكم، لاحظنا أن Yousef تمر بوقت عصيب وأن مؤشرات القلق مرتفعة. نود أن نطمئنكم أننا هنا لدعم Yousef، وسنعمل معًا على تجاوز هذه المرحلة الصعبة قبل الاختبار القادم.",
+          "draft_message_ar": "السلام عليكم، لاحظنا أن Yousef يمر بفترة قلق ونود الاطمئنان عليه. هل هناك شيء معين يزعجه أو يمكننا المساعدة به؟ نحن هنا لدعمه في هذه المرحلة قبل الاختبار القادم.",
           "parent_phone": "+9665••••••73",
-          "phone_flag": "ok"
-        },
-        {
-          "priority": "Critical",
-          "base_tier_numbers_only": "Critical",
-          "risk_score": 6,
-          "student_id": "S044",
-          "campus": "C02",
-          "track": "Remedial",
-          "lane": "queue",
-          "action": "call_parent",
-          "call_waitlisted": false,
-          "quiz_failed": true,
-          "contacted_since_quiz": false,
-          "last_note_day": 4,
-          "note_state": "needs_help",
-          "blocker": "academic",
-          "confidence": "high",
-          "note_changed_priority": false,
-          "story": "Layla's performance is poor across the board, requiring immediate parental contact.",
-          "why": [
-            "failed Quiz 1 (scored 39 < 60)",
-            "chronically low attendance (recent avg 39 min/session)",
-            "little sustained practice (median 2 questions/day)"
-          ],
-          "evidence_ar": "ليلى اداء ضعيف بكل المقاييس",
-          "draft_message_ar": "السلام عليكم، نود لفت انتباهكم إلى أن أداء Maryam يحتاج إلى دعم إضافي في هذه الفترة. هل يمكننا تحديد وقت قصير للتحدث حول كيف يمكننا مساعدتها معًا لتجاوز هذه المرحلة قبل الاختبار القادم؟",
-          "parent_phone": "+9665••••••44",
           "phone_flag": "ok"
         },
         {
@@ -493,7 +493,7 @@
           "campus": "C02",
           "track": "Remedial",
           "lane": "queue",
-          "action": "one_on_one",
+          "action": "call_parent",
           "call_waitlisted": false,
           "quiz_failed": true,
           "contacted_since_quiz": false,
@@ -509,7 +509,7 @@
             "little sustained practice (median 0 questions/day)"
           ],
           "evidence_ar": "الدرجات والحضور والتمارين كلها ضعيفة",
-          "draft_message_ar": "السلام عليكم، نلاحظ أن Yousef يواجه بعض الصعوبات حاليًا في الدرجات والحضور والتمارين. نود تقديم دعم إضافي له، ونقترح تخصيص وقت إضافي معه الأسبوع القادم لمساعدته على استعادة مستواه قبل الاختبار القادم.",
+          "draft_message_ar": "السلام عليكم، نود الاطمئنان على Yousef ومساعدته على تجاوز هذه المرحلة. نعرف أن الأمور قد تكون صعبة أحيانًا، لكننا هنا لدعمه في كل خطوة — هل يمكننا تحديد وقت قصير لمناقشة كيف يمكننا تحسين أدائه قبل الاختبار القادم؟",
           "parent_phone": "+9665••••••49",
           "phone_flag": "ok"
         },
@@ -521,23 +521,23 @@
           "campus": "C02",
           "track": "Remedial",
           "lane": "queue",
-          "action": "one_on_one",
+          "action": "call_parent",
           "call_waitlisted": false,
           "quiz_failed": true,
           "contacted_since_quiz": false,
           "last_note_day": 4,
           "note_state": "needs_help",
-          "blocker": "academic",
+          "blocker": "unknown",
           "confidence": "high",
           "note_changed_priority": false,
-          "story": "Fatima is struggling and requires intensive support.",
+          "story": "Fatima is in a difficult situation and requires intensive support.",
           "why": [
             "failed Quiz 1 (scored 34 < 60)",
             "chronically low attendance (recent avg 34 min/session)",
             "little sustained practice (median 2 questions/day)"
           ],
           "evidence_ar": "محتاجه دعم مكثف",
-          "draft_message_ar": "السلام عليكم، نلاحظ أن Sara تحتاج دعمًا إضافيًا في هذه الفترة. هل يمكننا تخصيص وقت إضافي لها هذا الأسبوع لمراجعة المواد الصعبة قبل الاختبار القادم؟ نحن هنا لمساعدتها على النجاح.",
+          "draft_message_ar": "السلام عليكم، نود الاطمئنان على Sara وتقديم الدعم اللازم لها. ندرك أن الأمور قد تكون صعبة أحيانًا، ونحن هنا لمساعدتها على تجاوز أي تحديات قبل الاختبار القادم. هل يمكننا تحديد وقت قصير للتحدث؟",
           "parent_phone": "+9665••••••66",
           "phone_flag": "ok"
         },
@@ -558,13 +558,13 @@
           "blocker": "academic",
           "confidence": "high",
           "note_changed_priority": false,
-          "story": "The student is attending but not completing exercises, indicating a potential systemic issue with understanding the importance of practice.",
+          "story": "The student attends but does no exercises, a pattern seen in multiple students, indicating a systemic issue with understanding the importance of exercises.",
           "why": [
             "failed Quiz 1 (scored 58 < 60)",
             "little sustained practice (median 0 questions/day)"
           ],
           "evidence_ar": "حسن نفس النمط. يبين ان عندنا مشكلة منهجية - الطلاب ما يفهمون ان التمارين جزء اساسي من البرنامج",
-          "draft_message_ar": "السلام عليكم، نلاحظ أن Abdullah يحضر الحصص بانتظام ولكن لا يكمل التمارين. من المهم جدًا أن نفهم أن حل التمارين هو مفتاح التميز قبل الاختبار القادم، ونحن هنا لدعم Abdullah في هذه الخطوة.",
+          "draft_message_ar": "السلام عليكم، نلاحظ أن Abdullah يحضر الحصص بانتظام ولكن لا يحل التمارين. من المهم جدًا أن نفهم أن حل التمارين هو مفتاح التقدّم قبل الاختبار القادم، ونحن هنا لمساعدته على تجاوز أي صعوبة.",
           "parent_phone": "+9665••••••69",
           "phone_flag": "ok"
         },
@@ -585,12 +585,12 @@
           "blocker": "academic",
           "confidence": "high",
           "note_changed_priority": false,
-          "story": "Sarah continues to focus only on easy exercises and needs more challenging material.",
+          "story": "The student is still focusing on easy exercises and needs to be challenged more.",
           "why": [
             "failed Quiz 1 (scored 56 < 60)"
           ],
-          "evidence_ar": "سارة لسا تركز على السهل",
-          "draft_message_ar": "السلام عليكم، لاحظنا أن Ahmad تتفوق في التمارين السهلة ويسعدنا هذا التقدم. لضمان أفضل استعداد للاختبار القادم، نقترح تخصيص وقت إضافي هذا الأسبوع للتدرب على مسائل أكثر تحديًا، ونحن هنا للمساعدة.",
+          "evidence_ar": "سارة لسا تركز على السهل. لازم تدخل اقوى",
+          "draft_message_ar": "السلام عليكم، لاحظنا أن Ahmad ما زالت تركز على التمارين السهلة، ويهمنا أن نضمن لها التحدي المناسب لتطورها. هل يمكننا تخصيص وقت قصير لمناقشة بعض المسائل الأكثر تعقيدًا معها قبل الاختبار القادم؟",
           "parent_phone": "+9665••••••63",
           "phone_flag": "ok"
         }
@@ -613,13 +613,13 @@
           "blocker": "family",
           "confidence": "high",
           "note_changed_priority": false,
-          "story": "The student's lack of practice was due to parents not knowing it was required, and they are now aware and expect improvement.",
+          "story": "The student's lack of practice was due to parents not knowing it was required, and they have now been informed.",
           "why": [
             "failed Quiz 1 (scored 59 < 60)",
             "little sustained practice (median 0 questions/day)"
           ],
           "evidence_ar": "بعد ما وضحنا الموضوع، المفروض تتحسن",
-          "draft_message_ar": "السلام عليكم، يسعدنا أن نوضح أن مشاركة Omar في حل التمارين اليومية هي مفتاح النجاح، والآن بعد أن أصبحتم على علم، نتوقع رؤية تحسن ملحوظ. التركيز على 5 تمارين يوميًا سيجهز Omar بشكل ممتاز للاختبار القادم.",
+          "draft_message_ar": "السلام عليكم، يسعدنا أن نوضح أن تمارين Omar هي جزء أساسي من البرنامج لضمان أفضل تحصيل قبل الاختبار القادم. متابعتكم لها في حل الواجبات ستحدث فرقًا كبيرًا في أدائها.",
           "parent_phone": "+9665••••••41",
           "phone_flag": "ok"
         },
@@ -640,40 +640,14 @@
           "blocker": "motivation",
           "confidence": "high",
           "note_changed_priority": false,
-          "story": "After initial panic-induced cramming and poor results, the student is now practicing regularly and showing improvement.",
+          "story": "After initial anxiety and cramming, the student is now practicing regularly and showing improvement.",
           "why": [
             "failed Quiz 1 (scored 52 < 60)",
             "little sustained practice (a 120-question cram day is not counted as engagement) (median 1 questions/day)"
           ],
           "evidence_ar": "يوسف بدا يتحسن بعد ما فهم ان المذاكرة بالعجلة ما تنفع. الحين يتمرن بانتظام",
-          "draft_message_ar": "ما شاء الله، يوسف الآن يتدرب بانتظام وهذا هو الطريق الصحيح. الاستمرار على هذا النهج سيضمن له نتائج أفضل بكثير في الاختبار القادم — ونحن هنا لدعمه.",
+          "draft_message_ar": "السلام عليكم، يسعدنا جدًا أن Ahmad بدأ يتمرن بانتظام ويظهر تحسنًا ملحوظًا. الاستمرار على هذا النهج سيساعده كثيرًا في الاختبار القادم، ونحن هنا لدعمه في كل خطوة.",
           "parent_phone": "+9665••••••51",
-          "phone_flag": "ok"
-        },
-        {
-          "priority": "High",
-          "base_tier_numbers_only": "Low",
-          "risk_score": 0,
-          "student_id": "S042",
-          "campus": "C02",
-          "track": "Standard",
-          "lane": "queue",
-          "action": "message",
-          "call_waitlisted": false,
-          "quiz_failed": false,
-          "contacted_since_quiz": true,
-          "last_note_day": 13,
-          "note_state": "refused",
-          "blocker": "motivation",
-          "confidence": "high",
-          "note_changed_priority": true,
-          "story": "Fatima returned after illness but refused extra help, and is still distracted during class.",
-          "why": [
-            "an attempted intervention is failing — recent contact has NOT resolved it, so this is NOT lower priority"
-          ],
-          "evidence_ar": "عرضت عليها مساعده اضافية بعد الحصة، رفضت",
-          "draft_message_ar": "السلام عليكم، يسعدنا رجوع Sara ونأمل أن تكون بصحة جيدة. نلاحظ أنها لا تزال تحتاج بعض التركيز الإضافي في الحصة، ونحن هنا لدعمها. هل يمكننا تخصيص 5 دقائق بعد الحصة لمراجعة سريعة لبعض النقاط الأساسية قبل الاختبار القادم؟",
-          "parent_phone": "+9665••••••42",
           "phone_flag": "ok"
         },
         {
@@ -693,12 +667,12 @@
           "blocker": "motivation",
           "confidence": "high",
           "note_changed_priority": false,
-          "story": "The student avoids difficult questions and needs more time to build confidence, which is a slow process.",
+          "story": "The student avoids difficult questions and needs more time to build self-confidence.",
           "why": [
             "failed Quiz 1 (scored 54 < 60)"
           ],
           "evidence_ar": "عمر يتهرب من الاسئلة الصعبة",
-          "draft_message_ar": "السلام عليكم، نلاحظ أن Ahmad يحتاج بعض الوقت الإضافي للتعامل مع الأسئلة الصعبة، وهذا طبيعي جدًا. سنعمل معه على بناء ثقته بنفسه تدريجيًا، ونحن هنا لدعمه في كل خطوة قبل الاختبار القادم.",
+          "draft_message_ar": "السلام عليكم، نلاحظ أن Ahmad يحتاج وقتًا إضافيًا للتعامل مع الأسئلة الصعبة، وهذا طبيعي جدًا في مرحلة بناء الثقة بالنفس. سنركز في جلستنا القادمة على تمارين بسيطة لتعزيز ثقته بنفسه قبل الاختبار القادم.",
           "parent_phone": "+9665••••••75",
           "phone_flag": "ok"
         },
@@ -719,14 +693,40 @@
           "blocker": "academic",
           "confidence": "high",
           "note_changed_priority": true,
-          "story": "Noura attends all sessions but completes zero exercises, and her parents need to be informed about the requirement.",
+          "story": "The student attends all sessions but completes zero exercises, and the parents need to be informed about the requirement.",
           "why": [
             "little sustained practice (median 1 questions/day)",
             "the metrics look fine but the note reveals a problem the numbers miss"
           ],
           "evidence_ar": "نورة تحضر ١٠٠٪ بس التمارين صفر",
-          "draft_message_ar": "السلام عليكم، نورة طالبة مجتهدة في الحضور ونحن سعداء بذلك. لكن لاحظنا أنها لا تحل التمارين، وهي جزء أساسي من التعلّم لضمان الاستعداد للاختبار القادم. هل يمكننا الاتفاق على حل تمرين واحد يوميًا؟",
+          "draft_message_ar": "السلام عليكم، معكم مُيسِّر Abdullah في بوون أكاديمي. حضور Abdullah منتظم وهذا ممتاز، لكن التمارين اليومية شبه متوقفة. التمارين هي ما يرفع الدرجات فعليًا — نقترح البدء بـ10 أسئلة يوميًا قبل الاختبار القادم.",
           "parent_phone": "+9665••••••57",
+          "phone_flag": "ok"
+        },
+        {
+          "priority": "Medium",
+          "base_tier_numbers_only": "Low",
+          "risk_score": 0,
+          "student_id": "S042",
+          "campus": "C02",
+          "track": "Standard",
+          "lane": "queue",
+          "action": "one_on_one",
+          "call_waitlisted": true,
+          "quiz_failed": false,
+          "contacted_since_quiz": true,
+          "last_note_day": 13,
+          "note_state": "needs_help",
+          "blocker": "motivation",
+          "confidence": "high",
+          "note_changed_priority": true,
+          "story": "The student returned after an illness but seems distracted and refused extra help.",
+          "why": [
+            "the metrics look fine but the note reveals a problem the numbers miss"
+          ],
+          "evidence_ar": "عرضت عليها مساعده اضافية بعد الحصة، رفضت",
+          "draft_message_ar": "السلام عليكم، يسعدنا رجوع Sara بعد وعكتها الصحية. لاحظنا أنها قد تحتاج بعض الدعم الإضافي لاستعادة تركيزها بالكامل قبل الاختبار القادم، ونحن هنا لمساعدتها في أي وقت يناسبها.",
+          "parent_phone": "+9665••••••42",
           "phone_flag": "ok"
         }
       ],
@@ -751,14 +751,14 @@
           "blocker": "unknown",
           "confidence": "high",
           "note_changed_priority": false,
-          "story": "Mohamed needs urgent intervention before the situation worsens.",
+          "story": "The student needs urgent intervention before the situation worsens.",
           "why": [
             "failed Quiz 1 (scored 30 < 60)",
             "chronically low attendance (recent avg 31 min/session)",
             "little sustained practice (median 1 questions/day)"
           ],
-          "evidence_ar": "يحتاج تدخل عاجل قبل ما الوضع يتفاقم اكثر",
-          "draft_message_ar": "السلام عليكم، نود الاطمئنان على Sara والتأكد أن كل شيء على ما يرام. نلاحظ بعض التحديات ونرغب في تقديم الدعم اللازم لضمان استمراره في المسار الصحيح قبل الاختبار القادم — هل يمكننا التحدث لدقائق؟",
+          "evidence_ar": "محمد يحتاج تدخل عاجل قبل ما الوضع يتفاقم اكثر",
+          "draft_message_ar": "السلام عليكم، نود لفت انتباهكم إلى أن Sara بحاجة إلى دعم إضافي في هذه الفترة لضمان استمرار تقدمها قبل الاختبار القادم. نأمل في تعاونكم لتقديم المساعدة اللازمة.",
           "parent_phone": "+9665••••••78",
           "phone_flag": "ok"
         },
@@ -770,7 +770,7 @@
           "campus": "C03",
           "track": "Remedial",
           "lane": "queue",
-          "action": "call_parent",
+          "action": "one_on_one",
           "call_waitlisted": false,
           "quiz_failed": true,
           "contacted_since_quiz": false,
@@ -785,8 +785,8 @@
             "chronically low attendance (recent avg 29 min/session)",
             "little sustained practice (median 2 questions/day)"
           ],
-          "evidence_ar": "احمد اداء ضعيف جداً. لازم نتحرك بسرعة",
-          "draft_message_ar": "السلام عليكم، لاحظنا أن أداء Omar يحتاج دعمًا إضافيًا في هذه الفترة. نود التأكد من أن كل شيء على ما يرام وأننا نقدم له كل ما يحتاجه للنجاح قبل الاختبار القادم — هل يمكننا التحدث سريعًا؟",
+          "evidence_ar": "احمد اداء ضعيف جداً",
+          "draft_message_ar": "السلام عليكم، لاحظنا أن أداء Omar يحتاج إلى دعم إضافي في الفترة الحالية. نود تقديم مساعدة فردية لتقوية فهمه للمادة قبل الاختبار القادم، ونحن هنا لدعمه بكل الطرق الممكنة.",
           "parent_phone": "+9665••••••89",
           "phone_flag": "ok"
         },
@@ -807,14 +807,14 @@
           "blocker": "academic",
           "confidence": "high",
           "note_changed_priority": false,
-          "story": "Leila is identified as one of the weakest students and requires an intervention plan.",
+          "story": "The student is identified as one of the weakest and requires an intervention plan.",
           "why": [
             "failed Quiz 1 (scored 26 < 60)",
             "chronically low attendance (recent avg 26 min/session)",
             "little sustained practice (median 0 questions/day)"
           ],
-          "evidence_ar": "ليلى من اضعف الطلاب",
-          "draft_message_ar": "السلام عليكم، لاحظنا أن Amal تحتاج بعض الدعم الإضافي في المواد الدراسية. هل يمكننا تخصيص وقت إضافي لها هذا الأسبوع لمراجعة بعض النقاط الأساسية قبل الاختبار القادم؟ نحن هنا لمساعدتها على النجاح.",
+          "evidence_ar": "ليلى من اضعف الطلاب. محتاجه خطة انقاذ",
+          "draft_message_ar": "السلام عليكم، لاحظنا أن Amal تحتاج بعض الدعم الإضافي في المواد الدراسية ويسعدنا تقديم المساعدة. هل يمكننا تخصيص وقت قصير لمناقشة بعض النقاط معها بشكل فردي قبل الاختبار القادم؟",
           "parent_phone": "+9665••••••84",
           "phone_flag": "ok"
         },
@@ -826,23 +826,23 @@
           "campus": "C03",
           "track": "Remedial",
           "lane": "queue",
-          "action": "one_on_one",
+          "action": "call_parent",
           "call_waitlisted": false,
           "quiz_failed": true,
           "contacted_since_quiz": false,
           "last_note_day": 3,
           "note_state": "needs_help",
-          "blocker": "academic",
+          "blocker": "unknown",
           "confidence": "high",
           "note_changed_priority": false,
-          "story": "Noura is struggling and requires special attention.",
+          "story": "The student is struggling and requires special attention.",
           "why": [
             "failed Quiz 1 (scored 24 < 60)",
             "chronically low attendance (recent avg 24 min/session)",
             "little sustained practice (median 0 questions/day)"
           ],
           "evidence_ar": "نورة حالة متعثرة تحتاج اهتمام خاص",
-          "draft_message_ar": "السلام عليكم، نود الاطمئنان على Amal ومتابعة تقدمها الدراسي. نرى أنها تحتاج بعض الدعم الإضافي في هذه المرحلة، ونحن هنا لمساعدتها على تجاوز أي صعوبات قبل الاختبار القادم.",
+          "draft_message_ar": "السلام عليكم، نود لفت انتباهكم إلى أن Amal تواجه بعض التعثر حاليًا ويهمّنا تقديم الدعم اللازم لها. هل يمكننا تحديد وقت مناسب للاتصال قريبًا لمناقشة كيف يمكننا مساعدتها معًا قبل الاختبار القادم؟",
           "parent_phone": "+9665••••••96",
           "phone_flag": "ok"
         },
@@ -863,7 +863,7 @@
           "blocker": "health",
           "confidence": "high",
           "note_changed_priority": false,
-          "story": "A student who was previously good is now absent and unresponsive, with her mother also unreachable.",
+          "story": "A student who was previously good has become absent and tired, and her mother is unresponsive to calls and messages.",
           "why": [
             "failed Quiz 1 (scored 48 < 60)",
             "chronically low attendance (recent avg 0 min/session)",
@@ -871,7 +871,7 @@
             "an attempted intervention is failing — recent contact has NOT resolved it, so this is NOT lower priority"
           ],
           "evidence_ar": "مريم ما جت ابداً. اتصلت على امها - ما في رد",
-          "draft_message_ar": "السلام عليكم، نفتقد Khalid في الحصص منذ أيام ويهمنا الاطمئنان أن كل شيء بخير. نعرف أن التعب قد يكون سببًا، لكن وجود Khalid في حصة الغد يفرق كثيرًا قبل الاختبار القادم — نرجو الرد لطمأنتنا.",
+          "draft_message_ar": "السلام عليكم، نفتقد Khalid في الحصص هذه الأيام ويهمنا الاطمئنان أن كل شيء بخير. نعرف أن التعب قد يكون عائقًا، لكننا نشجعها على العودة قريبًا — وجودها في حصة الغد يفرق كثيرًا قبل الاختبار القادم.",
           "parent_phone": "+9665••••••91",
           "phone_flag": "ok"
         },
@@ -892,13 +892,13 @@
           "blocker": "motivation",
           "confidence": "high",
           "note_changed_priority": false,
-          "story": "The student attends all sessions but refuses to do any exercises, and the parents need to intervene.",
+          "story": "The student attends all sessions but completely refuses to do any exercises, and parental intervention has not worked.",
           "why": [
             "failed Quiz 1 (scored 57 < 60)",
             "little sustained practice (median 0 questions/day)"
           ],
-          "evidence_ar": "علي يحضر كل الحصص تمام بس يرفض يسوي اي تمارين",
-          "draft_message_ar": "السلام عليكم، نود الاطمئنان على Abdullah وتقدمه. نلاحظ أنه يحضر الحصص بانتظام ولكن لا يقوم بالتمارين، وهذا قد يؤثر على استيعابه قبل الاختبار القادم. هل يمكننا مناقشة طرق تشجيعه على حل بعض التمارين يوميًا؟",
+          "evidence_ar": "علي حالة صعبة. يحضر كل شي بس يرفض التمارين تماماً",
+          "draft_message_ar": "السلام عليكم، نود لفت انتباهكم إلى أن Abdullah يحضر الحصص بانتظام ولكن لا يزال يواجه صعوبة في إكمال التمارين. ندرك أن هذا قد يكون تحديًا، ولكن تشجيعكم له على البدء ولو بتمرين واحد يوميًا سيحدث فرقًا كبيرًا قبل الاختبار القادم.",
           "parent_phone": "+9665••••••93",
           "phone_flag": "ok"
         }
@@ -921,12 +921,12 @@
           "blocker": "academic",
           "confidence": "high",
           "note_changed_priority": false,
-          "story": "The student is starting to attempt harder questions after previously only doing easy ones, showing academic progress.",
+          "story": "The student is starting to attempt more difficult exercises, showing progress from only doing easy ones.",
           "why": [
             "failed Quiz 1 (scored 53 < 60)"
           ],
           "evidence_ar": "ليلى بدت تحاول الاسئلة الصعبة",
-          "draft_message_ar": "ما شاء الله، ملاحظة اهتمام Layla بالأسئلة الأصعب خطوة ممتازة نحو التميّز. الاستمرار على هذا النهج سيضمن له الاستعداد الكامل للاختبار القادم.",
+          "draft_message_ar": "ما شاء الله، ملاحظة أن Layla بدأت تتناول الأسئلة الأصعب وهذا تقدم رائع. الاستمرار على هذا النهج سيساعدها كثيرًا في التحضير للاختبار القادم.",
           "parent_phone": "+9665••••••86",
           "phone_flag": "ok"
         }
@@ -943,7 +943,7 @@
           "campus": "C03",
           "track": "Remedial",
           "lane": "queue",
-          "action": "one_on_one",
+          "action": "call_parent",
           "call_waitlisted": false,
           "quiz_failed": true,
           "contacted_since_quiz": false,
@@ -959,7 +959,7 @@
             "little sustained practice (median 1 questions/day)"
           ],
           "evidence_ar": "فاطمة وضعها يتطلب تدخل سريع",
-          "draft_message_ar": "السلام عليكم، معكم مُيسِّر Amal في بوون أكاديمي. نتيجة Amal في الاختبار الأخير كانت 28 من 100، والوقت كافٍ تمامًا للتحسّن قبل الاختبار القادم. نقترح خطوة واحدة: حل 10 أسئلة تدريب يوميًا هذا الأسبوع، وسنتابع التقدّم أولًا بأول.",
+          "draft_message_ar": "السلام عليكم، نود الاطمئنان على Amal وتقديم الدعم اللازم لها. هل يمكننا تحديد وقت مناسب للتحدث معكم قريبًا لمعرفة كيف يمكننا مساعدتها بشكل أفضل قبل الاختبار القادم؟",
           "parent_phone": "+9665••••••08",
           "phone_flag": "ok"
         },
@@ -971,7 +971,7 @@
           "campus": "C03",
           "track": "Remedial",
           "lane": "queue",
-          "action": "one_on_one",
+          "action": "call_parent",
           "call_waitlisted": false,
           "quiz_failed": true,
           "contacted_since_quiz": false,
@@ -986,8 +986,8 @@
             "chronically low attendance (recent avg 29 min/session)",
             "little sustained practice (median 1 questions/day)"
           ],
-          "evidence_ar": "سارة حالة تعثر واضحة",
-          "draft_message_ar": "السلام عليكم، لاحظنا أن Omar تواجه بعض الصعوبات حاليًا ويهمنا جدًا مساعدتها على تجاوزها. هل يمكننا تخصيص وقت قصير لمناقشة بعض الاستراتيجيات التي قد تساعدها على التحسن قبل الاختبار القادم؟",
+          "evidence_ar": "سارة حالة تعثر واضحة. لازم خطة عمل",
+          "draft_message_ar": "السلام عليكم، نود مناقشة خطة عمل لدعم Omar في تجاوز صعوبات التعلم الحالية. نؤمن بقدرة Omar على التحسن مع الدعم المناسب، ونحن هنا للمساعدة في كل خطوة.",
           "parent_phone": "+9665••••••13",
           "phone_flag": "ok"
         },
@@ -1041,7 +1041,7 @@
             "little sustained practice (median 4 questions/day)"
           ],
           "evidence_ar": "عمر من الطلاب المتعثرين. محتاج دعم شامل",
-          "draft_message_ar": "السلام عليكم، نود التأكيد على أهمية الدعم الشامل لـ Sara في هذه المرحلة. هل يمكننا تخصيص وقت إضافي لمناقشة خطة دعم فردية معه قبل الاختبار القادم؟",
+          "draft_message_ar": "السلام عليكم، نود الاطمئنان على Sara وتقديم الدعم اللازم لها. ندرك أن الأمور قد تكون صعبة أحيانًا، ونحن هنا لمساعدتها على تجاوز أي صعوبات أكاديمية أو تحفيزية قبل الاختبار القادم.",
           "parent_phone": "+9665••••••02",
           "phone_flag": "ok"
         },
@@ -1062,13 +1062,13 @@
           "blocker": "motivation",
           "confidence": "high",
           "note_changed_priority": false,
-          "story": "Fatima attends regularly but consistently refuses to do any practice exercises, a pattern observed in other students as well.",
+          "story": "The student attends but consistently refuses to do any practice exercises, a pattern observed in other students as well.",
           "why": [
             "failed Quiz 1 (scored 59 < 60)",
             "little sustained practice (median 0 questions/day)"
           ],
           "evidence_ar": "فاطمة تحضر زين بس حرفياً ما تتمرن ابداً",
-          "draft_message_ar": "السلام عليكم، نلاحظ أن Abdullah تحضر الحصص بانتظام وهذا أمر رائع. لكن، لضمان أفضل استفادة قبل الاختبار القادم، من المهم جدًا أن تبدأ بحل التمارين ولو بشكل بسيط يوميًا. هل يمكننا تخصيص وقت قصير لها لمناقشة هذا الأمر؟",
+          "draft_message_ar": "السلام عليكم، نلاحظ أن Abdullah تحضر الحصص بانتظام ولكنها لا تقوم بالتمارين. هل يمكننا تخصيص وقت قصير لمناقشة سبب ذلك وتقديم الدعم اللازم لها لتجاوز هذه العقبة قبل الاختبار القادم؟",
           "parent_phone": "+9665••••••05",
           "phone_flag": "ok"
         },
@@ -1095,7 +1095,7 @@
             "the metrics look fine but the note reveals a problem the numbers miss"
           ],
           "evidence_ar": "سارة حضور مثالي بس ٠ تمارين",
-          "draft_message_ar": "السلام عليكم، سارة طالبة ملتزمة بالحضور وهذا شيء رائع. لكي نضمن لها أفضل استفادة قبل الاختبار القادم، نقترح تخصيص 15 دقيقة إضافية بعد الحصة لمناقشة التمارين التي تجد صعوبة فيها، ونحن هنا لدعمها.",
+          "draft_message_ar": "السلام عليكم، معكم مُيسِّر Maryam في بوون أكاديمي. حضور Maryam منتظم وهذا ممتاز، لكن التمارين اليومية شبه متوقفة. التمارين هي ما يرفع الدرجات فعليًا — نقترح البدء بـ10 أسئلة يوميًا قبل الاختبار القادم.",
           "parent_phone": "+9665••••••16",
           "phone_flag": "ok"
         }
@@ -1118,12 +1118,12 @@
           "blocker": "motivation",
           "confidence": "high",
           "note_changed_priority": false,
-          "story": "Ahmed now understands the importance of challenging exercises and is actively seeking them out.",
+          "story": "The student now understands the importance of challenging exercises and has started to push themselves more.",
           "why": [
             "failed Quiz 1 (scored 58 < 60)"
           ],
-          "evidence_ar": "بدا يتحدى نفسه اكثر بالتمارين",
-          "draft_message_ar": "ممتاز يا Layla! رؤية حماسك لتحدي نفسك في التمارين أمر مشجع جدًا. الاستمرار على هذا النهج سيجعلك مستعدًا تمامًا للاختبار القادم.",
+          "evidence_ar": "احمد فهم النقطة. بدا يتحدى نفسه اكثر بالتمارين",
+          "draft_message_ar": "ما شاء الله، يسعدنا أن Layla بدأت تتحدى نفسها أكثر في التمارين. هذا التطور سيساعدها كثيرًا في تحقيق أهدافها قبل الاختبار القادم، ونحن هنا لدعمها في كل خطوة.",
           "parent_phone": "+9665••••••10",
           "phone_flag": "ok"
         }
@@ -1156,7 +1156,7 @@
             "little sustained practice (median 1 questions/day)"
           ],
           "evidence_ar": "حضور سيء وتمارين معدومة تقريباً",
-          "draft_message_ar": "السلام عليكم، لاحظنا أن Abdullah تواجه صعوبة في الحضور وحل التمارين مؤخرًا، ويهمنا جدًا أن نرى تقدمها. هل هناك ما يمكننا فعله لدعمها في الالتزام بالتمارين اليومية قبل الاختبار القادم؟",
+          "draft_message_ar": "السلام عليكم، نود الاطمئنان على Abdullah لأن حضورها مؤخرًا كان قليلًا جدًا وتمارينها شبه معدومة. هل هناك أي شيء يمكننا تقديمه للمساعدة في تحفيزها على المشاركة بانتظام قبل الاختبار القادم؟",
           "parent_phone": "+9665••••••33",
           "phone_flag": "ok"
         },
@@ -1177,14 +1177,14 @@
           "blocker": "academic",
           "confidence": "high",
           "note_changed_priority": false,
-          "story": "Student is struggling and requires an intensive intervention plan.",
+          "story": "The student is struggling and requires an intensive intervention plan.",
           "why": [
             "failed Quiz 1 (scored 35 < 60)",
             "chronically low attendance (recent avg 36 min/session)",
             "little sustained practice (median 2 questions/day)"
           ],
           "evidence_ar": "محمد من الطلاب المتعثرين. محتاج خطة تدخل مكثفة",
-          "draft_message_ar": "السلام عليكم، نود مناقشة خطة دعم مكثفة لـ Layla لمساعدته على تجاوز الصعوبات الحالية. سنقوم بتخصيص وقت إضافي لـ Layla لضمان فهمه للمادة قبل الاختبار القادم.",
+          "draft_message_ar": "السلام عليكم، نود التأكد من أن Layla تحصل على الدعم الكامل لتجاوز صعوبات المادة. سنقوم بوضع خطة متابعة مكثفة لضمان تقدمها قبل الاختبار القادم، ونحن هنا لدعمها في كل خطوة.",
           "parent_phone": "+9665••••••38",
           "phone_flag": "ok"
         },
@@ -1233,7 +1233,7 @@
           "blocker": "unknown",
           "confidence": "high",
           "note_changed_priority": false,
-          "story": "A high-achieving student, Layla, has been absent for two days with no response from parents after initial contact.",
+          "story": "A student who was previously excellent and scored 88 on the last quiz is now absent, and parents are not responding to WhatsApp messages.",
           "why": [
             "attendance collapsed from a strong baseline (87 min) to near-zero in the last days — possible silent dropout",
             "an attempted intervention is failing — recent contact has NOT resolved it, so this is NOT lower priority"
@@ -1260,13 +1260,13 @@
           "blocker": "unknown",
           "confidence": "high",
           "note_changed_priority": false,
-          "story": "Abdullah stopped attending suddenly despite good quiz scores, and attempts to contact his parents via WhatsApp and phone have failed.",
+          "story": "Abdullah, who was attending regularly, has stopped coming and his father is unreachable via WhatsApp and phone.",
           "why": [
             "attendance collapsed from a strong baseline (87 min) to near-zero in the last days — possible silent dropout",
             "an attempted intervention is failing — recent contact has NOT resolved it, so this is NOT lower priority"
           ],
           "evidence_ar": "حاولت اتصل على اهل عبدالله مرتين، ما في رد. الواتساب ما وصل كمان",
-          "draft_message_ar": "السلام عليكم، نفتقد Ahmad في الحصص منذ يومين ويهمنا كثيرًا الاطمئنان أن كل شيء بخير. نرجو التكرم بالرد على هذه الرسالة أو تحديد وقت يناسبكم للاتصال — وجود Ahmad في حصة الغد يفرق كثيرًا قبل الاختبار القادم.",
+          "draft_message_ar": "السلام عليكم، نفتقد Ahmad في الحصص هذه الأيام ويهمنا الاطمئنان أن كل شيء بخير. نرجو التكرم بالرد على هذه الرسالة أو تحديد وقت يناسبكم للاتصال — وجود Ahmad في حصة الغد يفرق كثيرًا قبل الاختبار القادم.",
           "parent_phone": "+9665••••••39",
           "phone_flag": "ok"
         },
@@ -1293,7 +1293,7 @@
             "little sustained practice (median 2 questions/day)"
           ],
           "evidence_ar": "عمر يعاني بكل المجالات. لازم نتدخل بسرعة",
-          "draft_message_ar": "السلام عليكم، نود الاطمئنان على Ahmad لأننا نلاحظ أنه يواجه صعوبات في عدة مجالات حاليًا. نؤمن بقدرته على التحسن، ونرغب في العمل معكم لدعمه قبل الاختبار القادم.",
+          "draft_message_ar": "السلام عليكم، نود الاطمئنان على Ahmad لأننا لاحظنا أنه يواجه صعوبات في عدة مجالات مؤخرًا. نؤمن بقدرته على التحسن ويهمنا جدًا أن نكون جزءًا من هذا التحسن قبل الاختبار القادم، ونحن هنا لدعمه.",
           "parent_phone": "+9665••••••27",
           "phone_flag": "ok"
         },
@@ -1314,17 +1314,15 @@
           "blocker": "academic",
           "confidence": "high",
           "note_changed_priority": false,
-          "story": "Fatima is doing many easy exercises but her test scores show this is insufficient, and she has not changed her strategy despite needing closer monitoring.",
+          "story": "The student is doing many easy exercises but her test scores indicate this is insufficient, and she has not changed her strategy.",
           "why": [
             "failed Quiz 1 (scored 57 < 60)"
           ],
           "evidence_ar": "فاطمة لسا ما غيرت استراتيجيتها. محتاجه متابعة اقرب",
-          "draft_message_ar": "السلام عليكم، لاحظنا أن Hassan تبذل جهدًا كبيرًا في التمارين، ولكن لتحقيق أفضل النتائج قبل الاختبار القادم، من المهم التركيز على التمارين الأكثر تحديًا. هل يمكننا تخصيص وقت قصير لمناقشة استراتيجية حل المسائل معًا؟",
+          "draft_message_ar": "السلام عليكم، لاحظنا أن Hassan تبذل جهدًا كبيرًا في التمارين، وهذا أمر رائع! لكن لضمان أفضل استعداد للاختبار القادم، نقترح التركيز على تمارين المستوى الأصعب قليلًا، ونحن هنا لمساعدتها في ذلك.",
           "parent_phone": "+9665••••••35",
           "phone_flag": "ok"
-        }
-      ],
-      "messages": [
+        },
         {
           "priority": "Medium",
           "base_tier_numbers_only": "Low",
@@ -1333,7 +1331,7 @@
           "campus": "C01",
           "track": "Standard",
           "lane": "queue",
-          "action": "message",
+          "action": "one_on_one",
           "call_waitlisted": false,
           "quiz_failed": false,
           "contacted_since_quiz": true,
@@ -1342,17 +1340,18 @@
           "blocker": "motivation",
           "confidence": "high",
           "note_changed_priority": true,
-          "story": "The student attends regularly but does not complete exercises, believing attendance is sufficient, a pattern that needs addressing.",
+          "story": "The student attends regularly but does not complete exercises, believing attendance is sufficient.",
           "why": [
             "little sustained practice (median 1 questions/day)",
             "the metrics look fine but the note reveals a problem the numbers miss"
           ],
-          "evidence_ar": "حسن يحضر دايم بس ما يتمرن. نفس مشكلة خالد - يفكر الحضور كافي",
-          "draft_message_ar": "السلام عليكم، نلاحظ أن Sara يحضر بانتظام وهذا أمر ممتاز. لكن لضمان أفضل استفادة قبل الاختبار القادم، من المهم جدًا أن يتدرب على حل التمارين يوميًا — هذا سيساعده على تثبيت المعلومات بشكل فعّال.",
+          "evidence_ar": "حسن يحضر دايم بس ما يتمرن",
+          "draft_message_ar": "السلام عليكم، نلاحظ أن Sara تحضر الحصص بانتظام وهذا ممتاز، لكن تمارين التطبيق هي ما يثبّت المعلومة ويضمن التفوق. هل يمكننا تخصيص وقت قصير بعد الحصة لمناقشة أهمية حل التمارين وكيف يمكن لـ Sara البدء بها؟",
           "parent_phone": "+9665••••••30",
           "phone_flag": "ok"
         }
       ],
+      "messages": [],
       "review": []
     },
     "facilitator7@noon.com": {
@@ -1473,33 +1472,6 @@
           "priority": "High",
           "base_tier_numbers_only": "High",
           "risk_score": 4,
-          "student_id": "S152",
-          "campus": "C04",
-          "track": "Standard",
-          "lane": "queue",
-          "action": "one_on_one",
-          "call_waitlisted": false,
-          "quiz_failed": true,
-          "contacted_since_quiz": true,
-          "last_note_day": 14,
-          "note_state": "needs_help",
-          "blocker": "academic",
-          "confidence": "high",
-          "note_changed_priority": false,
-          "story": "Ali is attending sessions but not completing any exercises.",
-          "why": [
-            "failed Quiz 1 (scored 56 < 60)",
-            "little sustained practice (median 0 questions/day)"
-          ],
-          "evidence_ar": "تمارين صفر",
-          "draft_message_ar": "السلام عليكم، نلاحظ أن Maryam يحضر الحصص بانتظام وهذا أمر رائع. لزيادة الاستفادة قبل الاختبار القادم، نقترح تخصيص 15 دقيقة يوميًا لحل التمارين — نحن هنا لدعم Maryam في هذه الخطوة.",
-          "parent_phone": "+9665••••••52",
-          "phone_flag": "ok"
-        },
-        {
-          "priority": "High",
-          "base_tier_numbers_only": "High",
-          "risk_score": 4,
           "student_id": "S162",
           "campus": "C04",
           "track": "Standard",
@@ -1518,9 +1490,36 @@
             "failed Quiz 1 (scored 55 < 60)",
             "little sustained practice (median 0 questions/day)"
           ],
-          "evidence_ar": "حسن يحضر دايم بس رافض يتمرن",
-          "draft_message_ar": "السلام عليكم، نلاحظ أن Sara يحضر الحصص بانتظام وهذا أمر رائع. لكننا نود مساعدته على الاستفادة القصوى من البرنامج عبر حل التمارين اليومية، فهل يمكننا تخصيص وقت قصير معه لمناقشة أهميتها وكيفية البدء بها؟",
+          "evidence_ar": "حسن كمان نفس الحالة",
+          "draft_message_ar": "السلام عليكم، نلاحظ أن Sara تحضر الحصص بانتظام وهذا أمر ممتاز، لكنها لم تبدأ بعد في حل التمارين. نود التأكيد على أن حل التمارين هو مفتاح إتقان المادة، ونحن هنا لمساعدتها على تجاوز أي صعوبة قد تواجهها في البدء.",
           "parent_phone": "+9665••••••62",
+          "phone_flag": "ok"
+        },
+        {
+          "priority": "High",
+          "base_tier_numbers_only": "High",
+          "risk_score": 4,
+          "student_id": "S152",
+          "campus": "C04",
+          "track": "Standard",
+          "lane": "queue",
+          "action": "one_on_one",
+          "call_waitlisted": false,
+          "quiz_failed": true,
+          "contacted_since_quiz": true,
+          "last_note_day": 14,
+          "note_state": "needs_help",
+          "blocker": "academic",
+          "confidence": "high",
+          "note_changed_priority": false,
+          "story": "The student has good attendance but is not completing any exercises.",
+          "why": [
+            "failed Quiz 1 (scored 56 < 60)",
+            "little sustained practice (median 0 questions/day)"
+          ],
+          "evidence_ar": "تمارين صفر",
+          "draft_message_ar": "السلام عليكم، نلاحظ أن Maryam تحضر الحصص بانتظام وهذا أمر ممتاز، لكنها لا تقوم بحل التمارين. هل يمكننا تخصيص وقت قصير لمناقشة سبب ذلك وتقديم الدعم اللازم لها قبل الاختبار القادم؟",
+          "parent_phone": "+9665••••••52",
           "phone_flag": "ok"
         },
         {
@@ -1540,12 +1539,12 @@
           "blocker": "motivation",
           "confidence": "high",
           "note_changed_priority": false,
-          "story": "The student consistently avoids difficult questions and requires ongoing emotional support, indicating a deeper issue than just practice.",
+          "story": "The student is avoiding difficult questions and requires ongoing psychological support, which is deeper than just practice.",
           "why": [
             "failed Quiz 1 (scored 54 < 60)"
           ],
-          "evidence_ar": "يوسف يتجنب الاسئلة الصعبة",
-          "draft_message_ar": "السلام عليكم، لاحظنا أن Layla يواجه صعوبة مع الأسئلة الصعبة ويحتاج دعمًا إضافيًا. نود التأكيد على أن كل خطوة صغيرة نحو فهم أصعب المفاهيم هي نجاح بحد ذاته، ونحن هنا لتشجيعه في كل مرحلة قبل الاختبار القادم.",
+          "evidence_ar": "يوسف محتاج دعم نفسي مستمر. الموضوع اعمق من التمارين",
+          "draft_message_ar": "السلام عليكم، لاحظنا أن Layla تتجنب الأسئلة الصعبة، وهذا قد يكون مؤشرًا على قلق أكبر. نود التأكيد على أننا هنا لدعمها نفسيًا ومعنويًا، وتشجيعها على مواجهة التحديات بثقة قبل الاختبار القادم.",
           "parent_phone": "+9665••••••46",
           "phone_flag": "ok"
         }
@@ -1795,7 +1794,7 @@
           "blocker": "unknown",
           "confidence": "high",
           "note_changed_priority": false,
-          "story": "A previously excellent student, Layla, has drastically reduced her attendance and is now completely absent, with no response from her mother.",
+          "story": "A student who was previously excellent has drastically reduced attendance and is now absent, with attempts to contact her mother unsuccessful.",
           "why": [
             "failed Quiz 1 (scored 46 < 60)",
             "chronically low attendance (recent avg 0 min/session)",
@@ -1803,7 +1802,7 @@
             "an attempted intervention is failing — recent contact has NOT resolved it, so this is NOT lower priority"
           ],
           "evidence_ar": "ليلى محتاجه تدخل عاجل. كانت ممتازه والحين شبه اختفت",
-          "draft_message_ar": "السلام عليكم، نفتقد Nora في الحصص منذ أيام ويهمنا كثيرًا الاطمئنان أن كل شيء بخير. نرجو التكرم بالرد على هذه الرسالة أو تحديد وقت يناسبكم للاتصال — وجود Nora في حصة الغد يفرق كثيرًا قبل الاختبار القادم.",
+          "draft_message_ar": "السلام عليكم، نفتقد Nora في الحصص منذ أيام ويهمنا الاطمئنان أن كل شيء بخير. نرجو التكرم بالرد على هذه الرسالة أو تحديد وقت يناسبكم للاتصال — وجود Nora في حصة الغد يفرق كثيرًا قبل الاختبار القادم.",
           "parent_phone": "+9665••••••90",
           "phone_flag": "ok"
         }
@@ -1826,41 +1825,14 @@
           "blocker": "academic",
           "confidence": "high",
           "note_changed_priority": false,
-          "story": "Ali continues to prioritize quantity over quality in his work, and the current approach to clarify this is insufficient.",
+          "story": "Ali continues to focus on quantity over quality in his work, and the facilitator needs to be clearer with him.",
           "why": [
             "failed Quiz 1 (scored 49 < 60)",
             "chronically low attendance (recent avg 38 min/session)"
           ],
           "evidence_ar": "علي لسا يركز على الكمية",
-          "draft_message_ar": "السلام عليكم، لاحظنا أن Hassan يركز على إنجاز الكثير من التمارين، وهذا ممتاز، لكن من المهم أيضًا التأكد من جودة الحلول. هل يمكننا تخصيص وقت قصير معه لمراجعة بعض الأمثلة للتأكد من فهمه للنوعية المطلوبة قبل الاختبار القادم؟",
+          "draft_message_ar": "السلام عليكم، لاحظنا أن Hassan يركز على إنهاء المهام بسرعة، وهذا قد يؤثر على جودة عمله. نقترح تخصيص وقت إضافي لمراجعة التمارين معه للتأكد من فهمه للمادة بشكل أعمق قبل الاختبار القادم.",
           "parent_phone": "+9665••••••79",
-          "phone_flag": "ok"
-        },
-        {
-          "priority": "High",
-          "base_tier_numbers_only": "High",
-          "risk_score": 5,
-          "student_id": "S191",
-          "campus": "C05",
-          "track": "Remedial",
-          "lane": "queue",
-          "action": "one_on_one",
-          "call_waitlisted": true,
-          "quiz_failed": true,
-          "contacted_since_quiz": true,
-          "last_note_day": 14,
-          "note_state": "needs_help",
-          "blocker": "academic",
-          "confidence": "high",
-          "note_changed_priority": false,
-          "story": "The student is stuck on easy exercises and needs better guidance, with the facilitator planning to meet with her.",
-          "why": [
-            "failed Quiz 1 (scored 47 < 60)",
-            "chronically low attendance (recent avg 35 min/session)"
-          ],
-          "evidence_ar": "مريم محتاجه توجيه افضل",
-          "draft_message_ar": "السلام عليكم، لاحظنا أن Hassan تحتاج بعض الدعم الإضافي في التمارين لتجاوز المستوى الحالي. سنعمل معها على تمارين أكثر تحديًا بعد الحصة لضمان تقدمها قبل الاختبار القادم.",
-          "parent_phone": "+9665••••••91",
           "phone_flag": "ok"
         },
         {
@@ -1880,14 +1852,41 @@
           "blocker": "motivation",
           "confidence": "high",
           "note_changed_priority": false,
-          "story": "Sarah is not responding to guidance and is exhibiting a pattern seen in several students.",
+          "story": "The student is not responding to guidance, indicating a persistent issue.",
           "why": [
             "failed Quiz 1 (scored 45 < 60)",
             "chronically low attendance (recent avg 30 min/session)"
           ],
           "evidence_ar": "سارة الحالة صعبة. مو مستجيبة للتوجيهات",
-          "draft_message_ar": "السلام عليكم، معكم مُيسِّر Fatima في بوون أكاديمي. نتيجة Fatima في الاختبار الأخير كانت 45 من 100، والوقت كافٍ تمامًا للتحسّن قبل الاختبار القادم. نقترح خطوة واحدة: حل 10 أسئلة تدريب يوميًا هذا الأسبوع، وسنتابع التقدّم أولًا بأول.",
+          "draft_message_ar": "السلام عليكم، نلاحظ أن Fatima تواجه صعوبة في الاستجابة للتوجيهات الأخيرة ويهمنا دعمها. هل يمكننا تخصيص وقت قصير لها هذا الأسبوع لمناقشة ما قد يواجهها بشكل مباشر؟ وجودها معنا غدًا سيساعدها كثيرًا قبل الاختبار القادم.",
           "parent_phone": "+9665••••••96",
+          "phone_flag": "ok"
+        },
+        {
+          "priority": "High",
+          "base_tier_numbers_only": "High",
+          "risk_score": 5,
+          "student_id": "S191",
+          "campus": "C05",
+          "track": "Remedial",
+          "lane": "queue",
+          "action": "one_on_one",
+          "call_waitlisted": true,
+          "quiz_failed": true,
+          "contacted_since_quiz": true,
+          "last_note_day": 14,
+          "note_state": "needs_help",
+          "blocker": "academic",
+          "confidence": "high",
+          "note_changed_priority": false,
+          "story": "The student is only completing easy exercises and needs better guidance, with the facilitator planning to meet with her after class.",
+          "why": [
+            "failed Quiz 1 (scored 47 < 60)",
+            "chronically low attendance (recent avg 35 min/session)"
+          ],
+          "evidence_ar": "مريم محتاجه توجيه افضل",
+          "draft_message_ar": "السلام عليكم، لاحظت أن Hassan تتقن التمارين السهلة وتحتاج لتحدي أكبر. أقترح أن نركز معًا على التمارين الأصعب قليلًا في الحصة القادمة لضمان استمرار تقدمها قبل الاختبار.",
+          "parent_phone": "+9665••••••91",
           "phone_flag": "ok"
         },
         {
@@ -1939,8 +1938,8 @@
             "failed Quiz 1 (scored 54 < 60)",
             "little sustained practice (median 0 questions/day)"
           ],
-          "evidence_ar": "محمد يرفض التمارين كلياً. لازم نتدخل بشكل مباشر",
-          "draft_message_ar": "السلام عليكم، لاحظنا أن Sara يواجه صعوبة في إكمال التمارين مؤخرًا، ويهمنا جدًا دعمه. هل يمكننا تخصيص وقت قصير معه الأسبوع القادم لمساعدته على تجاوز هذه العقبة قبل الاختبار القادم؟",
+          "evidence_ar": "محمد يرفض التمارين كلياً",
+          "draft_message_ar": "السلام عليكم، لاحظنا أن Sara لا تقوم بحل التمارين حاليًا، وهذا جزء مهم من رحلة التعلم. هل يمكننا تخصيص وقت قصير لمناقشة أي صعوبات تواجهها في التمارين وتقديم الدعم اللازم لها قبل الاختبار القادم؟",
           "parent_phone": "+9665••••••74",
           "phone_flag": "ok"
         },
@@ -1958,16 +1957,16 @@
           "contacted_since_quiz": true,
           "last_note_day": 14,
           "note_state": "needs_help",
-          "blocker": "motivation",
+          "blocker": "academic",
           "confidence": "high",
           "note_changed_priority": false,
-          "story": "Fatima attends regularly but completes no exercises, a pattern that has persisted.",
+          "story": "The student attends regularly but completes no exercises, a pattern that has persisted.",
           "why": [
             "failed Quiz 1 (scored 53 < 60)",
             "little sustained practice (median 0 questions/day)"
           ],
           "evidence_ar": "حضور قوي، تمارين معدومة",
-          "draft_message_ar": "السلام عليكم، نلاحظ أن Omar تحضر بانتظام وهذا شيء رائع، لكنها لا تكمل التمارين. هل يمكننا تخصيص وقت قصير معها الأسبوع القادم لمناقشة أي صعوبات قد تواجهها في التمارين؟",
+          "draft_message_ar": "السلام عليكم، نلاحظ أن Omar يحضر الحصص بانتظام ولكن لا يحل التمارين. هل يمكننا تخصيص وقت قصير بعد الحصة لمناقشة أي صعوبات قد تواجهه في التمارين؟ هذا سيساعده كثيرًا قبل الاختبار القادم.",
           "parent_phone": "+9665••••••85",
           "phone_flag": "ok"
         },
@@ -2005,21 +2004,21 @@
           "campus": "C05",
           "track": "Remedial",
           "lane": "queue",
-          "action": "one_on_one",
-          "call_waitlisted": true,
+          "action": "message",
+          "call_waitlisted": false,
           "quiz_failed": true,
           "contacted_since_quiz": true,
           "last_note_day": 14,
           "note_state": "improving",
           "blocker": "academic",
-          "confidence": "medium",
+          "confidence": "high",
           "note_changed_priority": false,
-          "story": "Fatima is starting to understand the importance of challenging exercises, showing a slight but present improvement.",
+          "story": "Fatima is starting to understand the importance of challenging exercises, showing slight but noticeable improvement.",
           "why": [
             "failed Quiz 1 (scored 51 < 60)"
           ],
-          "evidence_ar": "فاطمة بدت تفهم اهمية التحدي",
-          "draft_message_ar": "السلام عليكم، يسعدنا أن Amal بدأت تدرك أهمية التمارين الصعبة. تشجيعها على تجربة مسألة واحدة تتطلب تفكيرًا أعمق كل يوم سيساعدها على بناء ثقتها قبل الاختبار القادم.",
+          "evidence_ar": "فاطمة بدت تفهم اهمية التحدي. تحسن بسيط بس موجود",
+          "draft_message_ar": "ما شاء الله، يسعدنا أن Amal بدأت تدرك أهمية التحديات في تطوير المهارات. الاستمرار على هذا النهج سيساعدها كثيرًا قبل الاختبار القادم، ونحن هنا لدعمها.",
           "parent_phone": "+9665••••••68",
           "phone_flag": "ok"
         }
@@ -2042,16 +2041,16 @@
           "contacted_since_quiz": true,
           "last_note_day": 14,
           "note_state": "failing",
-          "blocker": "motivation",
+          "blocker": "unknown",
           "confidence": "high",
           "note_changed_priority": false,
-          "story": "The student's absence, initially linked to late-night gaming, has worsened and the mother is unresponsive to calls and messages.",
+          "story": "The student's absence continues, and attempts to contact the mother have been unsuccessful, escalating concerns.",
           "why": [
             "attendance collapsed from a strong baseline (87 min) to near-zero in the last days — possible silent dropout",
             "an attempted intervention is failing — recent contact has NOT resolved it, so this is NOT lower priority"
           ],
-          "evidence_ar": "احمد محتاج متابعه فورية. الموضوع بدا من مشكلة الالعاب بس الحين صار اسوأ",
-          "draft_message_ar": "السلام عليكم، نفتقد Omar في الحصص هذه الأيام ويهمنا الاطمئنان. نعرف أن تنظيم وقت الألعاب ليس سهلًا، لكن الاتفاق على وقت ثابت لإغلاق الجهاز قبل النوم يصنع فرقًا واضحًا قبل الاختبار القادم — ونحن معكم خطوة بخطوة.",
+          "evidence_ar": "اتصلت مرتين على الام، ما ردت",
+          "draft_message_ar": "السلام عليكم، نفتقد Omar في الحصص هذه الأيام ويهمنا الاطمئنان أن كل شيء بخير. نرجو التكرم بالرد على هذه الرسالة أو تحديد وقت يناسبكم للاتصال — وجود Omar في حصة الغد يفرق كثيرًا قبل الاختبار القادم.",
           "parent_phone": "+9665••••••05",
           "phone_flag": "ok"
         },
@@ -2072,14 +2071,14 @@
           "blocker": "unknown",
           "confidence": "high",
           "note_changed_priority": true,
-          "story": "Ahmed's poor attendance and lack of practice continue, and attempts to contact his parents have been unsuccessful.",
+          "story": "Student's poor attendance and lack of practice persist despite attempts to contact the parents, who have been unreachable.",
           "why": [
             "failed Quiz 1 (scored 42 < 60)",
             "little sustained practice (median 2 questions/day)",
             "an attempted intervention is failing — recent contact has NOT resolved it, so this is NOT lower priority"
           ],
           "evidence_ar": "احمد لسا على نفس الوضع. حاولت اتواصل مع الاهل بدون نتيجة",
-          "draft_message_ar": "السلام عليكم، نود الاطمئنان على Fatima وتقديم الدعم اللازم. نلاحظ غيابًا مستمرًا وعدم حل للتمارين، ويهمنا جدًا معرفة أي تحديات قد تواجهونه لتقديم المساعدة المناسبة قبل الاختبار القادم.",
+          "draft_message_ar": "السلام عليكم، نفتقد Fatima في الحصص هذه الأيام ويهمنا الاطمئنان. نعرف أن تنظيم وقت الألعاب ليس سهلًا، لكن الاتفاق على وقت ثابت لإغلاق الجهاز قبل النوم يصنع فرقًا واضحًا قبل الاختبار القادم — ونحن معكم خطوة بخطوة.",
           "parent_phone": "+9665••••••04",
           "phone_flag": "missing_plus"
         },
@@ -2091,7 +2090,7 @@
           "campus": "C01",
           "track": "Remedial",
           "lane": "queue",
-          "action": "one_on_one",
+          "action": "call_parent",
           "call_waitlisted": false,
           "quiz_failed": true,
           "contacted_since_quiz": false,
@@ -2105,8 +2104,8 @@
             "failed Quiz 1 (scored 38 < 60)",
             "little sustained practice (median 2 questions/day)"
           ],
-          "evidence_ar": "محتاجه دعم شامل",
-          "draft_message_ar": "السلام عليكم، نود الاطمئنان على Khalid وتقديم الدعم اللازم لها. نلاحظ أنها تحتاج لبعض المساعدة الإضافية في المواد، ونحن هنا لمساعدتها على تجاوز هذه المرحلة قبل الاختبار القادم.",
+          "evidence_ar": "فاطمة حضور ضعيف ودرجات متدنية. محتاجه دعم شامل",
+          "draft_message_ar": "السلام عليكم، نود الاطمئنان على Khalid ومتابعة مستواها الدراسي. لاحظنا انخفاضًا في الحضور والدرجات، ويهمنا تقديم الدعم اللازم لها لتجاوز هذه المرحلة قبل الاختبار القادم. هل يمكننا مناقشة كيف يمكننا مساعدتها بشكل أفضل؟",
           "parent_phone": "+9665••••••19",
           "phone_flag": "ok"
         },
@@ -2127,13 +2126,13 @@
           "blocker": "motivation",
           "confidence": "high",
           "note_changed_priority": false,
-          "story": "Khaled attends but doesn't practice, believing understanding in class is sufficient, leading to a failing grade.",
+          "story": "The student attends but does not practice, believing understanding in class is sufficient, and his grades reflect this.",
           "why": [
             "failed Quiz 1 (scored 58 < 60)",
             "little sustained practice (median 0 questions/day)"
           ],
           "evidence_ar": "خالد نفس مشكلة كثير طلاب - يفكر ان الفهم بالحصة كافي. لازم نركز على توعية الطلاب باهمية الممارسة",
-          "draft_message_ar": "السلام عليكم، نلاحظ أن Ahmad يحضر الحصص بانتظام ولكن لا يمارس التمارين، وهذا يؤثر على درجاته. هل يمكننا تخصيص وقت قصير لمناقشة كيف أن حل التمارين يعزز الفهم ويضمن درجة أفضل في الاختبار القادم؟",
+          "draft_message_ar": "السلام عليكم، لاحظنا أن Ahmad يحضر الحصص لكنه لا يمارس التمارين، وهذا يؤثر على درجاته. نود التأكيد على أن الممارسة بعد الشرح هي مفتاح إتقان المادة وتحقيق درجات أفضل في الاختبار القادم، ونحن هنا لمساعدته على فهم هذه النقطة.",
           "parent_phone": "+9665••••••15",
           "phone_flag": "ok"
         },
@@ -2154,7 +2153,7 @@
           "blocker": "motivation",
           "confidence": "high",
           "note_changed_priority": true,
-          "story": "The student attends but refuses to do exercises, and the parent is defensive and uncooperative, blocking any help.",
+          "story": "The student attends but refuses to do exercises, and the mother is defensive and uncooperative, blocking any help.",
           "why": [
             "little sustained practice (median 0 questions/day)",
             "an attempted intervention is failing — recent contact has NOT resolved it, so this is NOT lower priority"
@@ -2162,32 +2161,6 @@
           "evidence_ar": "الام كانت دفاعية: 'هي تحضر الحصص، ايش اكثر من كذا تبون؟' مو متعاونه",
           "draft_message_ar": "السلام عليكم، معكم مُيسِّر Maryam في بوون أكاديمي. حضور Maryam منتظم وهذا ممتاز، لكن التمارين اليومية شبه متوقفة. التمارين هي ما يرفع الدرجات فعليًا — نقترح البدء بـ10 أسئلة يوميًا قبل الاختبار القادم.",
           "parent_phone": "+9665••••••08",
-          "phone_flag": "ok"
-        },
-        {
-          "priority": "Medium",
-          "base_tier_numbers_only": "Low",
-          "risk_score": 0,
-          "student_id": "S013",
-          "campus": "C01",
-          "track": "Standard",
-          "lane": "queue",
-          "action": "one_on_one",
-          "call_waitlisted": false,
-          "quiz_failed": false,
-          "contacted_since_quiz": true,
-          "last_note_day": 14,
-          "note_state": "needs_help",
-          "blocker": "motivation",
-          "confidence": "medium",
-          "note_changed_priority": true,
-          "story": "The student appears distracted and is leaving sessions early, but denies any specific problem when asked.",
-          "why": [
-            "the metrics look fine but the note reveals a problem the numbers miss"
-          ],
-          "evidence_ar": "نور شكلها مشغولة البال. جت ٥٠ دقيقة بس اليوم، عادة تجي كامل الحصة",
-          "draft_message_ar": "السلام عليكم، لاحظنا أن Yousef تبدو مشغولة البال مؤخرًا وتغادر الحصة مبكرًا. نود التأكيد على أننا هنا لدعمها في أي شيء قد تواجهه، وأننا نقدر حضورها الكامل قبل الاختبار القادم.",
-          "parent_phone": "+9665••••••13",
           "phone_flag": "ok"
         },
         {
@@ -2207,17 +2180,46 @@
           "blocker": "family",
           "confidence": "high",
           "note_changed_priority": true,
-          "story": "Amal is experiencing family issues causing emotional distress, but she is still attending classes and showing resilience.",
+          "story": "The student is experiencing family issues causing emotional distress, but is still attending classes and showing resilience.",
           "why": [
             "the metrics look fine but the note reveals a problem the numbers miss"
           ],
-          "evidence_ar": "امل محتاجه دعم عاطفي. المشاكل العائلية اثرت عليها بس لسا محافظه على الحضور.",
-          "draft_message_ar": "السلام عليكم، نلاحظ أن Omar تمر بوقت عصيب بسبب مشاكل عائلية، ونحن هنا لدعمها. التركيز على الحضور اليومي هو خطوة ممتازة، وسنعمل معها لتعزيز ثقتها بنفسها قبل الاختبار القادم.",
+          "evidence_ar": "امل محتاجه دعم عاطفي. المشاكل العائلية اثرت عليها بس لسا محافظه على الحضور",
+          "draft_message_ar": "السلام عليكم، نلاحظ أن Omar تمر بوقت عصيب بسبب مشاكل عائلية، ونحن هنا لدعمها. حضورها المنتظم رغم هذه الظروف أمر إيجابي جدًا، وسنحرص على تقديم الدعم اللازم لها في الحصص القادمة.",
           "parent_phone": "+9665••••••17",
           "phone_flag": "ok"
         }
       ],
       "messages": [
+        {
+          "priority": "Medium",
+          "base_tier_numbers_only": "Critical",
+          "risk_score": 6,
+          "student_id": "S012",
+          "campus": "C01",
+          "track": "Remedial",
+          "lane": "queue",
+          "action": "message",
+          "call_waitlisted": false,
+          "quiz_failed": true,
+          "contacted_since_quiz": true,
+          "last_note_day": 14,
+          "note_state": "explained",
+          "blocker": "family",
+          "confidence": "high",
+          "note_changed_priority": true,
+          "story": "The father was unaware of the program, which impacted the student's performance, but he wants the student to continue.",
+          "why": [
+            "failed Quiz 1 (scored 28 < 60)",
+            "chronically low attendance (recent avg 15 min/session)",
+            "little sustained practice (median 0 questions/day)",
+            "the absence is explained (illness/family, parent already engaged) — a check-in, not another call slot"
+          ],
+          "evidence_ar": "ما كان يدري عن البرنامج اصلاً!",
+          "draft_message_ar": "السلام عليكم، نود التأكيد على أهمية التواصل المستمر بيننا وبينكم لضمان أفضل متابعة لـ Amal. يسعدنا دعمكم لـ Amal في البرنامج، وسنحرص على إبقائكم على اطلاع دائم بكل جديد قبل الاختبار القادم.",
+          "parent_phone": "+9665••••••12",
+          "phone_flag": "ok"
+        },
         {
           "priority": "Medium",
           "base_tier_numbers_only": "Medium",
@@ -2261,44 +2263,41 @@
           "blocker": "motivation",
           "confidence": "high",
           "note_changed_priority": false,
-          "story": "The student was avoiding difficult questions due to low self-confidence, but recent motivational talks are showing positive initial results.",
+          "story": "The student is showing initial positive signs after discussing self-confidence issues, which were hindering his willingness to tackle difficult problems.",
           "why": [
             "failed Quiz 1 (scored 58 < 60)"
           ],
           "evidence_ar": "محمد بدا يتحسن بعد ما كلمته عن الثقة بالنفس. لسا طريق طويل بس البداية ايجابية",
-          "draft_message_ar": "السلام عليكم، يسعدنا أن نرى تحسنًا في ثقة Abdullah بنفسه بعد حديثنا الأخير. الاستمرار في مواجهة التحديات الصغيرة يوميًا سيساعده كثيرًا على بناء هذه الثقة قبل الاختبار القادم، ونحن هنا لدعمه.",
+          "draft_message_ar": "السلام عليكم، يسعدنا أن Abdullah بدأ يشعر بتحسن بعد حديثنا عن الثقة بالنفس. تشجيعه المستمر على مواجهة التحديات الصعبة، مهما كانت النتيجة، سيساعده على بناء هذه الثقة تدريجيًا قبل الاختبار القادم.",
           "parent_phone": "+9665••••••09",
           "phone_flag": "ok"
         }
       ],
       "review": [
         {
-          "priority": "Critical",
-          "base_tier_numbers_only": "Critical",
-          "risk_score": 6,
-          "student_id": "S012",
+          "priority": "Medium",
+          "base_tier_numbers_only": "Low",
+          "risk_score": 0,
+          "student_id": "S013",
           "campus": "C01",
-          "track": "Remedial",
+          "track": "Standard",
           "lane": "human_review",
           "action": "review",
           "call_waitlisted": false,
-          "quiz_failed": true,
+          "quiz_failed": false,
           "contacted_since_quiz": true,
           "last_note_day": 14,
-          "note_state": "explained",
-          "blocker": "family",
+          "note_state": "needs_help",
+          "blocker": "motivation",
           "confidence": "low",
-          "note_changed_priority": false,
-          "story": "The father was unaware of the program until recently, which impacted the student's participation and performance; he is now aware and wants the student to continue.",
+          "note_changed_priority": true,
+          "story": "The student is leaving class early and seems distracted and uncomfortable, but is not disclosing a specific reason.",
           "why": [
-            "failed Quiz 1 (scored 28 < 60)",
-            "chronically low attendance (recent avg 15 min/session)",
-            "little sustained practice (median 0 questions/day)",
-            "the note is ambiguous — needs a human read before acting"
+            "the metrics look fine but the note reveals a problem the numbers miss"
           ],
           "evidence_ar": "",
-          "draft_message_ar": "السلام عليكم، يسعدنا أن Amal مستمر معكم في البرنامج. نود التأكيد على أهمية متابعة التمارين اليومية لضمان أفضل استعداد للاختبار القادم، ونحن هنا لدعمكم.",
-          "parent_phone": "+9665••••••12",
+          "draft_message_ar": "السلام عليكم، لاحظنا أن Yousef تبدو مشغولة البال وتغادر الحصة مبكرًا مؤخرًا. يهمنا الاطمئنان عليها والتأكد من أن كل شيء على ما يرام. هل هناك أي شيء يمكننا تقديمه للمساعدة في جعل وقت الحصة أكثر راحة وتركيزًا لها قبل الاختبار القادم؟",
+          "parent_phone": "+9665••••••13",
           "phone_flag": "ok"
         }
       ]

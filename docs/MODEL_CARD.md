@@ -15,18 +15,23 @@ score risk or rank students — deterministic rules do that.
 rule cannot do. Everything else (risk, fusion, ranking, template drafts for un-noted
 students) is deterministic and explainable.
 
-**Inputs / privacy:** the model receives the note text ONLY — no attendance, practice,
-or quiz numbers. That is deliberate twice over: metrics in the prompt would let the
-state echo the numbers (contaminating the fusion and any note-vs-outcome comparison),
-and it keeps the payload minimal. Roster names and parent phones are never sent
-(`to_llm_payload`); drafts use a literal `{name}` placeholder filled locally.
+**Inputs / privacy:** the model receives the note text + the student's gender ONLY —
+no attendance, practice or quiz numbers, and never a name or phone. Metrics are
+excluded so the state can't echo the numbers (that would contaminate the fusion and
+any note-vs-outcome comparison). Gender (v3.2) is included because the draft is
+written around a `{name}` placeholder and Arabic verbs/pronouns must agree with the
+ROSTER child — names inside notes can belong to someone else (the name-mismatch
+trap), so the model is instructed never to infer gender from them. The v3.2 re-run
+moved two genuinely ambiguous threads (κ 0.82→0.80); both are in the disagreement
+list, not hidden.
 
 **Measured quality (all 75 noted threads, human gold labels — `eval/`):**
 
 | Prompt | strict | lenient | κ (state) | blocker | failing recall |
 |---|---|---|---|---|---|
 | v3   | 80% | 89% | 0.68 | 71% | 0.15 |
-| v3.1 | **88%** | **99%** | **0.82** | 71% | 0.54 strict / 1.00 lenient |
+| v3.1 | 88% | 99% | 0.82 | 71% | 0.54 strict / 1.00 lenient |
+| v3.2 | **87%** | **97%** | **0.80** | 69% | 0.54 strict / 1.00 lenient |
 
 Labels were drafted from the notes alone, **before** v3 ran, against a written codebook
 (`eval/CODEBOOK.md`); genuinely two-way threads carry an adjudicated alternate state
@@ -39,6 +44,9 @@ labels: per-state numbers are directional at n=75, and a second Arabic-speaking 
 **Guardrails (operating stats from the committed run):**
 - *Faithfulness* — every non-`none` state must quote a verbatim span from a real note;
   a missing OR fabricated quote is downgraded to low confidence (1 trip / 75).
+- *Name-leak guard* — a draft that doesn't use the `{name}` placeholder copied a name
+  from the notes (possibly the WRONG child's); it is discarded for the gender-safe
+  deterministic template.
 - *Abstention* — low-confidence reads route to a human-review lane, never auto-acted
   (1 / 75).
 - *De-escalation guards* — `improving` can lower priority only if the metrics agree

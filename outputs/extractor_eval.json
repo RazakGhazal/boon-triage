@@ -1,9 +1,9 @@
 {
   "n_threads": 75,
-  "strict_agreement_pct": 88,
-  "lenient_agreement_pct": 99,
-  "cohen_kappa_state": 0.82,
-  "blocker_agreement_pct": 71,
+  "strict_agreement_pct": 87,
+  "lenient_agreement_pct": 97,
+  "cohen_kappa_state": 0.8,
+  "blocker_agreement_pct": 69,
   "per_state": {
     "none": {
       "gold_n": 1,
@@ -22,7 +22,7 @@
     },
     "needs_help": {
       "gold_n": 38,
-      "precision": 0.85,
+      "precision": 0.83,
       "recall": 0.92
     },
     "failing": {
@@ -33,7 +33,7 @@
     "refused": {
       "gold_n": 3,
       "precision": 1.0,
-      "recall": 1.0
+      "recall": 0.67
     }
   },
   "confusion_gold_to_pred": {
@@ -48,7 +48,8 @@
       "improving": 14
     },
     "refused": {
-      "refused": 3
+      "refused": 2,
+      "needs_help": 1
     },
     "needs_help": {
       "explained": 2,
@@ -70,6 +71,13 @@
       "pred": "needs_help",
       "confidence": "high",
       "rationale": "Talked to him about practice; Day 14 same 'understands in class' stance — guidance given, no change"
+    },
+    {
+      "student_id": "S042",
+      "gold": "refused",
+      "pred": "needs_help",
+      "confidence": "high",
+      "rationale": "Sick week explained, but the LATEST decisive event is refusing offered extra help"
     }
   ],
   "provenance": "gold labels drafted from notes only, before the v3 extractor ran (eval/CODEBOOK.md)"
