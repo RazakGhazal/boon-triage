@@ -26,19 +26,19 @@ number: failers reached before Quiz 2.
 - **Ingest** that survives the mess: joins on `student_id` only, reads a quiz "0" with a blank
   session as absence (still worth risk points — test avoidance is a flag), ignores the corrupt
   `target_score`, normalizes dirty phones, keeps every note **dated**.
-- **A transparent risk score, backtested:** scored on days 1–9 only, it ranks who actually
-  failed Quiz 1 at **AUC 0.91**. Naive weights? Measured: equal weights score the same (0.909),
-  and a CV logistic on raw features hits 0.976 — a gap paid deliberately for legibility on one
-  label event, reclaimable by Quiz-2 recalibration.
+- **A transparent risk score, backtested:** scored on days 1–9 only it ranks who actually
+  failed Quiz 1 at **AUC 0.91** — and the "naive weights" worry is measured, not argued:
+  equal weights score the same (0.909) while a CV logistic hits 0.976, a gap paid
+  deliberately for legibility and reclaimable by Quiz-2 recalibration.
 - **A note-reader with a gold set:** Gemini turns each Arabic thread into a 6-state label +
-  blocker, quoting a verbatim evidence span (unevidenced claims auto-drop to human review).
-  Against **75 human-labeled threads**: **κ = 0.80** (87% strict / 97% lenient) — and the gold
-  set caught a failing-recall bug (0.15) that one prompt revision fixed (κ 0.68 → 0.80;
-  the two residual misses are documented gray cases).
-- **Fusion, three rule families:** failing/refused contact escalates (≥High); improving with
-  agreeing numbers hands capacity back; an *explained* absence (sick, parent already engaged)
-  becomes a check-in message instead of burning a call slot; low-confidence reads go to a
-  human. Net: notes moved **18 of 75** noted students (9 up, 8 down, 1 review).
+  blocker quoting a verbatim evidence span (unevidenced claims auto-drop to human review),
+  measured at **κ = 0.80** (87% strict / 97% lenient) against **75 human-labeled threads** —
+  a gold set that earned its keep by catching a failing-recall bug (0.15) one prompt
+  revision fixed.
+- **Fusion, three rule families:** failing/refused contact escalates (≥High), improving with
+  agreeing numbers hands capacity back, an *explained* absence (sick, parent already engaged)
+  becomes a check-in message instead of burning a call slot, and low-confidence reads go to
+  a human — net, the notes moved **18 of 75** noted students (9 up, 8 down, 1 review).
 - **The product:** a two-tier queue (`action_queue.html` — calls capped, messages uncapped, so
   **66/66 failers get a ready action**), coverage counters, tap-to-log contact with CSV export,
   and a **pre-registered Day-20 eval** (`docs/EVAL_PLAN.md`) frozen before Quiz-2 exists.
