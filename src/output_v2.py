@@ -66,6 +66,12 @@ def _report(result, eff, fair, ext, bt, lift, escalate, as_of) -> str:
         f"actually failed Quiz 1: **AUC {bt['auc']}**, precision@{bt['k']} = {bt['precision_at_k']}, "
         f"and {bt['failers_already_surfaced_medium_plus_pct']}% of eventual failers were already "
         f"surfaced (Medium+) the day before the quiz.",
+        f"- Are hand-set weights naive? Measured: equal weights score "
+        f"{bt['weights_ablation']['equal_rule_weights_auc']} (≈ tuned — the design is "
+        f"weight-insensitive), while a 5-fold-CV logistic on the raw features reaches "
+        f"**{bt['weights_ablation']['cv_logistic_on_raw_features_auc']}** — the price of "
+        f"binarizing signals into legible flags, paid deliberately (one label event; a "
+        f"facilitator must understand why #1 is #1) and reclaimable via Quiz-2 recalibration.",
         f"- Scope: {bt['caveats'][0]}.\n",
     ]
 

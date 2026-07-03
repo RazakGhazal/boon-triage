@@ -6,6 +6,7 @@
 
 ## 2. Does the ranking point the right way? (Day-9 backtest)
 - Scoring every student on days 1–9 only (pre-quiz clock) and checking against who actually failed Quiz 1: **AUC 0.911**, precision@66 = 0.85, and 56% of eventual failers were already surfaced (Medium+) the day before the quiz.
+- Are hand-set weights naive? Measured: equal weights score 0.909 (≈ tuned — the design is weight-insensitive), while a 5-fold-CV logistic on the raw features reaches **0.976** — the price of binarizing signals into legible flags, paid deliberately (one label event; a facilitator must understand why #1 is #1) and reclaimable via Quiz-2 recalibration.
 - Scope: validates the behavior terms only (attendance/practice/cliff); the quiz term cannot be backtested against the same quiz.
 
 ## 3. Is the note-reader reading right? (gold-set eval)

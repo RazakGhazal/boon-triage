@@ -8,6 +8,13 @@
   "k": 66,
   "failers_already_flagged_high_or_critical_pct": 0,
   "failers_already_surfaced_medium_plus_pct": 56,
+  "weights_ablation": {
+    "tuned_rule_weights_auc": 0.911,
+    "equal_rule_weights_auc": 0.909,
+    "raw_practice_median_alone_auc": 0.927,
+    "cv_logistic_on_raw_features_auc": 0.976,
+    "reading": "weights barely matter (tuned≈equal); binarization is the real cost — a learned ranker beats the rules, a gap paid deliberately for legibility and shift-robustness, reclaimable via Quiz-2 recalibration"
+  },
   "caveats": [
     "validates the behavior terms only (attendance/practice/cliff); the quiz term cannot be backtested against the same quiz",
     "one quiz, n=200 — directional, not a calibration",

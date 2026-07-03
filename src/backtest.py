@@ -11,6 +11,15 @@ free by the same clamps the production path uses.
 Honest scope: this validates the behavior terms (attendance / practice / cliff)
 on one quiz with n=200. It says the ranking points the right way — not that the
 weights are optimal. No sklearn: AUC is Mann-Whitney with tie-averaged ranks.
+
+It also runs the "are hand-set weights naive?" ablation, because the question
+deserves a number, not a shrug: equal weights score the same as the tuned ones
+(the design is weight-INsensitive), while a cross-validated logistic regression
+on the raw features does beat the rules — the measured price of binarizing
+continuous signals into legible flags. We pay it deliberately: one label event,
+a hard legibility requirement (a facilitator must understand why #1 is #1), and
+robustness to distribution shift across 100 campuses. The gap is what Quiz-2
+recalibration can reclaim later.
 """
 from __future__ import annotations
 
@@ -60,6 +69,7 @@ def run_backtest(as_of: str = DAY9, write: bool = True) -> dict:
 
     flagged = {sid for sid in pre if risks[sid].tier in ("High", "Critical")}
     med_up = {sid for sid in pre if risks[sid].tier != "Low"}
+    ablation = _weights_ablation(pre, risks, labels)
     report = {
         "as_of": as_of,
         "design": "score on days 1-9 only (pre-quiz clock; quiz term structurally absent), "
@@ -73,6 +83,7 @@ def run_backtest(as_of: str = DAY9, write: bool = True) -> dict:
             round(100 * sum(1 for sid in flagged if labels[sid]) / n_fail) if n_fail else None,
         "failers_already_surfaced_medium_plus_pct":
             round(100 * sum(1 for sid in med_up if labels[sid]) / n_fail) if n_fail else None,
+        "weights_ablation": ablation,
         "caveats": [
             "validates the behavior terms only (attendance/practice/cliff); the quiz term "
             "cannot be backtested against the same quiz",
@@ -86,3 +97,46 @@ def run_backtest(as_of: str = DAY9, write: bool = True) -> dict:
         json.dump(report, open(os.path.join(C.OUTPUT_DIR, "backtest_day9.json"), "w",
                                encoding="utf-8"), ensure_ascii=False, indent=2)
     return report
+
+
+def _weights_ablation(pre, risks, labels) -> dict:
+    """Rules-vs-learned, quantified (numpy ships with pandas; fixed seed = reproducible)."""
+    import numpy as np
+
+    sids = sorted(pre)
+    y = np.array([labels[s] for s in sids], float)
+
+    def auc(v):
+        return round(_auc(list(zip(v.tolist(), (y == 1).tolist()))), 3)
+
+    sig = {k: np.array([risks[s].signals[k] for s in sids], float)
+           for k in ("cliff", "chronic_low_att", "low_practice")}
+    att_r = np.array([pre[s].attendance_recent_min or 0 for s in sids], float)
+    att_b = np.array([pre[s].attendance_baseline_min or 0 for s in sids], float)
+    prac_m = np.array([pre[s].practice_median for s in sids], float)
+    prac_x = np.array([pre[s].practice_max_day for s in sids], float)
+
+    # 5-fold CV logistic regression on the RAW features (plain gradient descent)
+    X = np.column_stack([att_r, att_b, prac_m, prac_x, sig["cliff"],
+                         sig["chronic_low_att"], sig["low_practice"]])
+    X = (X - X.mean(0)) / (X.std(0) + 1e-9)
+    X = np.column_stack([np.ones(len(X)), X])
+    idx = np.random.RandomState(0).permutation(len(y))
+    oof = np.zeros(len(y))
+    for fold in np.array_split(idx, 5):
+        tr = np.setdiff1d(idx, fold)
+        w = np.zeros(X.shape[1])
+        for _ in range(3000):
+            p = 1 / (1 + np.exp(-X[tr] @ w))
+            w -= 0.1 * (X[tr].T @ (p - y[tr]) / len(tr) + 0.01 * np.r_[0, w[1:]])
+        oof[fold] = X[fold] @ w
+
+    return {
+        "tuned_rule_weights_auc": auc(np.array([risks[s].score for s in sids], float)),
+        "equal_rule_weights_auc": auc(sig["cliff"] + sig["chronic_low_att"] + sig["low_practice"]),
+        "raw_practice_median_alone_auc": auc(-prac_m),
+        "cv_logistic_on_raw_features_auc": auc(oof),
+        "reading": "weights barely matter (tuned≈equal); binarization is the real cost — a "
+                   "learned ranker beats the rules, a gap paid deliberately for legibility "
+                   "and shift-robustness, reclaimable via Quiz-2 recalibration",
+    }
